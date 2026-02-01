@@ -19,6 +19,8 @@ st.set_page_config(
 from services.client_service import ClientService
 from services.llm_service import LLMService
 from services.vector_store import VectorStoreService, get_vector_store
+from services.alerts_service import AlertsService, alerts_service
+from data.schema import AlertPriority, AlertType
 
 
 # ============== INITIALIZATION ==============
@@ -64,12 +66,13 @@ def render_sidebar(client_service: ClientService):
         st.subheader("Navigation")
         view = st.radio(
             "View",
-            ["💬 Chat", "📊 Dashboard", "👥 Clients", "📧 Email Drafts"],
+            ["💬 Chat", "� Alerts", "📊 Dashboard", "👥 Clients", "📧 Email Drafts"],
             label_visibility="collapsed"
         )
         
         st.session_state.current_view = {
             "💬 Chat": "chat",
+            "🚨 Alerts": "alerts",
             "📊 Dashboard": "dashboard", 
             "👥 Clients": "clients",
             "📧 Email Drafts": "emails"
@@ -422,6 +425,174 @@ def render_dashboard(client_service: ClientService):
             st.success("No overdue follow-ups! 🎉")
 
 
+def render_alerts(client_service: ClientService, llm_service: LLMService):
+    """Render proactive alerts view - the heart of Jarvis"""
+    st.header("🚨 Proactive Alerts")
+    st.caption("Jarvis has scanned all your clients and found these items needing attention")
+    
+    # Generate all alerts
+    clients = client_service.get_all_clients()
+    all_alerts = alerts_service.generate_all_alerts(clients)
+    summary = alerts_service.get_alert_summary(all_alerts)
+    
+    # Top summary metrics
+    col1, col2, col3, col4, col5 = st.columns(5)
+    with col1:
+        st.metric("Total Alerts", summary["total"])
+    with col2:
+        st.metric("🔴 Urgent", summary["urgent"])
+    with col3:
+        st.metric("🟠 High", summary["high"])
+    with col4:
+        st.metric("🟡 Medium", summary["medium"])
+    with col5:
+        st.metric("🟢 Low", summary["low"])
+    
+    st.divider()
+    
+    # Filter options
+    col_filter1, col_filter2, col_filter3 = st.columns(3)
+    with col_filter1:
+        priority_filter = st.selectbox(
+            "Filter by Priority",
+            ["All", "Urgent", "High", "Medium", "Low"],
+            key="alert_priority_filter"
+        )
+    with col_filter2:
+        type_options = ["All"] + [t.value.replace("_", " ").title() for t in AlertType]
+        type_filter = st.selectbox(
+            "Filter by Type",
+            type_options,
+            key="alert_type_filter"
+        )
+    with col_filter3:
+        st.write("")  # Spacer
+        show_dismissed = st.checkbox("Show Dismissed", key="show_dismissed")
+    
+    # Apply filters
+    filtered_alerts = all_alerts
+    
+    if priority_filter != "All":
+        priority_map = {"Urgent": AlertPriority.URGENT, "High": AlertPriority.HIGH, 
+                       "Medium": AlertPriority.MEDIUM, "Low": AlertPriority.LOW}
+        filtered_alerts = [a for a in filtered_alerts if a.priority == priority_map.get(priority_filter)]
+    
+    if type_filter != "All":
+        type_value = type_filter.lower().replace(" ", "_")
+        filtered_alerts = [a for a in filtered_alerts if a.alert_type.value == type_value]
+    
+    if not show_dismissed:
+        filtered_alerts = [a for a in filtered_alerts if not a.is_dismissed]
+    
+    st.caption(f"Showing {len(filtered_alerts)} of {len(all_alerts)} alerts")
+    
+    # Daily briefing button
+    if st.button("📋 Generate Daily Briefing", use_container_width=True):
+        with st.spinner("Generating AI briefing..."):
+            briefing_text = alerts_service.generate_daily_briefing(all_alerts)
+            
+            # Enhance with LLM if available
+            try:
+                ai_summary = llm_service.chat(
+                    user_message="Based on these alerts, give me a brief, actionable summary of what I should focus on today. Be concise and prioritize urgent items.",
+                    context=briefing_text,
+                    conversation_history=[]
+                )
+                st.info(ai_summary)
+            except Exception:
+                st.markdown(briefing_text)
+    
+    st.divider()
+    
+    # Display alerts by priority group
+    if not filtered_alerts:
+        st.success("🎉 No alerts matching your filters!")
+        return
+    
+    # Group by priority
+    priority_groups = {
+        AlertPriority.URGENT: ("🔴 Urgent", []),
+        AlertPriority.HIGH: ("🟠 High Priority", []),
+        AlertPriority.MEDIUM: ("🟡 Medium Priority", []),
+        AlertPriority.LOW: ("🟢 Low Priority", [])
+    }
+    
+    for alert in filtered_alerts:
+        priority_groups[alert.priority][1].append(alert)
+    
+    # Render each group
+    for priority, (label, alerts_in_group) in priority_groups.items():
+        if not alerts_in_group:
+            continue
+        
+        st.subheader(f"{label} ({len(alerts_in_group)})")
+        
+        for alert in alerts_in_group:
+            # Get priority color
+            color = {"urgent": "🔴", "high": "🟠", "medium": "🟡", "low": "🟢"}.get(alert.priority.value, "⚪")
+            
+            with st.expander(f"{alert.title} | {alert.client_name}", expanded=(priority == AlertPriority.URGENT)):
+                col_info, col_actions = st.columns([3, 1])
+                
+                with col_info:
+                    st.write(alert.description)
+                    
+                    # Show due date info
+                    if alert.due_date:
+                        if alert.days_until_due and alert.days_until_due < 0:
+                            st.error(f"⚠️ Overdue by {abs(alert.days_until_due)} days")
+                        elif alert.days_until_due == 0:
+                            st.warning("📅 Due Today!")
+                        else:
+                            st.info(f"📅 Due: {alert.due_date.strftime('%d %B %Y')} ({alert.days_until_due} days)")
+                    
+                    # Show related data
+                    if alert.related_data:
+                        with st.container():
+                            st.caption("**Additional Details:**")
+                            for key, value in alert.related_data.items():
+                                if value and key not in ["email", "phone"]:
+                                    nice_key = key.replace("_", " ").title()
+                                    st.caption(f"• {nice_key}: {value}")
+                
+                with col_actions:
+                    # Action buttons
+                    if st.button("📧 Draft Email", key=f"alert_email_{alert.id}", use_container_width=True):
+                        st.session_state.draft_for = alert.client_id
+                        st.session_state.draft_type = _get_email_type_for_alert(alert.alert_type)
+                        st.session_state.alert_context = alert.description
+                        st.session_state.current_view = "emails"
+                        st.rerun()
+                    
+                    if st.button("👤 View Client", key=f"alert_client_{alert.id}", use_container_width=True):
+                        st.session_state.selected_client = alert.client_id
+                        st.session_state.current_view = "clients"
+                        st.rerun()
+                    
+                    if st.button("✓ Dismiss", key=f"alert_dismiss_{alert.id}", use_container_width=True):
+                        # In production, this would persist
+                        st.toast(f"Alert dismissed: {alert.title}")
+        
+        st.divider()
+
+
+def _get_email_type_for_alert(alert_type: AlertType) -> str:
+    """Map alert type to email draft type"""
+    mapping = {
+        AlertType.BIRTHDAY: "birthday",
+        AlertType.POLICY_RENEWAL: "policy_renewal",
+        AlertType.FOLLOW_UP_DUE: "follow_up",
+        AlertType.FOLLOW_UP_OVERDUE: "follow_up",
+        AlertType.ANNUAL_REVIEW_DUE: "review_reminder",
+        AlertType.ANNUAL_REVIEW_OVERDUE: "review_reminder",
+        AlertType.NO_CONTACT: "check_in",
+        AlertType.LIFE_EVENT: "check_in",
+        AlertType.RETIREMENT_APPROACHING: "retirement_planning",
+        AlertType.POLICY_MATURITY: "policy_maturity",
+    }
+    return mapping.get(alert_type, "check_in")
+
+
 def render_clients(client_service: ClientService):
     """Render clients list view"""
     
@@ -548,12 +719,16 @@ def render_emails(client_service: ClientService, llm_service: LLMService):
         selected = st.selectbox("Select Client", list(client_names.keys()), index=default_index)
         selected_client_id = client_names[selected]
         
-        # Email type
+        # Email type - expanded for alert types
         email_types = {
             "Birthday Wishes": "birthday",
             "Review Reminder": "review_reminder", 
             "Check-in": "check_in",
-            "Follow-up": "follow_up"
+            "Follow-up": "follow_up",
+            "Policy Renewal": "policy_renewal",
+            "Policy Maturity": "policy_maturity",
+            "Retirement Planning": "retirement_planning",
+            "General Update": "general_update"
         }
         
         default_type = 0
@@ -566,7 +741,10 @@ def render_emails(client_service: ClientService, llm_service: LLMService):
         selected_type = st.selectbox("Email Type", list(email_types.keys()), index=default_type)
         email_type = email_types[selected_type]
         
+        # Include alert context if coming from alerts page
+        alert_context = st.session_state.get("alert_context", "")
         additional_context = st.text_area("Additional context (optional)", 
+            value=alert_context,
             placeholder="Any specific points to include...")
         
         generate_btn = st.button("✨ Generate Draft", type="primary", use_container_width=True)
@@ -576,6 +754,8 @@ def render_emails(client_service: ClientService, llm_service: LLMService):
             del st.session_state.draft_for
         if "draft_type" in st.session_state:
             del st.session_state.draft_type
+        if "alert_context" in st.session_state:
+            del st.session_state.alert_context
     
     with col2:
         st.subheader("Email Preview")
@@ -628,6 +808,8 @@ def main():
     # Route to current view
     if st.session_state.current_view == "chat":
         render_chat(client_service, llm_service, vector_store)
+    elif st.session_state.current_view == "alerts":
+        render_alerts(client_service, llm_service)
     elif st.session_state.current_view == "dashboard":
         render_dashboard(client_service)
     elif st.session_state.current_view == "clients":

@@ -298,3 +298,58 @@ class ClientDatabase(BaseModel):
     clients: List[Client]
     last_updated: datetime = Field(default_factory=datetime.now)
     version: str = "1.0.0"
+
+
+# ============== ALERT MODELS ==============
+
+class AlertType(str, Enum):
+    """Types of proactive alerts"""
+    BIRTHDAY = "birthday"
+    POLICY_RENEWAL = "policy_renewal"
+    FOLLOW_UP_DUE = "follow_up_due"
+    FOLLOW_UP_OVERDUE = "follow_up_overdue"
+    LIFE_EVENT = "life_event"
+    ANNUAL_REVIEW_DUE = "annual_review_due"
+    ANNUAL_REVIEW_OVERDUE = "annual_review_overdue"
+    NO_CONTACT = "no_contact"
+    COMPLIANCE_GAP = "compliance_gap"
+    RISK_PROFILE_STALE = "risk_profile_stale"
+    CONCERN_NEEDS_ATTENTION = "concern_needs_attention"
+    RETIREMENT_APPROACHING = "retirement_approaching"
+    POLICY_MATURITY = "policy_maturity"
+
+
+class AlertPriority(str, Enum):
+    """Alert priority levels"""
+    URGENT = "urgent"
+    HIGH = "high"
+    MEDIUM = "medium"
+    LOW = "low"
+
+
+class Alert(BaseModel):
+    """Proactive alert for advisor action"""
+    id: str
+    client_id: str
+    client_name: str
+    alert_type: AlertType
+    priority: AlertPriority
+    title: str
+    description: str
+    due_date: Optional[date] = None
+    days_until_due: Optional[int] = None
+    created_at: datetime = Field(default_factory=datetime.now)
+    is_dismissed: bool = False
+    action_taken: Optional[str] = None
+    related_data: dict = {}  # Store extra context (policy info, event details, etc.)
+    
+    @property
+    def priority_order(self) -> int:
+        """Numeric priority for sorting (lower = more urgent)"""
+        order = {
+            AlertPriority.URGENT: 0,
+            AlertPriority.HIGH: 1,
+            AlertPriority.MEDIUM: 2,
+            AlertPriority.LOW: 3
+        }
+        return order.get(self.priority, 4)
