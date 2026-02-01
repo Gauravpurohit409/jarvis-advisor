@@ -66,17 +66,33 @@ def render_sidebar(client_service: ClientService):
         st.subheader("Navigation")
         view = st.radio(
             "View",
-            ["💬 Chat", "� Alerts", "📊 Dashboard", "👥 Clients", "📧 Email Drafts"],
+            ["💬 Chat", "🚨 Alerts", "📊 Dashboard", "👥 Clients", "📧 Email Drafts"],
             label_visibility="collapsed"
         )
         
-        st.session_state.current_view = {
+        view_mapping = {
             "💬 Chat": "chat",
             "🚨 Alerts": "alerts",
             "📊 Dashboard": "dashboard", 
             "👥 Clients": "clients",
             "📧 Email Drafts": "emails"
-        }.get(view, "chat")
+        }
+        
+        # Debug: ensure proper mapping
+        if view in view_mapping:
+            st.session_state.current_view = view_mapping[view]
+        else:
+            # Fallback for encoding issues
+            if "Alert" in view:
+                st.session_state.current_view = "alerts"
+            elif "Dashboard" in view:
+                st.session_state.current_view = "dashboard"
+            elif "Client" in view:
+                st.session_state.current_view = "clients"
+            elif "Email" in view:
+                st.session_state.current_view = "emails"
+            else:
+                st.session_state.current_view = "chat"
         
         st.divider()
         
