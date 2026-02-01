@@ -20,6 +20,7 @@ from services.client_service import ClientService
 from services.llm_service import LLMService
 from services.vector_store import VectorStoreService, get_vector_store
 from services.alerts_service import AlertsService, alerts_service
+from services.compliance_service import ComplianceService, compliance_service, ComplianceStatus
 from data.schema import AlertPriority, AlertType
 
 
@@ -66,14 +67,15 @@ def render_sidebar(client_service: ClientService):
         st.subheader("Navigation")
         view = st.radio(
             "View",
-            ["💬 Chat", "🚨 Alerts", "📊 Dashboard", "👥 Clients", "📧 Email Drafts"],
+            ["💬 Chat", "🚨 Alerts", "📊 Dashboard", "🏛️ Compliance", "👥 Clients", "📧 Email Drafts"],
             label_visibility="collapsed"
         )
         
         view_mapping = {
             "💬 Chat": "chat",
             "🚨 Alerts": "alerts",
-            "📊 Dashboard": "dashboard", 
+            "📊 Dashboard": "dashboard",
+            "🏛️ Compliance": "compliance",
             "👥 Clients": "clients",
             "📧 Email Drafts": "emails"
         }
@@ -85,6 +87,8 @@ def render_sidebar(client_service: ClientService):
             # Fallback for encoding issues
             if "Alert" in view:
                 st.session_state.current_view = "alerts"
+            elif "Compliance" in view:
+                st.session_state.current_view = "compliance"
             elif "Dashboard" in view:
                 st.session_state.current_view = "dashboard"
             elif "Client" in view:
@@ -804,6 +808,200 @@ def render_emails(client_service: ClientService, llm_service: LLMService):
             st.info("Select a client and email type, then click 'Generate Draft' to create an email.")
 
 
+def render_compliance(client_service: ClientService):
+    """Render FCA Consumer Duty compliance dashboard"""
+    st.header("🏛️ FCA Consumer Duty Compliance")
+    st.caption("Track regulatory requirements and demonstrate value to clients")
+    
+    clients = client_service.get_all_clients()
+    summary = compliance_service.get_portfolio_compliance_summary(clients)
+    
+    # Top-level metrics
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
+        score_color = "normal"
+        if summary["average_score"] >= 80:
+            score_color = "normal"
+        elif summary["average_score"] >= 60:
+            score_color = "off"
+        else:
+            score_color = "inverse"
+        st.metric("Average Score", f"{summary['average_score']}/100", delta_color=score_color)
+    
+    with col2:
+        st.metric("✅ Compliant", summary["compliant"], f"{round(summary['compliant']/summary['total_clients']*100)}%")
+    
+    with col3:
+        st.metric("⚠️ At Risk", summary["at_risk"])
+    
+    with col4:
+        st.metric("❌ Non-Compliant", summary["non_compliant"])
+    
+    st.divider()
+    
+    # Tabs for different views
+    tab1, tab2, tab3 = st.tabs(["📊 Overview", "👥 Client Scores", "📋 Full Report"])
+    
+    with tab1:
+        col_left, col_right = st.columns(2)
+        
+        with col_left:
+            st.subheader("Common Issues")
+            if summary["common_issues"]:
+                for issue, count in list(summary["common_issues"].items())[:6]:
+                    pct = round(count / summary["total_clients"] * 100)
+                    st.progress(pct / 100, f"{issue}: {count} clients ({pct}%)")
+            else:
+                st.success("No common issues found! 🎉")
+        
+        with col_right:
+            st.subheader("Priority Clients")
+            st.caption("Lowest compliance scores - need attention")
+            
+            for client, score in summary["lowest_scoring"][:5]:
+                status_icon = {"compliant": "✅", "at_risk": "⚠️", "non_compliant": "❌"}.get(score["status"].value, "❓")
+                
+                with st.expander(f"{status_icon} {client.full_name} - Score: {score['overall_score']}"):
+                    # Score breakdown
+                    st.caption("**Score Breakdown:**")
+                    for metric, value in score["breakdown"].items():
+                        nice_name = metric.replace("_", " ").title()
+                        color = "🟢" if value >= 80 else "🟡" if value >= 50 else "🔴"
+                        st.caption(f"{color} {nice_name}: {value}/100")
+                    
+                    st.caption("**Issues:**")
+                    for issue in score["issues"]:
+                        st.caption(f"• {issue}")
+                    
+                    col_a, col_b = st.columns(2)
+                    with col_a:
+                        if st.button("📧 Schedule Review", key=f"comp_email_{client.id}"):
+                            st.session_state.draft_for = client.id
+                            st.session_state.draft_type = "review_reminder"
+                            st.session_state.current_view = "emails"
+                            st.rerun()
+                    with col_b:
+                        if st.button("👤 View Client", key=f"comp_client_{client.id}"):
+                            st.session_state.selected_client = client.id
+                            st.session_state.current_view = "clients"
+                            st.rerun()
+    
+    with tab2:
+        st.subheader("All Client Compliance Scores")
+        
+        # Filter options
+        status_filter = st.selectbox(
+            "Filter by Status",
+            ["All", "Compliant", "At Risk", "Non-Compliant"],
+            key="compliance_filter"
+        )
+        
+        # Build data for all clients
+        client_data = []
+        for client in clients:
+            score = compliance_service.get_client_compliance_score(client)
+            
+            # Apply filter
+            if status_filter != "All":
+                filter_map = {"Compliant": "compliant", "At Risk": "at_risk", "Non-Compliant": "non_compliant"}
+                if score["status"].value != filter_map.get(status_filter):
+                    continue
+            
+            client_data.append({
+                "Client": client.full_name,
+                "Score": score["overall_score"],
+                "Status": score["status"].value.replace("_", " ").title(),
+                "Annual Review": score["breakdown"]["annual_review"],
+                "Risk Profile": score["breakdown"]["risk_profile"],
+                "Contact": score["breakdown"]["contact_frequency"],
+                "Issues": len(score["issues"])
+            })
+        
+        if client_data:
+            # Sort by score
+            client_data.sort(key=lambda x: x["Score"])
+            
+            # Display as table
+            st.dataframe(
+                client_data,
+                column_config={
+                    "Score": st.column_config.ProgressColumn(
+                        "Score",
+                        min_value=0,
+                        max_value=100,
+                        format="%d"
+                    ),
+                    "Annual Review": st.column_config.ProgressColumn(
+                        "Annual Review",
+                        min_value=0,
+                        max_value=100,
+                        format="%d"
+                    ),
+                    "Risk Profile": st.column_config.ProgressColumn(
+                        "Risk Profile",
+                        min_value=0,
+                        max_value=100,
+                        format="%d"
+                    ),
+                    "Contact": st.column_config.ProgressColumn(
+                        "Contact",
+                        min_value=0,
+                        max_value=100,
+                        format="%d"
+                    ),
+                },
+                use_container_width=True,
+                hide_index=True
+            )
+        else:
+            st.info("No clients match the selected filter.")
+    
+    with tab3:
+        st.subheader("Consumer Duty Compliance Report")
+        
+        if st.button("📋 Generate Full Report", type="primary"):
+            with st.spinner("Generating compliance report..."):
+                report = compliance_service.get_consumer_duty_report(clients)
+                st.markdown(report)
+                
+                # Download option
+                st.download_button(
+                    "📥 Download Report",
+                    report,
+                    file_name=f"consumer_duty_report_{date.today()}.md",
+                    mime="text/markdown"
+                )
+        else:
+            st.info("Click the button above to generate a full FCA Consumer Duty compliance report.")
+        
+        st.divider()
+        
+        # Consumer Duty explainer
+        with st.expander("ℹ️ About FCA Consumer Duty"):
+            st.markdown("""
+            **The Consumer Duty** came into force on 31 July 2023 and sets higher standards 
+            of consumer protection in financial services.
+            
+            **Three Cross-Cutting Rules:**
+            1. Act in good faith towards retail customers
+            2. Avoid causing foreseeable harm
+            3. Enable and support customers to pursue their financial objectives
+            
+            **Four Outcomes:**
+            - **Products & Services:** Designed to meet target market needs
+            - **Price & Value:** Fair value for money
+            - **Consumer Understanding:** Clear, understandable communications
+            - **Consumer Support:** Accessible, helpful support
+            
+            **Key Requirements for Advisors:**
+            - Regular annual reviews (at least every 12 months)
+            - Current risk profiles and suitability assessments
+            - Documentation of value delivered
+            - Proactive client communication
+            """)
+
+
 # ============== MAIN APP ==============
 
 def main():
@@ -828,6 +1026,8 @@ def main():
         render_alerts(client_service, llm_service)
     elif st.session_state.current_view == "dashboard":
         render_dashboard(client_service)
+    elif st.session_state.current_view == "compliance":
+        render_compliance(client_service)
     elif st.session_state.current_view == "clients":
         render_clients(client_service)
     elif st.session_state.current_view == "emails":
