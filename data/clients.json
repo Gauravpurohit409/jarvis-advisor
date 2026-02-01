@@ -1,0 +1,2951 @@
+{
+  "clients": [
+    {
+      "id": "CLT-2024001",
+      "title": "Mrs",
+      "first_name": "Sarah",
+      "last_name": "Thompson",
+      "date_of_birth": "1978-03-12",
+      "national_insurance": "AB123456C",
+      "occupation": "Senior Marketing Manager",
+      "employer": "Unilever UK Ltd",
+      "annual_income": 103000.0,
+      "contact_info": {
+        "email": "sarah.thompson@gmail.com",
+        "phone": "01234 567890",
+        "mobile": "07712 345678",
+        "address": {
+          "line1": "47 Meadowbrook Lane",
+          "line2": null,
+          "city": "Weybridge",
+          "county": "Surrey",
+          "postcode": "KT13 9PL",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "email",
+        "best_time_to_call": "Morning"
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "Michael",
+          "relationship": "spouse",
+          "date_of_birth": "1976-07-24",
+          "notes": "Associate Architect at Sterling Architects Ltd, \u00a372k salary, mild hypertension controlled with medication"
+        },
+        {
+          "name": "Emily",
+          "relationship": "child",
+          "date_of_birth": "2010-06-18",
+          "notes": "Age 14, St Catherine's School Weybridge, academically gifted, predicted A*/A grades, wants to study medicine or veterinary science"
+        },
+        {
+          "name": "Oliver",
+          "relationship": "child",
+          "date_of_birth": "2013-09-03",
+          "notes": "Age 11, St Catherine's School, more creative like Michael, interested in art and design"
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "other",
+          "event_date": "2026-09-01",
+          "description": "Emily starting GCSEs - potential tutoring costs",
+          "related_person": "Emily",
+          "source": "fact_find",
+          "created_at": "2026-02-01T19:57:43.365572"
+        },
+        {
+          "event_type": "other",
+          "event_date": "2028-09-01",
+          "description": "Emily starting university - estimated \u00a340k funding needed",
+          "related_person": "Emily",
+          "source": "fact_find",
+          "created_at": "2026-02-01T19:57:43.365579"
+        },
+        {
+          "event_type": "other",
+          "event_date": "2026-03-01",
+          "description": "Mortgage fixed rate expires - needs review before March 2026",
+          "related_person": null,
+          "source": "fact_find",
+          "created_at": "2026-02-01T19:57:43.365581"
+        },
+        {
+          "event_type": "other",
+          "event_date": "2027-06-01",
+          "description": "Family holiday to Australia planned - budget \u00a315,000, visiting Sarah's emigrated best friend",
+          "related_person": null,
+          "source": "meeting_notes",
+          "created_at": "2026-02-01T19:57:43.365583"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "retirement savings adequacy",
+          "details": "Sarah feels 'behind' on pension savings compared to colleagues. Concerned whether they're saving enough for retirement. Target retirement: Sarah 60, Michael 62 with \u00a350-60k combined income.",
+          "severity": "high",
+          "date_raised": "2024-11-15",
+          "status": "active",
+          "last_discussed": "2024-11-15",
+          "notes": null
+        },
+        {
+          "topic": "inheritance tax liability",
+          "details": "Surprised by estimated \u00a3160k IHT liability. Both from middle-class backgrounds, not used to estate planning. Don't want to burden children with IHT bill.",
+          "severity": "medium",
+          "date_raised": "2024-11-15",
+          "status": "active",
+          "last_discussed": "2024-11-15",
+          "notes": null
+        },
+        {
+          "topic": "children's education funding",
+          "details": "Very focused on Emily and Oliver's education. Private school fees \u00a32,600/month. University costs estimated \u00a340k per child. Emily academically gifted, may study medicine (5-6 years).",
+          "severity": "high",
+          "date_raised": "2024-11-15",
+          "status": "active",
+          "last_discussed": "2024-11-15",
+          "notes": null
+        },
+        {
+          "topic": "protection gap - Michael",
+          "details": "Michael has no critical illness cover and no income protection beyond statutory sick pay. Father died at 68 of heart attack. Michael has hypertension. May face underwriting issues.",
+          "severity": "high",
+          "date_raised": "2024-11-15",
+          "status": "active",
+          "last_discussed": "2024-11-15",
+          "notes": null
+        },
+        {
+          "topic": "mortgage strategy",
+          "details": "Current fixed rate expires March 2026. Outstanding \u00a3287k @ 3.89%. Need to review options before expiry.",
+          "severity": "medium",
+          "date_raised": "2024-11-15",
+          "status": "active",
+          "last_discussed": "2024-11-15",
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Unilever UK Pension Fund",
+          "policy_number": "UNI-DB-2016-ST",
+          "current_value": 412000.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2016-03-01",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Defined Benefit - Final Salary. Accrual 1/60th. 8 years service. Projected \u00a328k/year at 65. 50% spouse pension. DO NOT TRANSFER - extremely valuable."
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Aviva",
+          "policy_number": "SIPP-AV-2008-ST",
+          "current_value": 87400.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2008-01-01",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Previous employer WPP Group 2008-2016. Vanguard LifeStrategy 60%. Charges 0.41%."
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Vanguard",
+          "policy_number": "ISA-VG-ST",
+          "current_value": 47320.0,
+          "monthly_contribution": 400.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "LifeStrategy 80% Equity. Sarah manages own investments, reads FT and Monevator."
+        },
+        {
+          "policy_type": "life_insurance",
+          "provider": "Aviva",
+          "policy_number": "LIFE-AV-ST-500",
+          "current_value": 500000.0,
+          "monthly_contribution": 45.0,
+          "start_date": null,
+          "renewal_date": "2038-01-01",
+          "maturity_date": null,
+          "notes": "Level Term Assurance. 20 year term expires 2038. Includes \u00a3150k Critical Illness. In trust for Michael and children."
+        }
+      ],
+      "total_portfolio_value": 1099770.0,
+      "risk_profile": {
+        "attitude_to_risk": "high",
+        "capacity_for_loss": "high",
+        "investment_experience": "extensive",
+        "time_horizon_years": 15,
+        "last_assessed": "2024-11-15",
+        "notes": "Sarah: 7/10 Adventurous/Growth. Managed own ISAs 10+ years. Read Tim Hale's Smarter Investing. Comfortable with volatility. Michael: 6/10 Balanced/Growth, slightly more cautious."
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2024-11-15",
+          "meeting_type": "in_person",
+          "duration_minutes": 135,
+          "summary": "Initial comprehensive fact-find meeting at client's home. Both well-prepared with documentation. Sarah took lead but Michael fully engaged. Triggered to act after friends recommended firm. Recent 40th+ birthdays focused minds on retirement.",
+          "transcript": "Key discussion points:\n\nRETIREMENT: Sarah ideally retire 58-60, feeling 'burned out' at times from intense Unilever pace. Michael more flexible, enjoys work but wants reduced hours from 60. Want to travel (Australia, NZ, Japan), spend time with future grandchildren. Concerned \u00a350k/year may not be enough - will model \u00a360k scenarios.\n\nPROPERTY: Love Weybridge home, no plans to move unless downsizing in retirement. House valued \u00a3875k (paid \u00a3495k in 2012). Mentioned possible retirement to Winchester (near Sarah's sister Emma) or Devon/Cornwall.\n\nPROTECTION: Both understand importance given mortgage and children. Sarah has excellent employer benefits. Critical gap: Michael has NO critical illness cover and NO income protection. Michael's father died age 68 (heart attack). Michael has hypertension - seemed uncomfortable discussing, Sarah had to encourage sharing. URGENT recommendation for CI cover but expect underwriting issues.\n\nWILLS/LPA: Current wills from 2019, need update. No LPAs in place - significant gap.\n\nINVESTMENTS: Sarah knowledgeable, follows Monevator, read Tim Hale. Comfortable with passive approach. 80/20 equity/bond split appropriate. Michael less engaged but trusts Sarah. His workplace pension in default fund never reviewed - opportunity. Both interested in ESG but not strict ethical.\n\nCHILDREN: Emily (14) very academic, predicted straight As, wants medicine/vet. Oliver (11) more creative like Michael. School fees \u00a32,600/month committed until sixth form. JISAs: Emily \u00a318.4k, Oliver \u00a314.2k.",
+          "key_points": [
+            "Sarah feeling burned out at Unilever, wants to retire by 60",
+            "Michael's father died age 68 of heart attack - family history concern",
+            "Michael has NO critical illness cover or income protection - URGENT",
+            "Wills from 2019 need update, NO LPAs in place",
+            "Emily predicted A*/A grades, wants to study medicine",
+            "Mortgage fixed rate expires March 2026 - needs review"
+          ],
+          "action_items": [
+            "Prepare comprehensive suitability report",
+            "Pension consolidation review for Michael",
+            "Get CI quotes for Michael (expect underwriting loadings)",
+            "Review mortgage strategy before March 2026",
+            "Recommend wills update and LPAs",
+            "University funding projection"
+          ],
+          "concerns_raised": [
+            "retirement savings adequacy",
+            "inheritance tax liability",
+            "protection gap - Michael"
+          ],
+          "life_events_mentioned": [
+            "Emily starting GCSEs",
+            "Australia trip planned",
+            "Mortgage expires March 2026"
+          ]
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Prepare comprehensive suitability report covering retirement, pension consolidation, protection, university funding, tax and estate planning",
+          "deadline": "2024-12-06",
+          "status": "pending",
+          "created_date": "2024-11-15",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Get critical illness quotes for Michael with full medical underwriting",
+          "deadline": "2024-11-30",
+          "status": "pending",
+          "created_date": "2024-11-15",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Schedule follow-up meeting to present recommendations",
+          "deadline": "2024-12-06",
+          "status": "pending",
+          "created_date": "2024-11-15",
+          "completed_date": null,
+          "notes": "Meeting scheduled for 6th December 2024"
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2024-11-15T10:00:00",
+          "method": "in_person",
+          "direction": "outbound",
+          "summary": "Initial fact-find meeting at client's home, Weybridge. 2h15m comprehensive review.",
+          "duration_minutes": 135,
+          "next_action": "Prepare suitability report for 6th December meeting"
+        },
+        {
+          "interaction_date": "2024-11-10T14:30:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Sarah called to confirm meeting and ask what documents to prepare",
+          "duration_minutes": 10,
+          "next_action": "Meeting confirmed for 15th November"
+        }
+      ],
+      "compliance": {
+        "last_annual_review": null,
+        "next_review_due": "2025-11-15",
+        "review_status": "pending",
+        "suitability_confirmed": false,
+        "suitability_date": null,
+        "value_delivered": [],
+        "notes": "New client as of November 2024. First annual review due November 2025."
+      },
+      "client_since": "2024-11-10",
+      "assigned_advisor": "Jonathan Hayes",
+      "tags": [
+        "high-value",
+        "protection-focus",
+        "retirement-planning",
+        "db-pension"
+      ],
+      "notes": "Excellent client engagement. Sarah financially literate, Michael fully engaged. Strong financial position but gaps to address. Retirement goals achievable with right planning. Good long-term planning client."
+    },
+    {
+      "id": "CLT-2024003",
+      "title": "Mr",
+      "first_name": "David",
+      "last_name": "Chen",
+      "date_of_birth": "1975-06-12",
+      "national_insurance": "CD345678D",
+      "occupation": "Investment Banking Director",
+      "employer": "Goldman Sachs",
+      "annual_income": 245000.0,
+      "contact_info": {
+        "email": "david.chen@globalbank.com",
+        "phone": "020 7123 4567",
+        "mobile": "07789 234567",
+        "address": {
+          "line1": "28 Riverside Court",
+          "line2": null,
+          "city": "Richmond",
+          "county": "Greater London",
+          "postcode": "TW9 1PQ",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "email",
+        "best_time_to_call": "Evening"
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "Sarah",
+          "relationship": "spouse",
+          "date_of_birth": "1977-11-08",
+          "notes": "Arts Council Senior Manager, 4 days/week, \u00a372k salary. Considering 3 days/week from 2026 (-\u00a318k income). Had hypertension, now controlled at 125/78."
+        },
+        {
+          "name": "Oliver",
+          "relationship": "child",
+          "date_of_birth": "2008-03-14",
+          "notes": "Age 16, Westminster School, applying to Oxbridge/Durham/Bristol for Economics. University September 2025."
+        },
+        {
+          "name": "Sophie",
+          "relationship": "child",
+          "date_of_birth": "2011-09-22",
+          "notes": "Age 13, Westminster School. University 2029."
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "other",
+          "event_date": "2025-03-15",
+          "description": "David bonus \u00a360k expected - recommend \u00a320k VCT + \u00a320k ISA + \u00a320k pension carry-forward = \u00a318k tax saved",
+          "related_person": null,
+          "source": "meeting_notes",
+          "created_at": "2026-02-01T19:57:43.365646"
+        },
+        {
+          "event_type": "other",
+          "event_date": "2025-03-01",
+          "description": "French property viewing trip to Luberon, Provence. \u00a3400k budget.",
+          "related_person": null,
+          "source": "recommendation",
+          "created_at": "2026-02-01T19:57:43.365647"
+        },
+        {
+          "event_type": "other",
+          "event_date": "2025-09-01",
+          "description": "Oliver starting university - if Oxbridge, costs \u00a345k (vs \u00a340k planned). JISA \u00a328.4k with \u00a312k/year supplement.",
+          "related_person": "Oliver",
+          "source": "meeting_notes",
+          "created_at": "2026-02-01T19:57:43.365649"
+        },
+        {
+          "event_type": "other",
+          "event_date": "2026-05-01",
+          "description": "Remortgage decision required - current fix expires May 2026. \u00a3285k @ 2.89%. If French property: increase to \u00a3585k.",
+          "related_person": null,
+          "source": "fact_find",
+          "created_at": "2026-02-01T19:57:43.365650"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "work stress and career change",
+          "details": "David working 70+ hours/week. Considering exit to consulting (\u00a3120k vs \u00a3245k current). Physical and mental fatigue at age 49.",
+          "severity": "high",
+          "date_raised": "2025-10-01",
+          "status": "active",
+          "last_discussed": "2026-01-15",
+          "notes": null
+        },
+        {
+          "topic": "tax efficiency - lost personal allowance",
+          "details": "David: \u00a3220k adjusted income, lost all PA, paying 45% over \u00a3125k. Major inefficiency. VCT investment recommended for 30% relief.",
+          "severity": "high",
+          "date_raised": "2024-10-01",
+          "status": "monitoring",
+          "last_discussed": "2026-01-15",
+          "notes": "Increased pension to 15% (saves \u00a312,450 tax). VCT \u00a330k/year pending."
+        },
+        {
+          "topic": "market risk approaching retirement",
+          "details": "\u00a31M+ in equities, approaching retirement (9 years). Currently 75/25 allocation. Should de-risk to 60/40 at age 55.",
+          "severity": "medium",
+          "date_raised": "2025-10-01",
+          "status": "monitoring",
+          "last_discussed": "2026-01-15",
+          "notes": null
+        },
+        {
+          "topic": "French property - cross-border complexity",
+          "details": "Planning \u00a3400k property in Provence. Currency risk (\u00a3/\u20ac), rental voids if not used, maintenance \u00a310k/year. Residency implications if permanent move.",
+          "severity": "medium",
+          "date_raised": "2025-01-01",
+          "status": "active",
+          "last_discussed": "2026-01-15",
+          "notes": null
+        },
+        {
+          "topic": "Sarah protection gap",
+          "details": "Sarah CI cover \u00a3150k recommendation postponed - had hypertension (now controlled BP 125/78). Re-quote January 2025.",
+          "severity": "medium",
+          "date_raised": "2025-10-01",
+          "status": "active",
+          "last_discussed": "2026-01-12",
+          "notes": "BP now controlled. Re-quoting in progress."
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Goldman Sachs SIPP",
+          "policy_number": "GS-SIPP-DC",
+          "current_value": 825000.0,
+          "monthly_contribution": 2312.0,
+          "start_date": "2012-01-01",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Increased contribution 8%\u219215% (Oct 2025). Saves \u00a312,450 tax. Consolidated Barclays pension (\u00a3145k) Dec 2024, saves \u00a31,200/year fees."
+        },
+        {
+          "policy_type": "pension",
+          "provider": "LGPS",
+          "policy_number": "LGPS-SC-DB",
+          "current_value": 0.0,
+          "monthly_contribution": 0.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Sarah's Defined Benefit - accrued \u00a322k/year. Considering 3 days/week from 2026 would reduce accrual."
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Fidelity",
+          "policy_number": "SIPP-FID-SC",
+          "current_value": 34000.0,
+          "monthly_contribution": 200.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Sarah's SIPP from previous role."
+        },
+        {
+          "policy_type": "isa",
+          "provider": "AJ Bell",
+          "policy_number": "ISA-AJB-DC",
+          "current_value": 185400.0,
+          "monthly_contribution": 1666.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Hargreaves Lansdown",
+          "policy_number": "ISA-HL-SC",
+          "current_value": 142800.0,
+          "monthly_contribution": 1000.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "life_insurance",
+          "provider": "Aviva",
+          "policy_number": "LIFE-AV-DC",
+          "current_value": 750000.0,
+          "monthly_contribution": 85.0,
+          "start_date": null,
+          "renewal_date": "2035-01-01",
+          "maturity_date": null,
+          "notes": "Includes \u00a3200k Critical Illness. In trust. Expires 2035."
+        }
+      ],
+      "total_portfolio_value": 2850000.0,
+      "risk_profile": {
+        "attitude_to_risk": "high",
+        "capacity_for_loss": "high",
+        "investment_experience": "extensive",
+        "time_horizon_years": 9,
+        "last_assessed": "2025-10-01",
+        "notes": "David very analytical (banking background), likes detailed projections. Currently 75/25 equity/bond. Should de-risk to 60/40 at 55. Both wine enthusiasts."
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2026-01-15",
+          "meeting_type": "video_call",
+          "duration_minutes": 60,
+          "summary": "October 2025 review follow-up. David bonus \u00a385k (above average). Sarah promoted to \u00a372k. Oliver applying universities. Reviewed remortgage options and French property strategy.",
+          "transcript": null,
+          "key_points": [
+            "David bonus \u00a385k - allocated \u00a340k to mortgage, \u00a345k to ISAs",
+            "Sarah promoted \u00a365k \u2192 \u00a372k",
+            "Oliver applying Oxbridge, Durham, Bristol for Economics",
+            "Sarah considering 3 days/week from 2026 (-\u00a318k income)",
+            "French property viewing trip March 2025",
+            "Remortgage comparison sent - 5yr 4.1% or 10yr 4.4%"
+          ],
+          "action_items": [
+            "Re-quote Sarah CI (BP now controlled)",
+            "David research VCT options (Feb 2025)",
+            "Remortgage decision (Feb 2025)",
+            "French viewing trip (March 2025)"
+          ],
+          "concerns_raised": [
+            "work stress and career change",
+            "French property - cross-border complexity"
+          ],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Re-quote Sarah CI cover \u00a3150k - BP now controlled at 125/78",
+          "deadline": "2026-01-31",
+          "status": "pending",
+          "created_date": "2026-01-12",
+          "completed_date": null,
+          "notes": "In progress - awaiting underwriter response"
+        },
+        {
+          "commitment": "David VCT research and options presentation",
+          "deadline": "2026-02-15",
+          "status": "pending",
+          "created_date": "2026-01-15",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Remortgage options presentation and decision",
+          "deadline": "2026-02-28",
+          "status": "pending",
+          "created_date": "2026-01-15",
+          "completed_date": null,
+          "notes": "Current fix expires May 2026. Options: 5yr (4.1%) or 10yr (4.4%). If French property, increase to \u00a3585k."
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2026-01-21T09:00:00",
+          "method": "email",
+          "direction": "inbound",
+          "summary": "David email - bonus \u00a360k confirmed for March",
+          "duration_minutes": 0,
+          "next_action": "Prepare bonus allocation recommendation"
+        },
+        {
+          "interaction_date": "2026-01-15T14:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Review meeting - bonus allocation, French property, remortgage options",
+          "duration_minutes": 60,
+          "next_action": "Send remortgage comparison spreadsheet"
+        },
+        {
+          "interaction_date": "2026-01-12T11:30:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Sarah call - CI re-quote discussion. BP now controlled.",
+          "duration_minutes": 15,
+          "next_action": "Re-quote CI with updated medical"
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-10-01",
+        "next_review_due": "2026-02-18",
+        "review_status": "due_soon",
+        "suitability_confirmed": true,
+        "suitability_date": "2025-10-01",
+        "value_delivered": [
+          "Pension contribution optimization 8%\u219215% - saves \u00a312,450 tax annually",
+          "Consolidated Barclays pension - saves \u00a31,200/year fees",
+          "Wills updated November 2024 - mirror wills, children at 25",
+          "LPAs created and registered December 2024"
+        ],
+        "notes": null
+      },
+      "client_since": "2022-03-01",
+      "assigned_advisor": "Jonathan Hayes",
+      "tags": [
+        "high-value",
+        "complex-tax",
+        "vct-candidate",
+        "cross-border"
+      ],
+      "notes": "David very analytical (banking background), likes detailed projections. Sarah more lifestyle/family focused. Both wine enthusiasts. Chinese heritage - annual HK trips to see David's parents. Children academically gifted."
+    },
+    {
+      "id": "CLT-2024015",
+      "title": "Mr",
+      "first_name": "Basil",
+      "last_name": "Fawlty",
+      "date_of_birth": "1958-05-19",
+      "national_insurance": null,
+      "occupation": "Hotel Owner/Operator (semi-retired)",
+      "employer": "Fawlty Towers Hotel",
+      "annual_income": 42500.0,
+      "contact_info": {
+        "email": "basil@fawltytowers.co.uk",
+        "phone": "01803 123456",
+        "mobile": "07789 234567",
+        "address": {
+          "line1": "Fawlty Towers Hotel",
+          "line2": "Torquay Seafront",
+          "city": "Torquay",
+          "county": "Devon",
+          "postcode": "TQ1 2BE",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "phone",
+        "best_time_to_call": "Morning"
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "Sybil",
+          "relationship": "spouse",
+          "date_of_birth": "1960-08-07",
+          "notes": "Age 65, co-owner Fawlty Towers. Pragmatic, fatigued, focused on quality of life. Increasingly keen to exit hotel regardless of price."
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "retirement",
+          "event_date": "2027-06-01",
+          "description": "Target hotel exit during 2026-27 window. Sale preferred but lease option available.",
+          "related_person": null,
+          "source": "planning_discussion",
+          "created_at": "2026-02-01T19:57:43.365703"
+        },
+        {
+          "event_type": "other",
+          "event_date": "2026-04-05",
+          "description": "CGT Business Asset Disposal Relief deadline - strong incentive to complete sale before any legislative changes. Estimated gain \u00a3925k, BADR at 10% = \u00a392,500 tax.",
+          "related_person": null,
+          "source": "tax_planning",
+          "created_at": "2026-02-01T19:57:43.365704"
+        },
+        {
+          "event_type": "other",
+          "event_date": "2026-03-01",
+          "description": "Continued Spain winter rentals - purchase target \u00a3120k if hotel sold. Residency/healthcare implications need addressing.",
+          "related_person": null,
+          "source": "meeting_notes",
+          "created_at": "2026-02-01T19:57:43.365706"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "hotel sale delay",
+          "details": "Hotel remains unsold after 2024-25 listing at \u00a31.45M. Market feedback: \u00a31.2-1.3M realistic. Basil resistant to price reduction despite market evidence. Illiquidity and over-pricing delaying exit.",
+          "severity": "high",
+          "date_raised": "2024-06-01",
+          "status": "active",
+          "last_discussed": "2026-01-21",
+          "notes": "Basil ego-attached to hotel as life's work. Sybil pragmatic, fatigued."
+        },
+        {
+          "topic": "potential loss of BADR",
+          "details": "Business Asset Disposal Relief at 10% could save \u00a392,500 on \u00a3925k estimated gain. If sale delayed and legislation changes, tax liability materially increases. URGENT - key lever to unlock Basil's decision.",
+          "severity": "high",
+          "date_raised": "2025-01-01",
+          "status": "active",
+          "last_discussed": "2026-01-21",
+          "notes": null
+        },
+        {
+          "topic": "physical and mental fatigue",
+          "details": "Both aged 67/65, running 12-room hotel is physically demanding. Winter closures (Dec-Feb) reinforce desire to retire. Health impacts of prolonged stress.",
+          "severity": "medium",
+          "date_raised": "2025-01-01",
+          "status": "active",
+          "last_discussed": "2026-01-21",
+          "notes": null
+        },
+        {
+          "topic": "estate planning gaps",
+          "details": "Current wills from 1995 - 30 years out of date. No LPAs in place. Cross-border estate considerations if Spain residency pursued.",
+          "severity": "high",
+          "date_raised": "2026-01-01",
+          "status": "active",
+          "last_discussed": "2026-01-21",
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Standard Life",
+          "policy_number": "SIPP-SL-BF",
+          "current_value": 285000.0,
+          "monthly_contribution": 0.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Basil's SIPP. No current contributions."
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Aviva",
+          "policy_number": "PP-AV-SF",
+          "current_value": 165000.0,
+          "monthly_contribution": 0.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Sybil's personal pension."
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Vanguard",
+          "policy_number": "ISA-VG-JOINT",
+          "current_value": 145000.0,
+          "monthly_contribution": 0.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Joint ISAs. Not currently contributing due to business cashflow needs."
+        }
+      ],
+      "total_portfolio_value": 2100000.0,
+      "risk_profile": {
+        "attitude_to_risk": "medium",
+        "capacity_for_loss": "medium",
+        "investment_experience": "moderate",
+        "time_horizon_years": 5,
+        "last_assessed": "2026-01-01",
+        "notes": "Post-retirement, income drawdown flexibility needed. Target \u00a365k/year retirement income."
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2026-01-21",
+          "meeting_type": "video_call",
+          "duration_minutes": 45,
+          "summary": "January 2026 review. Hotel still unsold. Market consensus \u00a31.2-1.3M. Basil still believes \u00a31.45M achievable despite evidence. Sybil increasingly frustrated. Discussed lease option as interim bridge.",
+          "transcript": null,
+          "key_points": [
+            "Hotel unsold - market feedback \u00a31.2-1.3M realistic",
+            "Basil resistant to price reduction",
+            "Sybil renewed frustration over delayed sale",
+            "Lease option: 10-year ~\u00a348k/year indexed",
+            "Spanish winter rental repeated positively",
+            "BADR eligibility critical - 10% vs higher rate"
+          ],
+          "action_items": [
+            "Confirm BADR eligibility and legislative status",
+            "Revisit sale price with updated market evidence",
+            "Progress wills and LPAs urgently",
+            "Spain residency and tax planning clarification"
+          ],
+          "concerns_raised": [
+            "hotel sale delay",
+            "potential loss of BADR",
+            "estate planning gaps"
+          ],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Confirm BADR eligibility and check for legislative changes",
+          "deadline": "2026-02-15",
+          "status": "pending",
+          "created_date": "2026-01-21",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Prepare updated wills recommendation - current from 1995",
+          "deadline": "2026-02-28",
+          "status": "pending",
+          "created_date": "2026-01-21",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "LPA recommendation and process",
+          "deadline": "2026-02-28",
+          "status": "pending",
+          "created_date": "2026-01-21",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Spain residency tax implications research",
+          "deadline": "2026-03-15",
+          "status": "pending",
+          "created_date": "2026-01-21",
+          "completed_date": null,
+          "notes": null
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2026-01-21T10:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "January review - hotel sale strategy, BADR, wills/LPAs",
+          "duration_minutes": 45,
+          "next_action": "BADR eligibility check"
+        },
+        {
+          "interaction_date": "2026-01-17T14:00:00",
+          "method": "email",
+          "direction": "outbound",
+          "summary": "Agent update - pricing guidance unchanged at \u00a31.2-1.3M",
+          "duration_minutes": 0,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2026-01-12T11:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Sybil call - renewed frustration over delayed sale. Wants to exit regardless of price.",
+          "duration_minutes": 20,
+          "next_action": "Discuss with Basil"
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2026-01-21",
+        "next_review_due": "2027-02-18",
+        "review_status": "completed",
+        "suitability_confirmed": true,
+        "suitability_date": "2026-01-21",
+        "value_delivered": [],
+        "notes": null
+      },
+      "client_since": "2019-06-01",
+      "assigned_advisor": "Jonathan Hayes",
+      "tags": [
+        "business-exit",
+        "cgt-planning",
+        "cross-border",
+        "estate-planning"
+      ],
+      "notes": "Basil highly ego-attached to hotel as life's work. Sybil pragmatic, fatigued, focused on quality of life. No children reduces need to retain UK base. Basil responds best to authoritative data and tax clarity. BADR framing likely key lever to unlock decision."
+    },
+    {
+      "id": "CLT-2024006",
+      "title": "Mr",
+      "first_name": "James",
+      "last_name": "Martinez",
+      "date_of_birth": "1982-10-03",
+      "national_insurance": "EF234567E",
+      "occupation": "Software Engineering Manager",
+      "employer": "TechFlow Solutions Ltd",
+      "annual_income": 107000.0,
+      "contact_info": {
+        "email": "james.martinez@techflow.com",
+        "phone": "01483 123456",
+        "mobile": "07845 123987",
+        "address": {
+          "line1": "12 Oakwood Drive",
+          "line2": null,
+          "city": "Godalming",
+          "county": "Surrey",
+          "postcode": "GU7 2BB",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "email",
+        "best_time_to_call": "Evening"
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "Rebecca",
+          "relationship": "spouse",
+          "date_of_birth": "1984-02-15",
+          "notes": "NHS Consultant Radiologist, Royal Surrey. 4 days/week (0.8 FTE), \u00a398k. Additional private work \u00a36k/year. Wants option to reduce to 3 days from age 50."
+        },
+        {
+          "name": "Isabella",
+          "relationship": "child",
+          "date_of_birth": "2015-05-22",
+          "notes": "Age 9, Godalming Primary School"
+        },
+        {
+          "name": "Lucas",
+          "relationship": "child",
+          "date_of_birth": "2017-11-11",
+          "notes": "Age 6, Godalming Primary School"
+        },
+        {
+          "name": "Sofia",
+          "relationship": "child",
+          "date_of_birth": "2020-03-08",
+          "notes": "Age 4, starting reception September 2024. Nursery fees ending = \u00a3400/month saving."
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "other",
+          "event_date": "2024-09-01",
+          "description": "Sofia starting school - nursery fees (\u00a3400/month) ceased, freeing \u00a34,800/year",
+          "related_person": "Sofia",
+          "source": "fact_find",
+          "created_at": "2026-02-01T19:57:43.365747"
+        },
+        {
+          "event_type": "other",
+          "event_date": "2027-06-01",
+          "description": "House extension planned - extra bedroom and larger kitchen, \u00a380,000 budget",
+          "related_person": null,
+          "source": "goals",
+          "created_at": "2026-02-01T19:57:43.365749"
+        },
+        {
+          "event_type": "other",
+          "event_date": "2026-12-01",
+          "description": "Annual trip to Spain to visit James's father and extended family",
+          "related_person": null,
+          "source": "fact_find",
+          "created_at": "2026-02-01T19:57:43.365750"
+        },
+        {
+          "event_type": "birthday",
+          "event_date": "2034-02-15",
+          "description": "Rebecca turns 50 - wants option to reduce to 3 days/week",
+          "related_person": "Rebecca",
+          "source": "goals",
+          "created_at": "2026-02-01T19:57:43.365751"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "emergency fund",
+          "details": "Current savings \u00a312,600 - target 6 months expenses (\u00a330,000). Priority 1 objective.",
+          "severity": "medium",
+          "date_raised": "2024-09-08",
+          "status": "active",
+          "last_discussed": "2024-09-08",
+          "notes": null
+        },
+        {
+          "topic": "pension consolidation",
+          "details": "James has pensions scattered across 3 providers: current SIPP \u00a3142,600, previous 1 \u00a334,800, previous 2 \u00a318,200. Total \u00a3195,600. Consolidation opportunity.",
+          "severity": "medium",
+          "date_raised": "2024-09-08",
+          "status": "active",
+          "last_discussed": "2024-09-08",
+          "notes": null
+        },
+        {
+          "topic": "Rebecca part-time transition",
+          "details": "Rebecca wants option to reduce to 3 days/week from age 50 (2034). Need to plan for reduced income.",
+          "severity": "low",
+          "date_raised": "2024-09-08",
+          "status": "monitoring",
+          "last_discussed": "2024-09-08",
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Fidelity",
+          "policy_number": "SIPP-FID-JM",
+          "current_value": 142600.0,
+          "monthly_contribution": 750.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Current employer scheme. 8% employee + 10% employer."
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Scottish Widows",
+          "policy_number": "PP-SW-JM-OLD1",
+          "current_value": 34800.0,
+          "monthly_contribution": 0.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Previous employer - consolidation candidate"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Aegon",
+          "policy_number": "PP-AE-JM-OLD2",
+          "current_value": 18200.0,
+          "monthly_contribution": 0.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Previous employer - consolidation candidate"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "NHS Pension Scheme",
+          "policy_number": "NHS-DB-RM",
+          "current_value": 195200.0,
+          "monthly_contribution": 0.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Rebecca's Defined Benefit. Extremely valuable - do not transfer."
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Vanguard",
+          "policy_number": "ISA-VG-JM",
+          "current_value": 28450.0,
+          "monthly_contribution": 500.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Hargreaves Lansdown",
+          "policy_number": "ISA-HL-RM",
+          "current_value": 31280.0,
+          "monthly_contribution": 400.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        }
+      ],
+      "total_portfolio_value": 642730.0,
+      "risk_profile": {
+        "attitude_to_risk": "medium",
+        "capacity_for_loss": "medium",
+        "investment_experience": "moderate",
+        "time_horizon_years": 18,
+        "last_assessed": "2024-09-08",
+        "notes": "Both non-smokers, very active (James triathlon training, Rebecca yoga/swimming). Long time horizon to retirement."
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2024-09-08",
+          "meeting_type": "video_call",
+          "duration_minutes": 90,
+          "summary": "Initial fact-find. Dual-income tech/NHS couple with 3 young children. Strong position but emergency fund below target. James has scattered pensions - consolidation opportunity. Sofia starting school frees \u00a3400/month.",
+          "transcript": null,
+          "key_points": [
+            "Combined income \u00a3211k gross, \u00a311,500 net monthly",
+            "Monthly surplus \u00a32,209 after Sofia school frees \u00a3400",
+            "Emergency fund \u00a312.6k - target \u00a330k",
+            "James pension consolidation opportunity (3 providers)",
+            "Rebecca NHS DB extremely valuable - retain",
+            "House extension \u00a380k planned in 2-3 years"
+          ],
+          "action_items": [
+            "Build emergency fund to \u00a330k",
+            "James pension consolidation review",
+            "Review protection levels",
+            "House extension funding strategy"
+          ],
+          "concerns_raised": [
+            "emergency fund",
+            "pension consolidation"
+          ],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Prepare pension consolidation recommendation for James (3 schemes \u2192 1)",
+          "deadline": "2024-10-15",
+          "status": "pending",
+          "created_date": "2024-09-08",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Protection review - check current levels adequate for 3 children",
+          "deadline": "2024-10-15",
+          "status": "pending",
+          "created_date": "2024-09-08",
+          "completed_date": null,
+          "notes": null
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2024-09-08T19:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Initial fact-find meeting. Comprehensive review of finances, goals, concerns.",
+          "duration_minutes": 90,
+          "next_action": "Pension consolidation analysis"
+        }
+      ],
+      "compliance": {
+        "last_annual_review": null,
+        "next_review_due": "2025-09-08",
+        "review_status": "pending",
+        "suitability_confirmed": false,
+        "suitability_date": null,
+        "value_delivered": [],
+        "notes": null
+      },
+      "client_since": "2024-09-01",
+      "assigned_advisor": "Jonathan Hayes",
+      "tags": [
+        "young-family",
+        "pension-consolidation",
+        "dual-income",
+        "nhs-db"
+      ],
+      "notes": "James: British/Spanish dual nationality (Spanish father). Speaks fluent Spanish. Very active - triathlon training. Annual trips to Spain to visit family. Rebecca NHS consultant, considering part-time at 50."
+    },
+    {
+      "id": "CLT-2024020",
+      "title": "Mrs",
+      "first_name": "Anne",
+      "last_name": "Partridge",
+      "date_of_birth": "1956-11-23",
+      "national_insurance": null,
+      "occupation": "Retired Teacher",
+      "employer": null,
+      "annual_income": 35000.0,
+      "contact_info": {
+        "email": "anne.partridge@btinternet.com",
+        "phone": "01onal 234567",
+        "mobile": "07734 567890",
+        "address": {
+          "line1": "14 Rose Cottage Lane",
+          "line2": null,
+          "city": "Henley-on-Thames",
+          "county": "Oxfordshire",
+          "postcode": "RG9 2AB",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "phone",
+        "best_time_to_call": "Afternoon"
+      },
+      "marital_status": "widowed",
+      "family_members": [
+        {
+          "name": "Richard (deceased)",
+          "relationship": "spouse",
+          "date_of_birth": "1954-03-08",
+          "notes": "Passed away October 2025 after long illness. Was a chartered accountant. Anne now managing finances alone for first time."
+        },
+        {
+          "name": "Catherine",
+          "relationship": "child",
+          "date_of_birth": "1985-07-14",
+          "notes": "Age 39, lives in Bristol with husband and 2 children. Close relationship with Anne."
+        },
+        {
+          "name": "William",
+          "relationship": "child",
+          "date_of_birth": "1988-12-03",
+          "notes": "Age 36, lives in Edinburgh. Works in finance."
+        },
+        {
+          "name": "Emily",
+          "relationship": "grandchild",
+          "date_of_birth": "2018-04-12",
+          "notes": "Catherine's daughter, age 6"
+        },
+        {
+          "name": "Thomas",
+          "relationship": "grandchild",
+          "date_of_birth": "2021-09-28",
+          "notes": "Catherine's son, age 3"
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "death_in_family",
+          "event_date": "2025-10-15",
+          "description": "Richard passed away after long illness. Anne now managing finances alone for first time in 45 years of marriage.",
+          "related_person": "Richard",
+          "source": "bereavement_meeting",
+          "created_at": "2026-02-01T19:57:43.365789"
+        },
+        {
+          "event_type": "birthday",
+          "event_date": "2026-11-23",
+          "description": "Anne's 70th birthday - first significant birthday without Richard",
+          "related_person": null,
+          "source": "client_data",
+          "created_at": "2026-02-01T19:57:43.365790"
+        },
+        {
+          "event_type": "other",
+          "event_date": "2026-04-12",
+          "description": "Granddaughter Emily's 8th birthday",
+          "related_person": "Emily",
+          "source": "family_data",
+          "created_at": "2026-02-01T19:57:43.365792"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "managing finances alone",
+          "details": "Richard always handled investments and financial decisions during 45-year marriage. Anne has never managed money alone. Feeling overwhelmed and anxious about making wrong decisions.",
+          "severity": "high",
+          "date_raised": "2025-11-01",
+          "status": "active",
+          "last_discussed": "2025-11-20",
+          "notes": "Needs patient, clear explanations. Don't rush decisions."
+        },
+        {
+          "topic": "inheritance for grandchildren",
+          "details": "Wants to ensure grandchildren (Emily 6, Thomas 3) benefit from estate. Considering gifts now vs waiting. Worried about IHT.",
+          "severity": "medium",
+          "date_raised": "2025-11-20",
+          "status": "active",
+          "last_discussed": "2025-11-20",
+          "notes": null
+        },
+        {
+          "topic": "income sustainability",
+          "details": "Concerned whether inherited investments plus pensions will last. Doesn't want to burden children. Very frugal mindset.",
+          "severity": "medium",
+          "date_raised": "2025-11-01",
+          "status": "monitoring",
+          "last_discussed": "2025-11-20",
+          "notes": null
+        },
+        {
+          "topic": "loneliness and isolation",
+          "details": "Large family home now feels empty. Mentioned staying for memories but house is expensive to run. Children encouraging downsizing but emotionally difficult.",
+          "severity": "medium",
+          "date_raised": "2025-11-20",
+          "status": "monitoring",
+          "last_discussed": "2025-11-20",
+          "notes": "Non-financial but affects decision-making. Be sensitive."
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Teachers' Pension Scheme",
+          "policy_number": "TPS-DB-AP",
+          "current_value": 0.0,
+          "monthly_contribution": 0.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Defined Benefit. \u00a318,000/year index-linked. Widow's portion of Richard's pension adds \u00a38,000/year."
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Hargreaves Lansdown",
+          "policy_number": "SIPP-HL-RP-INHERITED",
+          "current_value": 340000.0,
+          "monthly_contribution": 0.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Inherited from Richard. Needs review - currently in cash after transfer. Income drawdown to set up."
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Vanguard",
+          "policy_number": "ISA-VG-AP",
+          "current_value": 85000.0,
+          "monthly_contribution": 0.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Inherited from Richard. Conservative allocation needed for Anne's risk profile."
+        }
+      ],
+      "total_portfolio_value": 750000.0,
+      "risk_profile": {
+        "attitude_to_risk": "low",
+        "capacity_for_loss": "medium",
+        "investment_experience": "limited",
+        "time_horizon_years": 15,
+        "last_assessed": "2025-11-20",
+        "notes": "Very cautious. Richard handled all investments. Needs simple explanations and reassurance. Don't recommend complex products."
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-11-20",
+          "meeting_type": "in_person",
+          "duration_minutes": 90,
+          "summary": "First meeting since Richard's passing. Anne emotional but coping. Overwhelmed by financial decisions. Inherited SIPP sitting in cash. Teachers pension plus widow's portion provides solid base. Main concern is making wrong decisions without Richard.",
+          "transcript": null,
+          "key_points": [
+            "Richard passed October 2025 after long illness",
+            "Anne never managed finances in 45-year marriage",
+            "Inherited SIPP \u00a3340k sitting in cash - needs investment",
+            "Teachers pension \u00a318k + widow's pension \u00a38k = \u00a326k guaranteed",
+            "Concerned about grandchildren inheritance",
+            "Large house expensive to run but emotionally attached"
+          ],
+          "action_items": [
+            "Simple investment proposal for inherited SIPP",
+            "Income projection to show sustainability",
+            "Estate planning review",
+            "Gentle discussion about downsizing options (not rushing)"
+          ],
+          "concerns_raised": [
+            "managing finances alone",
+            "inheritance for grandchildren",
+            "income sustainability"
+          ],
+          "life_events_mentioned": [
+            "Richard passed away",
+            "Anne's 70th birthday coming"
+          ]
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Prepare simple investment proposal for inherited SIPP - low risk, income focus",
+          "deadline": "2025-12-10",
+          "status": "pending",
+          "created_date": "2025-11-20",
+          "completed_date": null,
+          "notes": "Keep it simple - she's overwhelmed. Maximum 3 fund options."
+        },
+        {
+          "commitment": "Create income sustainability projection to reassure about long-term security",
+          "deadline": "2025-12-10",
+          "status": "pending",
+          "created_date": "2025-11-20",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Phone call to check in - how is she coping?",
+          "deadline": "2025-12-01",
+          "status": "pending",
+          "created_date": "2025-11-20",
+          "completed_date": null,
+          "notes": "Welfare check, not business. Be human."
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2025-11-20T14:00:00",
+          "method": "in_person",
+          "direction": "outbound",
+          "summary": "First meeting post-bereavement. Home visit to Anne. Emotional but coping. Discussed inherited SIPP, income needs, grandchildren.",
+          "duration_minutes": 90,
+          "next_action": "Prepare simple investment proposal"
+        },
+        {
+          "interaction_date": "2025-11-01T10:30:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Catherine (daughter) called on behalf of Anne to notify of Richard's passing and ask for help with finances.",
+          "duration_minutes": 20,
+          "next_action": "Schedule home visit"
+        }
+      ],
+      "compliance": {
+        "last_annual_review": null,
+        "next_review_due": "2026-11-20",
+        "review_status": "pending",
+        "suitability_confirmed": false,
+        "suitability_date": null,
+        "value_delivered": [],
+        "notes": "Bereaved client - handle with extra care. Don't rush decisions."
+      },
+      "client_since": "2018-06-01",
+      "assigned_advisor": "Jonathan Hayes",
+      "tags": [
+        "bereaved",
+        "inherited-pension",
+        "low-risk",
+        "needs-support"
+      ],
+      "notes": "Recently widowed after 45-year marriage. Never managed money alone. Needs patient, clear explanations. Don't recommend complex products. Check in regularly - welfare as important as financial advice. Catherine (daughter) helpful point of contact if needed."
+    },
+    {
+      "id": "CLT-2024008",
+      "title": "Mrs",
+      "first_name": "Priya",
+      "last_name": "Patel",
+      "date_of_birth": "1968-08-15",
+      "national_insurance": null,
+      "occupation": "Pharmacist/Business Owner",
+      "employer": "Patel Family Pharmacy Ltd",
+      "annual_income": 95000.0,
+      "contact_info": {
+        "email": "priya.patel@patelfamilypharmacy.co.uk",
+        "phone": "0161 234 5678",
+        "mobile": "07890 123456",
+        "address": {
+          "line1": "28 Victoria Gardens",
+          "line2": null,
+          "city": "Altrincham",
+          "county": "Greater Manchester",
+          "postcode": "WA14 2PL",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "email",
+        "best_time_to_call": "Afternoon"
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "Raj",
+          "relationship": "spouse",
+          "date_of_birth": "1965-04-22",
+          "notes": "Age 59. Co-owner Patel Family Pharmacy. \u00a395k income. Wants to retire at 62. Health good but starting to feel tired."
+        },
+        {
+          "name": "Anita",
+          "relationship": "child",
+          "date_of_birth": "1995-03-10",
+          "notes": "Age 29. Qualified pharmacist. Works in the family business. May take over when parents retire."
+        },
+        {
+          "name": "Sanjay",
+          "relationship": "child",
+          "date_of_birth": "1998-11-28",
+          "notes": "Age 26. Software developer in London. Not interested in family business."
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "wedding",
+          "event_date": "2026-08-15",
+          "description": "Anita's wedding planned for August 2026. Parents contributing \u00a350k.",
+          "related_person": "Anita",
+          "source": "meeting_notes",
+          "created_at": "2026-02-01T19:57:43.365882"
+        },
+        {
+          "event_type": "retirement",
+          "event_date": "2027-04-22",
+          "description": "Raj target retirement at 62. Priya may continue part-time.",
+          "related_person": "Raj",
+          "source": "planning",
+          "created_at": "2026-02-01T19:57:43.365884"
+        },
+        {
+          "event_type": "other",
+          "event_date": "2027-06-01",
+          "description": "Business succession - Anita potentially taking over pharmacy",
+          "related_person": "Anita",
+          "source": "meeting_notes",
+          "created_at": "2026-02-01T19:57:43.365885"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "business succession planning",
+          "details": "Anita may take over pharmacy when parents retire. Need to plan transition - timing, valuation, tax efficiency. Sanjay not interested but should be treated fairly in estate.",
+          "severity": "high",
+          "date_raised": "2025-06-01",
+          "status": "active",
+          "last_discussed": "2025-12-01",
+          "notes": null
+        },
+        {
+          "topic": "pension contributions optimization",
+          "details": "Both have significant pension headroom. Combined income \u00a3190k. Could maximize contributions for tax efficiency. Carry forward available.",
+          "severity": "medium",
+          "date_raised": "2025-06-01",
+          "status": "active",
+          "last_discussed": "2025-12-01",
+          "notes": null
+        },
+        {
+          "topic": "commercial property in pension",
+          "details": "Own pharmacy premises personally. Discussed transferring to SIPP - CGT, SDLT implications. Would provide tax-free rental income to pension.",
+          "severity": "medium",
+          "date_raised": "2025-06-01",
+          "status": "monitoring",
+          "last_discussed": "2025-12-01",
+          "notes": "Complex transaction - needs specialist input"
+        },
+        {
+          "topic": "Anita's wedding costs",
+          "details": "Contributing \u00a350k to Anita's wedding August 2026. Impacts cash reserves and investment timing.",
+          "severity": "low",
+          "date_raised": "2025-12-01",
+          "status": "active",
+          "last_discussed": "2025-12-01",
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "AJ Bell",
+          "policy_number": "SIPP-AJB-PP",
+          "current_value": 420000.0,
+          "monthly_contribution": 3000.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Priya's SIPP. Maximizing contributions for tax efficiency."
+        },
+        {
+          "policy_type": "pension",
+          "provider": "AJ Bell",
+          "policy_number": "SIPP-AJB-RP",
+          "current_value": 385000.0,
+          "monthly_contribution": 3500.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Raj's SIPP. Maximizing contributions, especially with retirement at 62 target."
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Hargreaves Lansdown",
+          "policy_number": "ISA-HL-JOINT",
+          "current_value": 180000.0,
+          "monthly_contribution": 1666.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Joint ISAs, both maximizing allowances"
+        },
+        {
+          "policy_type": "life_insurance",
+          "provider": "Legal & General",
+          "policy_number": "LIFE-LG-PP",
+          "current_value": 500000.0,
+          "monthly_contribution": 65.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Joint life first death. In trust for children."
+        }
+      ],
+      "total_portfolio_value": 1850000.0,
+      "risk_profile": {
+        "attitude_to_risk": "medium",
+        "capacity_for_loss": "high",
+        "investment_experience": "moderate",
+        "time_horizon_years": 8,
+        "last_assessed": "2025-06-01",
+        "notes": "Business owners understand risk. Want diversification away from business. Raj becoming more conservative as retirement approaches."
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-12-01",
+          "meeting_type": "video_call",
+          "duration_minutes": 60,
+          "summary": "Annual review. Anita's wedding August 2026 - \u00a350k contribution confirmed. Raj increasingly talking about retirement at 62 (April 2027). Business succession with Anita progressing - she's now dispensary manager.",
+          "transcript": null,
+          "key_points": [
+            "Anita's wedding August 2026 - \u00a350k contribution",
+            "Raj retirement target April 2027 (age 62)",
+            "Anita now dispensary manager - succession progressing",
+            "Sanjay not interested in business but needs fair treatment",
+            "Commercial property to SIPP still under consideration",
+            "Pension contributions maximized for tax efficiency"
+          ],
+          "action_items": [
+            "Wedding gift planning - timing and method",
+            "Update retirement projection with 2027 target",
+            "Business valuation for succession planning",
+            "Review commercial property to SIPP feasibility"
+          ],
+          "concerns_raised": [
+            "business succession planning",
+            "Anita's wedding costs"
+          ],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Coordinate with accountant on business valuation for succession",
+          "deadline": "2026-02-01",
+          "status": "pending",
+          "created_date": "2025-12-01",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Update retirement projection with Raj at 62 scenario",
+          "deadline": "2026-01-15",
+          "status": "pending",
+          "created_date": "2025-12-01",
+          "completed_date": null,
+          "notes": null
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2025-12-01T16:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Annual review - wedding planning, retirement timeline, succession",
+          "duration_minutes": 60,
+          "next_action": "Business valuation coordination"
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-12-01",
+        "next_review_due": "2026-12-01",
+        "review_status": "completed",
+        "suitability_confirmed": true,
+        "suitability_date": "2025-12-01",
+        "value_delivered": [
+          "Pension contribution optimization - saves \u00a315k tax annually",
+          "Business succession planning initiated",
+          "Protection review completed"
+        ],
+        "notes": null
+      },
+      "client_since": "2019-03-01",
+      "assigned_advisor": "Jonathan Hayes",
+      "tags": [
+        "business-owner",
+        "succession-planning",
+        "high-value",
+        "pension-optimization"
+      ],
+      "notes": "Family pharmacy business established 1992. Community focused. Strong family values. Anita likely successor. Sanjay in London - needs fair treatment in estate despite not taking business."
+    },
+    {
+      "id": "CLT-2024010",
+      "title": "Mr",
+      "first_name": "Rodney",
+      "last_name": "Trotter",
+      "date_of_birth": "1985-02-28",
+      "national_insurance": "GH567890G",
+      "occupation": "Self-Employed Trader",
+      "employer": "Trotters Independent Traders",
+      "annual_income": 48000.0,
+      "contact_info": {
+        "email": "rodney.trotter@titco.co.uk",
+        "phone": "020 7946 0958",
+        "mobile": "07700 123456",
+        "address": {
+          "line1": "Flat 12, Nelson Mandela House",
+          "line2": "Peckham High Street",
+          "city": "London",
+          "county": "Greater London",
+          "postcode": "SE15 5DQ",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "phone",
+        "best_time_to_call": "Afternoon"
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "Cassandra",
+          "relationship": "spouse",
+          "date_of_birth": "1988-05-15",
+          "notes": "Bank manager at Lloyds, \u00a352k salary. Very financially savvy. Often helps Rodney with money decisions."
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "other",
+          "event_date": "2026-06-01",
+          "description": "Looking to buy first home - \u00a3350k budget, saving for deposit",
+          "related_person": null,
+          "source": "meeting_notes",
+          "created_at": "2026-02-01T19:57:43.365920"
+        },
+        {
+          "event_type": "other",
+          "event_date": "2027-01-01",
+          "description": "Planning to start a family - Cassandra wants to take maternity leave",
+          "related_person": null,
+          "source": "meeting_notes",
+          "created_at": "2026-02-01T19:57:43.365921"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "variable income",
+          "details": "Self-employed income varies significantly month to month. Difficult to plan and save consistently. Cassandra's salary provides stability.",
+          "severity": "medium",
+          "date_raised": "2025-09-01",
+          "status": "active",
+          "last_discussed": "2025-12-15",
+          "notes": null
+        },
+        {
+          "topic": "house deposit savings",
+          "details": "Need \u00a335k deposit for \u00a3350k property. Currently have \u00a322k saved. Target completion by June 2026.",
+          "severity": "high",
+          "date_raised": "2025-09-01",
+          "status": "active",
+          "last_discussed": "2025-12-15",
+          "notes": null
+        },
+        {
+          "topic": "inadequate life insurance",
+          "details": "No life insurance currently. With mortgage and potential family, protection review needed.",
+          "severity": "medium",
+          "date_raised": "2025-12-15",
+          "status": "active",
+          "last_discussed": "2025-12-15",
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "isa",
+          "provider": "Moneybox",
+          "policy_number": "ISA-MB-RT",
+          "current_value": 22000.0,
+          "monthly_contribution": 800.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Lifetime ISA for house deposit. \u00a34k annual limit. 25% government bonus."
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Nest",
+          "policy_number": "NEST-RT",
+          "current_value": 18500.0,
+          "monthly_contribution": 200.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Self-employed pension. Considering increasing contributions."
+        }
+      ],
+      "total_portfolio_value": 45000.0,
+      "risk_profile": {
+        "attitude_to_risk": "medium",
+        "capacity_for_loss": "low",
+        "investment_experience": "limited",
+        "time_horizon_years": 25,
+        "last_assessed": "2025-09-01",
+        "notes": "Cassandra more financially literate than Rodney. Both understand need for protection."
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-12-15",
+          "meeting_type": "video_call",
+          "duration_minutes": 45,
+          "summary": "Review of house deposit progress. \u00a322k saved, need \u00a335k by June 2026. Discussed protection gap.",
+          "transcript": null,
+          "key_points": [
+            "House deposit \u00a322k, target \u00a335k by June 2026",
+            "Cassandra's salary provides income stability",
+            "No life insurance - needs addressing before mortgage",
+            "Family planning 2027 - maternity planning needed"
+          ],
+          "action_items": [
+            "Life insurance quotes for both",
+            "Mortgage affordability projection"
+          ],
+          "concerns_raised": [
+            "house deposit savings",
+            "inadequate life insurance"
+          ],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Obtain life insurance quotes for Rodney and Cassandra",
+          "deadline": "2026-01-31",
+          "status": "pending",
+          "created_date": "2025-12-15",
+          "completed_date": null,
+          "notes": null
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2025-12-15T18:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "House deposit review and protection discussion",
+          "duration_minutes": 45,
+          "next_action": "Life insurance quotes"
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-09-01",
+        "next_review_due": "2026-09-01",
+        "review_status": "completed",
+        "suitability_confirmed": true,
+        "suitability_date": "2025-09-01",
+        "value_delivered": [],
+        "notes": null
+      },
+      "client_since": "2024-06-01",
+      "assigned_advisor": "Jonathan Hayes",
+      "tags": [
+        "first-time-buyer",
+        "young-couple",
+        "self-employed"
+      ],
+      "notes": "Rodney has older brother Derek who handles most of business. Cassandra very sensible, often takes lead in financial discussions."
+    },
+    {
+      "id": "CLT-2024011",
+      "title": "Mrs",
+      "first_name": "Hyacinth",
+      "last_name": "Bucket",
+      "date_of_birth": "1952-04-10",
+      "national_insurance": null,
+      "occupation": "Retired",
+      "employer": null,
+      "annual_income": 42000.0,
+      "contact_info": {
+        "email": "hyacinth.bucket@btinternet.com",
+        "phone": "01onal 789012",
+        "mobile": "07890 111222",
+        "address": {
+          "line1": "The Old Vicarage",
+          "line2": "Blossom Avenue",
+          "city": "Royal Leamington Spa",
+          "county": "Warwickshire",
+          "postcode": "CV32 5BP",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "phone",
+        "best_time_to_call": "Morning"
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "Richard",
+          "relationship": "spouse",
+          "date_of_birth": "1950-08-20",
+          "notes": "Age 75. Retired council worker. Very easy-going. Health good but had minor heart procedure 2024."
+        },
+        {
+          "name": "Sheridan",
+          "relationship": "child",
+          "date_of_birth": "1980-06-15",
+          "notes": "Age 45. Lives in London. Unmarried. Works in 'the arts'. Hyacinth very proud of him."
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "birthday",
+          "event_date": "2026-04-10",
+          "description": "Hyacinth's 74th birthday - planning 'intimate garden party for 200 guests'",
+          "related_person": null,
+          "source": "client_mentioned",
+          "created_at": "2026-02-01T19:57:43.365950"
+        },
+        {
+          "event_type": "other",
+          "event_date": "2026-08-01",
+          "description": "Richard's 76th birthday - Hyacinth planning cruise to celebrate",
+          "related_person": "Richard",
+          "source": "meeting_notes",
+          "created_at": "2026-02-01T19:57:43.365951"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "care home costs",
+          "details": "Very worried about potential care costs eroding estate. Wants to protect assets for Sheridan. Discussed gifting but concerned about 7-year rule.",
+          "severity": "high",
+          "date_raised": "2025-06-01",
+          "status": "active",
+          "last_discussed": "2025-10-15",
+          "notes": "Hyacinth adamant about not 'ending up in one of those places'. Premium care only if needed."
+        },
+        {
+          "topic": "inheritance tax",
+          "details": "Estate estimated \u00a31.2M including house. Wants to minimize IHT for Sheridan. Currently \u00a3280k above nil-rate bands.",
+          "severity": "high",
+          "date_raised": "2025-06-01",
+          "status": "active",
+          "last_discussed": "2025-10-15",
+          "notes": null
+        },
+        {
+          "topic": "Richard's health",
+          "details": "Had minor heart procedure in 2024. Now stable but Hyacinth anxious about future.",
+          "severity": "medium",
+          "date_raised": "2024-11-01",
+          "status": "monitoring",
+          "last_discussed": "2025-10-15",
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "LGPS",
+          "policy_number": "LGPS-RB-DB",
+          "current_value": 0.0,
+          "monthly_contribution": 0.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Richard's DB pension. \u00a318k/year index-linked. 50% survivor benefit."
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Prudential",
+          "policy_number": "PP-PRU-HB",
+          "current_value": 145000.0,
+          "monthly_contribution": 0.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Hyacinth's personal pension from brief office career."
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Hargreaves Lansdown",
+          "policy_number": "ISA-HL-BUCKET",
+          "current_value": 185000.0,
+          "monthly_contribution": 0.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Joint ISAs built over years. Conservative allocation."
+        }
+      ],
+      "total_portfolio_value": 1200000.0,
+      "risk_profile": {
+        "attitude_to_risk": "low",
+        "capacity_for_loss": "medium",
+        "investment_experience": "limited",
+        "time_horizon_years": 10,
+        "last_assessed": "2025-06-01",
+        "notes": "Very conservative. Hyacinth makes all decisions. Richard agrees with everything."
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-10-15",
+          "meeting_type": "in_person",
+          "duration_minutes": 75,
+          "summary": "Annual review at their home. Hyacinth served 'light refreshments' (5 course meal). Main focus on IHT planning and care cost concerns.",
+          "transcript": null,
+          "key_points": [
+            "Estate \u00a31.2M - \u00a3280k above nil-rate bands",
+            "Care costs major worry - want to protect for Sheridan",
+            "Discussed gifting strategy but 7-year rule concern",
+            "Richard health stable post-procedure",
+            "Cruise planned for Richard's 76th"
+          ],
+          "action_items": [
+            "Care fees planning meeting with specialist",
+            "Review gifting strategy",
+            "Update wills"
+          ],
+          "concerns_raised": [
+            "care home costs",
+            "inheritance tax"
+          ],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Arrange care fees planning meeting",
+          "deadline": "2025-12-01",
+          "status": "overdue",
+          "created_date": "2025-10-15",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Review gifting strategy options",
+          "deadline": "2025-12-15",
+          "status": "overdue",
+          "created_date": "2025-10-15",
+          "completed_date": null,
+          "notes": null
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2025-10-15T10:30:00",
+          "method": "in_person",
+          "direction": "outbound",
+          "summary": "Annual review at home. IHT and care planning.",
+          "duration_minutes": 75,
+          "next_action": "Care fees meeting"
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-10-15",
+        "next_review_due": "2026-10-15",
+        "review_status": "completed",
+        "suitability_confirmed": true,
+        "suitability_date": "2025-10-15",
+        "value_delivered": [],
+        "notes": null
+      },
+      "client_since": "2015-04-01",
+      "assigned_advisor": "Jonathan Hayes",
+      "tags": [
+        "retiree",
+        "estate-planning",
+        "care-planning",
+        "high-maintenance"
+      ],
+      "notes": "Hyacinth pronounces it 'Bouquet'. Very particular about everything. Meetings always involve elaborate hospitality. Good clients but require careful handling of expectations. Richard very easy-going."
+    },
+    {
+      "id": "CLT-2024012",
+      "title": "Mr",
+      "first_name": "Keith",
+      "last_name": "Lard",
+      "date_of_birth": "1972-11-05",
+      "national_insurance": null,
+      "occupation": "Health & Safety Manager",
+      "employer": "Bolton Metropolitan Borough Council",
+      "annual_income": 52000.0,
+      "contact_info": {
+        "email": "keith.lard@gmail.com",
+        "phone": "01204 123456",
+        "mobile": "07456 789012",
+        "address": {
+          "line1": "42 Coronation Street",
+          "line2": null,
+          "city": "Bolton",
+          "county": "Greater Manchester",
+          "postcode": "BL1 4QP",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "email",
+        "best_time_to_call": "Evening"
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "Candice",
+          "relationship": "spouse",
+          "date_of_birth": "1975-03-22",
+          "notes": "NHS Band 6 Nurse, \u00a345k. Works at Royal Bolton Hospital. 20 years NHS service."
+        },
+        {
+          "name": "Darren",
+          "relationship": "child",
+          "date_of_birth": "2002-07-14",
+          "notes": "Age 23. Graduated 2024. Working as junior accountant."
+        },
+        {
+          "name": "Kelly",
+          "relationship": "child",
+          "date_of_birth": "2005-04-30",
+          "notes": "Age 20. At University of Manchester, second year Business Studies."
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "retirement",
+          "event_date": "2032-11-05",
+          "description": "Keith target retirement at 60. Strong LGPS pension.",
+          "related_person": null,
+          "source": "planning",
+          "created_at": "2026-02-01T19:57:43.365983"
+        },
+        {
+          "event_type": "other",
+          "event_date": "2027-06-01",
+          "description": "Kelly university graduation expected",
+          "related_person": "Kelly",
+          "source": "family_timeline",
+          "created_at": "2026-02-01T19:57:43.365984"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "retirement income adequacy",
+          "details": "Both have DB pensions but want to ensure combined income meets target \u00a345k/year.",
+          "severity": "medium",
+          "date_raised": "2025-03-01",
+          "status": "monitoring",
+          "last_discussed": "2025-11-01",
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "LGPS",
+          "policy_number": "LGPS-KL-DB",
+          "current_value": 0.0,
+          "monthly_contribution": 0.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Keith's LGPS. 25 years service. Projected \u00a322k/year at 60."
+        },
+        {
+          "policy_type": "pension",
+          "provider": "NHS Pension Scheme",
+          "policy_number": "NHS-CL-DB",
+          "current_value": 0.0,
+          "monthly_contribution": 0.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Candice's NHS pension. 20 years service. Projected \u00a318k/year at 60."
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Halifax",
+          "policy_number": "ISA-HFX-LARD",
+          "current_value": 45000.0,
+          "monthly_contribution": 500.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Joint ISAs. Targeting extra retirement pot."
+        }
+      ],
+      "total_portfolio_value": 320000.0,
+      "risk_profile": {
+        "attitude_to_risk": "medium",
+        "capacity_for_loss": "medium",
+        "investment_experience": "limited",
+        "time_horizon_years": 7,
+        "last_assessed": "2025-03-01",
+        "notes": "Both understand pensions well due to public sector experience."
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-11-01",
+          "meeting_type": "video_call",
+          "duration_minutes": 45,
+          "summary": "Annual review. Retirement projections on track. ISA contributions maintained.",
+          "transcript": null,
+          "key_points": [
+            "Combined DB pensions project \u00a340k/year",
+            "ISA pot adds flexibility",
+            "Kelly at university - supporting with living costs",
+            "Darren now employed and self-sufficient"
+          ],
+          "action_items": [
+            "Update pension projections"
+          ],
+          "concerns_raised": [
+            "retirement income adequacy"
+          ],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [],
+      "interactions": [
+        {
+          "interaction_date": "2025-11-01T19:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Annual review",
+          "duration_minutes": 45,
+          "next_action": "None immediate"
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-11-01",
+        "next_review_due": "2026-11-01",
+        "review_status": "completed",
+        "suitability_confirmed": true,
+        "suitability_date": "2025-11-01",
+        "value_delivered": [],
+        "notes": null
+      },
+      "client_since": "2020-03-01",
+      "assigned_advisor": "Jonathan Hayes",
+      "tags": [
+        "public-sector",
+        "db-pension",
+        "straightforward"
+      ],
+      "notes": "Very straightforward clients. Both understand their pensions well. Annual review is mainly reassurance."
+    },
+    {
+      "id": "CLT-2024013",
+      "title": "Mr",
+      "first_name": "Gareth",
+      "last_name": "Cheeseman",
+      "date_of_birth": "1978-09-18",
+      "national_insurance": null,
+      "occupation": "Regional Sales Director",
+      "employer": "Infinidium Solutions Ltd",
+      "annual_income": 125000.0,
+      "contact_info": {
+        "email": "gareth.cheeseman@infinidium.com",
+        "phone": "0118 496 0999",
+        "mobile": "07911 234567",
+        "address": {
+          "line1": "Penthouse Suite, The Cube",
+          "line2": null,
+          "city": "Reading",
+          "county": "Berkshire",
+          "postcode": "RG1 2BN",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "phone",
+        "best_time_to_call": "Anytime"
+      },
+      "marital_status": "single",
+      "family_members": [],
+      "life_events": [
+        {
+          "event_type": "other",
+          "event_date": "2026-03-15",
+          "description": "Expected bonus \u00a345k - needs tax-efficient deployment",
+          "related_person": null,
+          "source": "client_mentioned",
+          "created_at": "2026-02-01T19:57:43.366007"
+        },
+        {
+          "event_type": "other",
+          "event_date": "2026-07-01",
+          "description": "Considering property purchase - buy-to-let investment",
+          "related_person": null,
+          "source": "meeting_notes",
+          "created_at": "2026-02-01T19:57:43.366009"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "tax efficiency",
+          "details": "High earner losing personal allowance. Bonus comes in lump sum. Needs tax planning.",
+          "severity": "high",
+          "date_raised": "2025-10-01",
+          "status": "active",
+          "last_discussed": "2025-10-01",
+          "notes": null
+        },
+        {
+          "topic": "pension underfunding",
+          "details": "Only \u00a385k in pension at 47. Late starter. Needs to maximize contributions. Carry-forward available.",
+          "severity": "high",
+          "date_raised": "2025-10-01",
+          "status": "active",
+          "last_discussed": "2025-10-01",
+          "notes": null
+        },
+        {
+          "topic": "no protection",
+          "details": "No life insurance, CI, or income protection. Single but valuable employee. Company scheme only.",
+          "severity": "medium",
+          "date_raised": "2025-10-01",
+          "status": "active",
+          "last_discussed": "2025-10-01",
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Aviva",
+          "policy_number": "SIPP-AV-GC",
+          "current_value": 85000.0,
+          "monthly_contribution": 1500.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Recently increased from \u00a3500/month. Carry-forward being used."
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Interactive Investor",
+          "policy_number": "ISA-II-GC",
+          "current_value": 62000.0,
+          "monthly_contribution": 1000.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Aggressive growth portfolio. 90% equities."
+        }
+      ],
+      "total_portfolio_value": 285000.0,
+      "risk_profile": {
+        "attitude_to_risk": "high",
+        "capacity_for_loss": "high",
+        "investment_experience": "moderate",
+        "time_horizon_years": 18,
+        "last_assessed": "2025-10-01",
+        "notes": "High risk tolerance. Wants growth. Understands volatility."
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-10-01",
+          "meeting_type": "in_person",
+          "duration_minutes": 60,
+          "summary": "Initial comprehensive meeting. High earner with tax issues and pension underfunding. Bonus due March 2026 needs planning.",
+          "transcript": null,
+          "key_points": [
+            "Income \u00a3125k + \u00a345k expected bonus",
+            "Losing personal allowance - 60% marginal rate",
+            "Pension only \u00a385k at 47 - late starter",
+            "No protection in place",
+            "Interested in buy-to-let"
+          ],
+          "action_items": [
+            "Bonus tax planning strategy",
+            "Pension catch-up using carry-forward",
+            "Protection review"
+          ],
+          "concerns_raised": [
+            "tax efficiency",
+            "pension underfunding",
+            "no protection"
+          ],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Prepare bonus tax planning strategy for March 2026",
+          "deadline": "2026-02-01",
+          "status": "pending",
+          "created_date": "2025-10-01",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Protection quotes (life, CI, IP)",
+          "deadline": "2025-11-15",
+          "status": "overdue",
+          "created_date": "2025-10-01",
+          "completed_date": null,
+          "notes": null
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2025-10-01T12:00:00",
+          "method": "in_person",
+          "direction": "outbound",
+          "summary": "Initial comprehensive review",
+          "duration_minutes": 60,
+          "next_action": "Tax planning strategy"
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-10-01",
+        "next_review_due": "2026-10-01",
+        "review_status": "completed",
+        "suitability_confirmed": true,
+        "suitability_date": "2025-10-01",
+        "value_delivered": [],
+        "notes": null
+      },
+      "client_since": "2025-09-01",
+      "assigned_advisor": "Jonathan Hayes",
+      "tags": [
+        "high-earner",
+        "tax-planning",
+        "pension-catch-up",
+        "single"
+      ],
+      "notes": "Very confident personality. Likes to think he knows about investments. Needs to be carefully guided. Late to pension saving but income allows aggressive catch-up."
+    },
+    {
+      "id": "CLT-2024014",
+      "title": "Ms",
+      "first_name": "Lisa",
+      "last_name": "Rahman",
+      "date_of_birth": "1982-06-25",
+      "national_insurance": null,
+      "occupation": "NHS Administrator",
+      "employer": "Birmingham Women's Hospital",
+      "annual_income": 32000.0,
+      "contact_info": {
+        "email": "lisa.rahman@nhs.net",
+        "phone": "0121 234 5678",
+        "mobile": "07789 345678",
+        "address": {
+          "line1": "28 Maple Road",
+          "line2": null,
+          "city": "Birmingham",
+          "county": "West Midlands",
+          "postcode": "B29 6PQ",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "email",
+        "best_time_to_call": "Lunchtime"
+      },
+      "marital_status": "divorced",
+      "family_members": [
+        {
+          "name": "Aisha",
+          "relationship": "child",
+          "date_of_birth": "2014-03-12",
+          "notes": "Age 11. Very bright. Lisa wants to save for university."
+        },
+        {
+          "name": "Omar",
+          "relationship": "child",
+          "date_of_birth": "2016-11-08",
+          "notes": "Age 9. Into football. Lisa managing costs of activities."
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "birthday",
+          "event_date": "2026-03-12",
+          "description": "Aisha's 12th birthday",
+          "related_person": "Aisha",
+          "source": "family_data",
+          "created_at": "2026-02-01T19:57:43.366038"
+        },
+        {
+          "event_type": "other",
+          "event_date": "2032-09-01",
+          "description": "Aisha university start - 6 years to save",
+          "related_person": "Aisha",
+          "source": "planning",
+          "created_at": "2026-02-01T19:57:43.366040"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "children's education funding",
+          "details": "Wants to save for Aisha and Omar's university. Limited monthly surplus. JISAs started but contributions modest.",
+          "severity": "medium",
+          "date_raised": "2024-09-01",
+          "status": "active",
+          "last_discussed": "2025-09-15",
+          "notes": null
+        },
+        {
+          "topic": "protection as single parent",
+          "details": "Critical that children are provided for if Lisa becomes ill or dies. Current life cover \u00a3100k may be insufficient.",
+          "severity": "high",
+          "date_raised": "2024-09-01",
+          "status": "active",
+          "last_discussed": "2025-09-15",
+          "notes": null
+        },
+        {
+          "topic": "pension at divorce",
+          "details": "Pension sharing order from divorce gave Lisa additional CETV but she's unsure how to manage it.",
+          "severity": "medium",
+          "date_raised": "2024-09-01",
+          "status": "monitoring",
+          "last_discussed": "2025-09-15",
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "NHS Pension Scheme",
+          "policy_number": "NHS-LR-DB",
+          "current_value": 0.0,
+          "monthly_contribution": 0.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Lisa's NHS DB pension. 12 years service."
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Scottish Widows",
+          "policy_number": "CETV-SW-LR",
+          "current_value": 48000.0,
+          "monthly_contribution": 0.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "CETV from divorce settlement. Needs investment strategy."
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Vanguard",
+          "policy_number": "JISA-VG-AISHA",
+          "current_value": 4200.0,
+          "monthly_contribution": 50.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Aisha's Junior ISA"
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Vanguard",
+          "policy_number": "JISA-VG-OMAR",
+          "current_value": 2800.0,
+          "monthly_contribution": 50.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Omar's Junior ISA"
+        },
+        {
+          "policy_type": "life_insurance",
+          "provider": "Legal & General",
+          "policy_number": "LIFE-LG-LR",
+          "current_value": 100000.0,
+          "monthly_contribution": 18.0,
+          "start_date": null,
+          "renewal_date": "2035-01-01",
+          "maturity_date": null,
+          "notes": "Level term. May need increasing."
+        }
+      ],
+      "total_portfolio_value": 78000.0,
+      "risk_profile": {
+        "attitude_to_risk": "medium",
+        "capacity_for_loss": "low",
+        "investment_experience": "limited",
+        "time_horizon_years": 20,
+        "last_assessed": "2024-09-01",
+        "notes": "Limited capacity for loss due to single-income household."
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-09-15",
+          "meeting_type": "video_call",
+          "duration_minutes": 40,
+          "summary": "Annual review. Discussed protection adequacy and children's savings. Lisa managing well on limited budget.",
+          "transcript": null,
+          "key_points": [
+            "Life cover \u00a3100k - may need review with children older",
+            "JISAs ongoing at \u00a350 each",
+            "CETV needs investment strategy",
+            "NHS pension building well"
+          ],
+          "action_items": [
+            "Protection review and quote",
+            "CETV investment recommendation"
+          ],
+          "concerns_raised": [
+            "protection as single parent",
+            "children's education funding"
+          ],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Protection review and increased cover quote",
+          "deadline": "2025-10-31",
+          "status": "overdue",
+          "created_date": "2025-09-15",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "CETV investment strategy recommendation",
+          "deadline": "2025-11-30",
+          "status": "overdue",
+          "created_date": "2025-09-15",
+          "completed_date": null,
+          "notes": null
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2025-09-15T12:30:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Annual review - protection and savings",
+          "duration_minutes": 40,
+          "next_action": "Protection review"
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-09-15",
+        "next_review_due": "2026-09-15",
+        "review_status": "completed",
+        "suitability_confirmed": true,
+        "suitability_date": "2025-09-15",
+        "value_delivered": [],
+        "notes": null
+      },
+      "client_since": "2024-06-01",
+      "assigned_advisor": "Jonathan Hayes",
+      "tags": [
+        "single-parent",
+        "modest-income",
+        "protection-focus",
+        "children-savings"
+      ],
+      "notes": "Lisa managing well as single mum. Very focused on children's future. Limited budget but committed to saving. Ex-husband pays child maintenance regularly."
+    },
+    {
+      "id": "CLT-2024016",
+      "title": "Mrs",
+      "first_name": "Emma",
+      "last_name": "Williams",
+      "date_of_birth": "1979-12-03",
+      "national_insurance": null,
+      "occupation": "HR Director",
+      "employer": "Williams & Co Solicitors",
+      "annual_income": 88000.0,
+      "contact_info": {
+        "email": "emma.williams@williamsco.com",
+        "phone": "01onal 456789",
+        "mobile": "07890 567890",
+        "address": {
+          "line1": "The Old Rectory",
+          "line2": null,
+          "city": "Winchester",
+          "county": "Hampshire",
+          "postcode": "SO23 8AQ",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "email",
+        "best_time_to_call": "Afternoon"
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "John",
+          "relationship": "spouse",
+          "date_of_birth": "1977-05-14",
+          "notes": "Solicitor partner at Williams & Co. \u00a3145k income."
+        },
+        {
+          "name": "Charlotte",
+          "relationship": "child",
+          "date_of_birth": "2008-08-22",
+          "notes": "Age 17. A-levels 2026."
+        },
+        {
+          "name": "Henry",
+          "relationship": "child",
+          "date_of_birth": "2011-02-15",
+          "notes": "Age 14. GCSEs 2027."
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "other",
+          "event_date": "2026-08-01",
+          "description": "Charlotte A-level results and university applications",
+          "related_person": "Charlotte",
+          "source": "family_timeline",
+          "created_at": "2026-02-01T19:57:43.366074"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "scattered pensions",
+          "details": "Both have multiple pensions from career moves. John has 4 schemes, Emma has 3. Need consolidation review.",
+          "severity": "medium",
+          "date_raised": "2024-06-01",
+          "status": "active",
+          "last_discussed": "2024-06-15",
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Various",
+          "policy_number": "MULTIPLE-EW",
+          "current_value": 156000.0,
+          "monthly_contribution": 600.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Emma's pensions across 3 providers. Consolidation recommended."
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Various",
+          "policy_number": "MULTIPLE-JW",
+          "current_value": 285000.0,
+          "monthly_contribution": 1200.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "John's pensions across 4 providers. Consolidation recommended."
+        }
+      ],
+      "total_portfolio_value": 890000.0,
+      "risk_profile": {
+        "attitude_to_risk": "medium",
+        "capacity_for_loss": "high",
+        "investment_experience": "moderate",
+        "time_horizon_years": 15,
+        "last_assessed": "2024-06-01",
+        "notes": "Both professionals, understand investments."
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2024-06-15",
+          "meeting_type": "video_call",
+          "duration_minutes": 50,
+          "summary": "Pension consolidation discussion. Both keen to simplify. Agreed to gather pension details.",
+          "transcript": null,
+          "key_points": [
+            "7 pension schemes between them",
+            "Want simplification",
+            "Agreed to send pension statements"
+          ],
+          "action_items": [
+            "Gather all pension statements",
+            "Prepare consolidation recommendation"
+          ],
+          "concerns_raised": [
+            "scattered pensions"
+          ],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Follow up on pension statements",
+          "deadline": "2024-07-31",
+          "status": "overdue",
+          "created_date": "2024-06-15",
+          "completed_date": null,
+          "notes": "Client hasn't responded. Need to chase."
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2024-06-15T15:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Pension consolidation meeting",
+          "duration_minutes": 50,
+          "next_action": "Await pension statements"
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2024-06-15",
+        "next_review_due": "2025-06-15",
+        "review_status": "overdue",
+        "suitability_confirmed": true,
+        "suitability_date": "2024-06-15",
+        "value_delivered": [],
+        "notes": null
+      },
+      "client_since": "2022-03-01",
+      "assigned_advisor": "Jonathan Hayes",
+      "tags": [
+        "dormant",
+        "re-engage",
+        "pension-consolidation",
+        "high-value"
+      ],
+      "notes": "Good clients gone quiet. Need to re-engage. May be busy with work and family. Send friendly re-engagement email."
+    },
+    {
+      "id": "CLT-2024017",
+      "title": "Dr",
+      "first_name": "Anthony",
+      "last_name": "Makepeace",
+      "date_of_birth": "1948-07-08",
+      "national_insurance": null,
+      "occupation": "Retired GP",
+      "employer": null,
+      "annual_income": 65000.0,
+      "contact_info": {
+        "email": "dr.makepeace@doctors.org.uk",
+        "phone": "01onal 234567",
+        "mobile": "07700 234567",
+        "address": {
+          "line1": "Orchard House",
+          "line2": "The Green",
+          "city": "Chipping Campden",
+          "county": "Gloucestershire",
+          "postcode": "GL55 6AU",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "phone",
+        "best_time_to_call": "Morning"
+      },
+      "marital_status": "widowed",
+      "family_members": [
+        {
+          "name": "Margaret (deceased)",
+          "relationship": "spouse",
+          "date_of_birth": "1950-03-15",
+          "notes": "Passed away 2022 after long illness. Anthony still adjusting."
+        },
+        {
+          "name": "Catherine",
+          "relationship": "child",
+          "date_of_birth": "1978-11-22",
+          "notes": "Age 47. Lives in Oxford. Medical researcher. Married with 2 children."
+        },
+        {
+          "name": "James",
+          "relationship": "child",
+          "date_of_birth": "1981-04-05",
+          "notes": "Age 44. Lives in Edinburgh. Surgeon. Married with 1 child."
+        },
+        {
+          "name": "Lily",
+          "relationship": "grandchild",
+          "date_of_birth": "2015-06-10",
+          "notes": "Catherine's daughter, age 10"
+        },
+        {
+          "name": "George",
+          "relationship": "grandchild",
+          "date_of_birth": "2018-12-03",
+          "notes": "Catherine's son, age 7"
+        },
+        {
+          "name": "Beatrice",
+          "relationship": "grandchild",
+          "date_of_birth": "2020-09-18",
+          "notes": "James's daughter, age 5"
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "birthday",
+          "event_date": "2026-06-10",
+          "description": "Granddaughter Lily turning 11",
+          "related_person": "Lily",
+          "source": "family_data",
+          "created_at": "2026-02-01T19:57:43.366101"
+        },
+        {
+          "event_type": "other",
+          "event_date": "2026-09-01",
+          "description": "Considering charitable foundation in Margaret's name",
+          "related_person": null,
+          "source": "meeting_notes",
+          "created_at": "2026-02-01T19:57:43.366103"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "legacy planning",
+          "details": "Wants to establish lasting legacy for Margaret. Considering charitable foundation. Also wants grandchildren provided for.",
+          "severity": "medium",
+          "date_raised": "2025-07-01",
+          "status": "active",
+          "last_discussed": "2025-11-20",
+          "notes": null
+        },
+        {
+          "topic": "IHT on estate",
+          "details": "Estate \u00a32.1M. Wants to minimize IHT while supporting grandchildren. NRB + RNRB partially used.",
+          "severity": "medium",
+          "date_raised": "2025-07-01",
+          "status": "active",
+          "last_discussed": "2025-11-20",
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "NHS Pension Scheme",
+          "policy_number": "NHS-AM-DB",
+          "current_value": 0.0,
+          "monthly_contribution": 0.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "NHS DB pension from GP career. \u00a338k/year."
+        },
+        {
+          "policy_type": "pension",
+          "provider": "AJ Bell",
+          "policy_number": "SIPP-AJB-AM",
+          "current_value": 420000.0,
+          "monthly_contribution": 0.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Additional voluntary contributions over career. Now in drawdown."
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Charles Stanley",
+          "policy_number": "ISA-CS-AM",
+          "current_value": 285000.0,
+          "monthly_contribution": 0.0,
+          "start_date": null,
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Equity income focus. Dividends reinvested."
+        }
+      ],
+      "total_portfolio_value": 2100000.0,
+      "risk_profile": {
+        "attitude_to_risk": "medium",
+        "capacity_for_loss": "high",
+        "investment_experience": "extensive",
+        "time_horizon_years": 10,
+        "last_assessed": "2025-07-01",
+        "notes": "Very comfortable with investments. Focus shifting to legacy and charity."
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-11-20",
+          "meeting_type": "in_person",
+          "duration_minutes": 75,
+          "summary": "Discussed charitable foundation options in Margaret's memory. Also reviewed grandchildren gifting and IHT position.",
+          "transcript": null,
+          "key_points": [
+            "Considering foundation for medical research (Margaret's wish)",
+            "3 grandchildren - wants education funds",
+            "Estate \u00a32.1M - IHT exposure ~\u00a3100k currently",
+            "Annual gifting from surplus income"
+          ],
+          "action_items": [
+            "Research charitable foundation options",
+            "Set up grandchildren trusts",
+            "IHT mitigation strategy"
+          ],
+          "concerns_raised": [
+            "legacy planning",
+            "IHT on estate"
+          ],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Present charitable foundation options",
+          "deadline": "2026-01-31",
+          "status": "pending",
+          "created_date": "2025-11-20",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Grandchildren education trust setup proposal",
+          "deadline": "2026-02-15",
+          "status": "pending",
+          "created_date": "2025-11-20",
+          "completed_date": null,
+          "notes": null
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2025-11-20T10:00:00",
+          "method": "in_person",
+          "direction": "outbound",
+          "summary": "Legacy and charitable planning discussion",
+          "duration_minutes": 75,
+          "next_action": "Foundation research"
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-11-20",
+        "next_review_due": "2026-11-20",
+        "review_status": "completed",
+        "suitability_confirmed": true,
+        "suitability_date": "2025-11-20",
+        "value_delivered": [],
+        "notes": null
+      },
+      "client_since": "2010-06-01",
+      "assigned_advisor": "Jonathan Hayes",
+      "tags": [
+        "retiree",
+        "widower",
+        "charitable",
+        "legacy-planning",
+        "high-value"
+      ],
+      "notes": "Lovely gentleman. Still misses Margaret deeply. Medicine runs in family - both children doctors. Very engaged with grandchildren. Wants to leave meaningful legacy."
+    }
+  ],
+  "last_updated": "2026-02-01T19:57:43.366173",
+  "version": "2.0.0"
+}

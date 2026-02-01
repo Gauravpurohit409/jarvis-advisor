@@ -1,0 +1,19 @@
+# Core
+fastapi==0.109.0
+uvicorn==0.27.0
+pydantic==2.5.3
+pydantic-settings==2.1.0
+python-dotenv==1.0.0
+
+# Streamlit UI
+streamlit==1.30.0
+
+# LLM Providers
+groq==0.4.2
+openai==1.12.0
+
+# Vector Store (Phase 2)
+chromadb==0.4.22
+
+# Utilities
+python-dateutil==2.8.2

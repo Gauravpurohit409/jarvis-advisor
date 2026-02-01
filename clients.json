@@ -1,0 +1,4679 @@
+{
+  "clients": [
+    {
+      "id": "CLT-2024001",
+      "title": "Mr",
+      "first_name": "James",
+      "last_name": "Taylor",
+      "date_of_birth": "1970-01-30",
+      "national_insurance": null,
+      "occupation": "Doctor",
+      "employer": "NHS Trust",
+      "annual_income": 95000.0,
+      "contact_info": {
+        "email": "james.taylor@gmail.com",
+        "phone": "01833 781453",
+        "mobile": "07818 671412",
+        "address": {
+          "line1": "108 Church Road",
+          "line2": null,
+          "city": "Leeds",
+          "county": "West Yorkshire",
+          "postcode": "LS1 1AA",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "phone",
+        "best_time_to_call": "Evening"
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "Margaret",
+          "relationship": "spouse",
+          "date_of_birth": "1973-07-06",
+          "notes": null
+        },
+        {
+          "name": "Catherine",
+          "relationship": "child",
+          "date_of_birth": "2016-03-08",
+          "notes": "Lives abroad"
+        },
+        {
+          "name": "Thomas",
+          "relationship": "child",
+          "date_of_birth": "2012-08-08",
+          "notes": "Lives abroad"
+        },
+        {
+          "name": "Oliver",
+          "relationship": "child",
+          "date_of_birth": "2018-01-25",
+          "notes": null
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "retirement",
+          "event_date": "2026-07-27",
+          "description": "Retirement party planned",
+          "related_person": null,
+          "source": "mentioned_in_meeting",
+          "created_at": "2026-02-01T19:47:38.497694"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "running out of money",
+          "details": "Anxiety about longevity and pension lasting",
+          "severity": "medium",
+          "date_raised": "2025-10-16",
+          "status": "monitoring",
+          "last_discussed": null,
+          "notes": null
+        },
+        {
+          "topic": "drawdown vs annuity",
+          "details": "Uncertain about retirement income strategy",
+          "severity": "high",
+          "date_raised": "2025-03-06",
+          "status": "active",
+          "last_discussed": "2025-12-19",
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Aviva",
+          "policy_number": "PEN865179",
+          "current_value": 260870.0,
+          "monthly_contribution": 549.0,
+          "start_date": "2002-10-19",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "SIPP"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Scottish Widows",
+          "policy_number": "PEN678856",
+          "current_value": 173709.0,
+          "monthly_contribution": 849.0,
+          "start_date": "2014-02-05",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Personal pension"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Legal & General",
+          "policy_number": "PEN838797",
+          "current_value": 56466.0,
+          "monthly_contribution": 46.0,
+          "start_date": "2014-10-31",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Old employer scheme"
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Hargreaves Lansdown",
+          "policy_number": "ISA996865",
+          "current_value": 71024.0,
+          "monthly_contribution": 151.0,
+          "start_date": "2019-04-06",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        }
+      ],
+      "total_portfolio_value": 562069.0,
+      "risk_profile": {
+        "attitude_to_risk": "low",
+        "capacity_for_loss": "medium",
+        "investment_experience": "limited",
+        "time_horizon_years": 22,
+        "last_assessed": "2025-05-05",
+        "notes": null
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-10-06",
+          "meeting_type": "video_call",
+          "duration_minutes": 45,
+          "summary": "Annual review with Mr Taylor. Discussed portfolio performance and rebalancing options.",
+          "transcript": null,
+          "key_points": [
+            "Considering increasing pension contributions"
+          ],
+          "action_items": [],
+          "concerns_raised": [
+            "running out of money"
+          ],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Follow up on signed LOA",
+          "deadline": "2026-02-16",
+          "status": "pending",
+          "created_date": "2026-01-20",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Provide ISA top-up options",
+          "deadline": "2026-02-05",
+          "status": "pending",
+          "created_date": "2026-01-25",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Send annual review summary",
+          "deadline": "2026-01-30",
+          "status": "overdue",
+          "created_date": "2026-01-16",
+          "completed_date": null,
+          "notes": null
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2025-11-22T17:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Discussed market conditions",
+          "duration_minutes": 60,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-11-14T11:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Portfolio review session",
+          "duration_minutes": 9,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-09-03T15:00:00",
+          "method": "email",
+          "direction": "outbound",
+          "summary": "Sent portfolio valuation update",
+          "duration_minutes": null,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2025-07-20T16:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Portfolio review session",
+          "duration_minutes": 60,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-05-20T11:00:00",
+          "method": "video_call",
+          "direction": "inbound",
+          "summary": "Portfolio review session",
+          "duration_minutes": 24,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-04-19T17:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Quick catch-up call",
+          "duration_minutes": 28,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-02-17T10:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Portfolio review session",
+          "duration_minutes": 26,
+          "next_action": null
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-03-31",
+        "next_review_due": "2026-03-31",
+        "review_status": "completed",
+        "suitability_confirmed": true,
+        "suitability_date": "2025-03-31",
+        "value_delivered": [],
+        "notes": null
+      },
+      "client_since": "2019-01-26",
+      "assigned_advisor": "default",
+      "tags": [
+        "retiree"
+      ],
+      "notes": null
+    },
+    {
+      "id": "CLT-2024002",
+      "title": "Mrs",
+      "first_name": "Anne",
+      "last_name": "Williams",
+      "date_of_birth": "1979-06-15",
+      "national_insurance": null,
+      "occupation": "Civil Servant",
+      "employer": "HMRC",
+      "annual_income": 55000.0,
+      "contact_info": {
+        "email": "anne.williams@yahoo.co.uk",
+        "phone": "01652 891952",
+        "mobile": "07847 823378",
+        "address": {
+          "line1": "52 Mill Lane",
+          "line2": null,
+          "city": "Cambridge",
+          "county": "Cambridgeshire",
+          "postcode": "CB1 1AA",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "phone",
+        "best_time_to_call": "Evening"
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "Richard",
+          "relationship": "spouse",
+          "date_of_birth": "1980-01-24",
+          "notes": null
+        }
+      ],
+      "life_events": [],
+      "concerns": [
+        {
+          "topic": "inheritance tax",
+          "details": "Concerned about IHT liability for children",
+          "severity": "low",
+          "date_raised": "2025-09-11",
+          "status": "monitoring",
+          "last_discussed": "2025-09-15",
+          "notes": null
+        },
+        {
+          "topic": "inflation",
+          "details": "Concerned about inflation eroding savings",
+          "severity": "low",
+          "date_raised": "2025-04-14",
+          "status": "monitoring",
+          "last_discussed": "2025-10-02",
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Aegon",
+          "policy_number": "PEN122056",
+          "current_value": 328443.0,
+          "monthly_contribution": 567.0,
+          "start_date": "2005-02-28",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Old employer scheme"
+        },
+        {
+          "policy_type": "life_insurance",
+          "provider": "Aviva",
+          "policy_number": "LIF340062",
+          "current_value": 135337.0,
+          "monthly_contribution": null,
+          "start_date": null,
+          "renewal_date": "2026-02-18",
+          "maturity_date": null,
+          "notes": "Level term"
+        }
+      ],
+      "total_portfolio_value": 463780.0,
+      "risk_profile": {
+        "attitude_to_risk": "low",
+        "capacity_for_loss": "high",
+        "investment_experience": "none",
+        "time_horizon_years": 23,
+        "last_assessed": "2025-09-27",
+        "notes": null
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-12-24",
+          "meeting_type": "phone",
+          "duration_minutes": 30,
+          "summary": "Protection review. Assessed current life cover and critical illness needs.",
+          "transcript": null,
+          "key_points": [
+            "Wants to review protection needs"
+          ],
+          "action_items": [],
+          "concerns_raised": [
+            "inheritance tax"
+          ],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-10-26",
+          "meeting_type": "video_call",
+          "duration_minutes": 60,
+          "summary": "Ad-hoc call regarding market conditions. Provided reassurance about long-term strategy.",
+          "transcript": null,
+          "key_points": [
+            "Interested in sustainable investments"
+          ],
+          "action_items": [],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-08-03",
+          "meeting_type": "phone",
+          "duration_minutes": 30,
+          "summary": "Protection review. Assessed current life cover and critical illness needs.",
+          "transcript": null,
+          "key_points": [
+            "Interested in sustainable investments"
+          ],
+          "action_items": [],
+          "concerns_raised": [
+            "inheritance tax"
+          ],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-03-07",
+          "meeting_type": "in_person",
+          "duration_minutes": 30,
+          "summary": "Annual review with Mrs Williams. Discussed portfolio performance and rebalancing options.",
+          "transcript": null,
+          "key_points": [
+            "Client happy with current strategy"
+          ],
+          "action_items": [],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Provide ISA top-up options",
+          "deadline": "2026-02-04",
+          "status": "pending",
+          "created_date": "2026-01-13",
+          "completed_date": null,
+          "notes": null
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2026-01-02T17:00:00",
+          "method": "email",
+          "direction": "inbound",
+          "summary": "Sent portfolio valuation update",
+          "duration_minutes": null,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-11-13T12:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Discussed market conditions",
+          "duration_minutes": 42,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-10-14T15:00:00",
+          "method": "email",
+          "direction": "inbound",
+          "summary": "Client requested callback",
+          "duration_minutes": null,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-07-16T13:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Quick catch-up call",
+          "duration_minutes": 49,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-01-14T14:00:00",
+          "method": "email",
+          "direction": "inbound",
+          "summary": "Client requested callback",
+          "duration_minutes": null,
+          "next_action": null
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2026-01-11",
+        "next_review_due": "2027-01-11",
+        "review_status": "completed",
+        "suitability_confirmed": true,
+        "suitability_date": "2026-01-11",
+        "value_delivered": [
+          "Reviewed and updated protection cover"
+        ],
+        "notes": null
+      },
+      "client_since": "2017-12-04",
+      "assigned_advisor": "default",
+      "tags": [],
+      "notes": null
+    },
+    {
+      "id": "CLT-2024003",
+      "title": "Mr",
+      "first_name": "Henry",
+      "last_name": "Wilson",
+      "date_of_birth": "1961-01-11",
+      "national_insurance": null,
+      "occupation": "Retired",
+      "employer": null,
+      "annual_income": 31552.0,
+      "contact_info": {
+        "email": "henry.wilson@btinternet.com",
+        "phone": "01457 172132",
+        "mobile": "07350 487477",
+        "address": {
+          "line1": "73 Church Road",
+          "line2": null,
+          "city": "Leeds",
+          "county": "West Yorkshire",
+          "postcode": "LS1 1AA",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "phone",
+        "best_time_to_call": "Evening"
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "Jennifer",
+          "relationship": "spouse",
+          "date_of_birth": "1963-05-02",
+          "notes": null
+        },
+        {
+          "name": "Victoria",
+          "relationship": "child",
+          "date_of_birth": "2021-07-21",
+          "notes": "Lives abroad"
+        },
+        {
+          "name": "Victoria",
+          "relationship": "child",
+          "date_of_birth": "1991-04-17",
+          "notes": "Lives locally"
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "wedding",
+          "event_date": "2026-05-07",
+          "description": "Daughter's wedding",
+          "related_person": null,
+          "source": "mentioned_in_meeting",
+          "created_at": "2026-02-01T19:47:38.498009"
+        },
+        {
+          "event_type": "birth",
+          "event_date": "2025-06-25",
+          "description": "New grandchild born",
+          "related_person": null,
+          "source": "client_mentioned",
+          "created_at": "2026-02-01T19:47:38.498013"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "inflation",
+          "details": "Concerned about inflation eroding savings",
+          "severity": "low",
+          "date_raised": "2025-06-19",
+          "status": "monitoring",
+          "last_discussed": "2025-09-10",
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Royal London",
+          "policy_number": "PEN395442",
+          "current_value": 337105.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2004-09-21",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Personal pension"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Legal & General",
+          "policy_number": "PEN820892",
+          "current_value": 352523.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2019-02-17",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Personal pension"
+        },
+        {
+          "policy_type": "isa",
+          "provider": "AJ Bell",
+          "policy_number": "ISA987204",
+          "current_value": 23316.0,
+          "monthly_contribution": 147.0,
+          "start_date": "2022-02-11",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "life_insurance",
+          "provider": "Zurich",
+          "policy_number": "LIF146228",
+          "current_value": 101858.0,
+          "monthly_contribution": null,
+          "start_date": null,
+          "renewal_date": "2026-07-22",
+          "maturity_date": null,
+          "notes": "Level term"
+        }
+      ],
+      "total_portfolio_value": 814802.0,
+      "risk_profile": {
+        "attitude_to_risk": "low",
+        "capacity_for_loss": "low",
+        "investment_experience": "none",
+        "time_horizon_years": 26,
+        "last_assessed": "2025-10-25",
+        "notes": null
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2026-01-10",
+          "meeting_type": "in_person",
+          "duration_minutes": 45,
+          "summary": "Retirement planning session. Discussed target retirement date and income requirements.",
+          "transcript": null,
+          "key_points": [
+            "Considering increasing pension contributions"
+          ],
+          "action_items": [
+            "Send pension projection"
+          ],
+          "concerns_raised": [
+            "inflation"
+          ],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-02-24",
+          "meeting_type": "phone",
+          "duration_minutes": 45,
+          "summary": "Annual review with Mr Wilson. Discussed portfolio performance and rebalancing options.",
+          "transcript": null,
+          "key_points": [
+            "Considering increasing pension contributions"
+          ],
+          "action_items": [
+            "Arrange meeting with spouse"
+          ],
+          "concerns_raised": [
+            "inflation"
+          ],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [],
+      "interactions": [
+        {
+          "interaction_date": "2025-11-02T15:00:00",
+          "method": "email",
+          "direction": "inbound",
+          "summary": "Sent meeting confirmation",
+          "duration_minutes": null,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-06-05T12:00:00",
+          "method": "email",
+          "direction": "outbound",
+          "summary": "Sent meeting confirmation",
+          "duration_minutes": null,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2025-02-23T12:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Discussed market conditions",
+          "duration_minutes": 29,
+          "next_action": null
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-09-11",
+        "next_review_due": "2026-09-11",
+        "review_status": "completed",
+        "suitability_confirmed": true,
+        "suitability_date": "2025-09-11",
+        "value_delivered": [
+          "Reviewed and updated protection cover"
+        ],
+        "notes": null
+      },
+      "client_since": "2018-12-09",
+      "assigned_advisor": "default",
+      "tags": [
+        "pension-focus",
+        "protection-focus"
+      ],
+      "notes": null
+    },
+    {
+      "id": "CLT-2024004",
+      "title": "Mr",
+      "first_name": "Andrew",
+      "last_name": "Patel",
+      "date_of_birth": "1966-10-04",
+      "national_insurance": null,
+      "occupation": "Doctor",
+      "employer": "NHS Trust",
+      "annual_income": 95000.0,
+      "contact_info": {
+        "email": "andrew.patel@btinternet.com",
+        "phone": "02546 735656",
+        "mobile": "07623 221263",
+        "address": {
+          "line1": "99 Station Road",
+          "line2": null,
+          "city": "Liverpool",
+          "county": "Merseyside",
+          "postcode": "L1 1AA",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "email",
+        "best_time_to_call": "Evening"
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "Charles",
+          "relationship": "spouse",
+          "date_of_birth": "1962-01-07",
+          "notes": null
+        },
+        {
+          "name": "Mary",
+          "relationship": "child",
+          "date_of_birth": "1992-07-05",
+          "notes": "Lives locally"
+        },
+        {
+          "name": "Andrew",
+          "relationship": "child",
+          "date_of_birth": "2009-03-13",
+          "notes": "Lives abroad"
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "retirement",
+          "event_date": "2026-07-24",
+          "description": "Retirement party planned",
+          "related_person": null,
+          "source": "mentioned_in_meeting",
+          "created_at": "2026-02-01T19:47:38.498127"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "drawdown vs annuity",
+          "details": "Uncertain about retirement income strategy",
+          "severity": "high",
+          "date_raised": "2025-11-06",
+          "status": "monitoring",
+          "last_discussed": null,
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Royal London",
+          "policy_number": "PEN799287",
+          "current_value": 234115.0,
+          "monthly_contribution": 334.0,
+          "start_date": "2009-01-09",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Personal pension"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Standard Life",
+          "policy_number": "PEN301158",
+          "current_value": 240434.0,
+          "monthly_contribution": 680.0,
+          "start_date": "2008-07-02",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Old employer scheme"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Royal London",
+          "policy_number": "PEN525800",
+          "current_value": 307276.0,
+          "monthly_contribution": 853.0,
+          "start_date": "2000-01-04",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Personal pension"
+        },
+        {
+          "policy_type": "life_insurance",
+          "provider": "Zurich",
+          "policy_number": "LIF587575",
+          "current_value": 331623.0,
+          "monthly_contribution": null,
+          "start_date": null,
+          "renewal_date": "2026-09-16",
+          "maturity_date": null,
+          "notes": "Level term"
+        }
+      ],
+      "total_portfolio_value": 1113448.0,
+      "risk_profile": {
+        "attitude_to_risk": "low",
+        "capacity_for_loss": "medium",
+        "investment_experience": "extensive",
+        "time_horizon_years": 25,
+        "last_assessed": "2025-10-01",
+        "notes": null
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-11-17",
+          "meeting_type": "in_person",
+          "duration_minutes": 30,
+          "summary": "Annual review with Mr Patel. Discussed portfolio performance and rebalancing options.",
+          "transcript": null,
+          "key_points": [
+            "Client happy with current strategy"
+          ],
+          "action_items": [],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-03-15",
+          "meeting_type": "in_person",
+          "duration_minutes": 90,
+          "summary": "Ad-hoc call regarding market conditions. Provided reassurance about long-term strategy.",
+          "transcript": null,
+          "key_points": [
+            "Needs to update beneficiary details"
+          ],
+          "action_items": [
+            "Arrange meeting with spouse"
+          ],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Send pension transfer analysis",
+          "deadline": "2026-02-15",
+          "status": "pending",
+          "created_date": "2026-01-26",
+          "completed_date": null,
+          "notes": null
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2025-11-02T17:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Answered questions about pension options",
+          "duration_minutes": 59,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-06-12T11:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Quick catch-up call",
+          "duration_minutes": 44,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-04-26T16:00:00",
+          "method": "email",
+          "direction": "outbound",
+          "summary": "Client requested callback",
+          "duration_minutes": null,
+          "next_action": "Follow up next week"
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-12-23",
+        "next_review_due": "2026-12-23",
+        "review_status": "completed",
+        "suitability_confirmed": true,
+        "suitability_date": "2025-12-23",
+        "value_delivered": [],
+        "notes": null
+      },
+      "client_since": "2018-10-07",
+      "assigned_advisor": "default",
+      "tags": [
+        "pension-focus"
+      ],
+      "notes": null
+    },
+    {
+      "id": "CLT-2024005",
+      "title": "Ms",
+      "first_name": "Susan",
+      "last_name": "Wilson",
+      "date_of_birth": "1969-05-14",
+      "national_insurance": null,
+      "occupation": "Nurse",
+      "employer": "NHS Trust",
+      "annual_income": 38000.0,
+      "contact_info": {
+        "email": "susan.wilson@yahoo.co.uk",
+        "phone": "02888 712451",
+        "mobile": "07812 120480",
+        "address": {
+          "line1": "196 Station Road",
+          "line2": null,
+          "city": "Leeds",
+          "county": "West Yorkshire",
+          "postcode": "LS1 1AA",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "phone",
+        "best_time_to_call": null
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "Henry",
+          "relationship": "spouse",
+          "date_of_birth": "1968-05-08",
+          "notes": null
+        },
+        {
+          "name": "Linda",
+          "relationship": "child",
+          "date_of_birth": "2009-03-05",
+          "notes": "Lives locally"
+        },
+        {
+          "name": "David",
+          "relationship": "child",
+          "date_of_birth": "2005-10-07",
+          "notes": null
+        },
+        {
+          "name": "James",
+          "relationship": "child",
+          "date_of_birth": "2006-02-03",
+          "notes": "Lives abroad"
+        },
+        {
+          "name": "Anne",
+          "relationship": "grandchild",
+          "date_of_birth": "2014-09-14",
+          "notes": null
+        },
+        {
+          "name": "Jennifer",
+          "relationship": "grandchild",
+          "date_of_birth": "2021-06-25",
+          "notes": null
+        },
+        {
+          "name": "Thomas",
+          "relationship": "grandchild",
+          "date_of_birth": "2024-12-15",
+          "notes": null
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "wedding",
+          "event_date": "2026-03-15",
+          "description": "Daughter's wedding",
+          "related_person": null,
+          "source": "mentioned_in_meeting",
+          "created_at": "2026-02-01T19:47:38.498264"
+        },
+        {
+          "event_type": "birth",
+          "event_date": "2025-04-10",
+          "description": "New grandchild born",
+          "related_person": null,
+          "source": "client_mentioned",
+          "created_at": "2026-02-01T19:47:38.498267"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "market volatility",
+          "details": "Worried about market fluctuations affecting pension value",
+          "severity": "high",
+          "date_raised": "2025-11-14",
+          "status": "active",
+          "last_discussed": null,
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Aviva",
+          "policy_number": "PEN188025",
+          "current_value": 356985.0,
+          "monthly_contribution": 438.0,
+          "start_date": "2003-01-16",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "SIPP"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Standard Life",
+          "policy_number": "PEN152727",
+          "current_value": 156396.0,
+          "monthly_contribution": 388.0,
+          "start_date": "2007-05-05",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Old employer scheme"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Hargreaves Lansdown",
+          "policy_number": "PEN442722",
+          "current_value": 196947.0,
+          "monthly_contribution": 779.0,
+          "start_date": "2019-09-24",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "SIPP"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Royal London",
+          "policy_number": "PEN888539",
+          "current_value": 456167.0,
+          "monthly_contribution": 431.0,
+          "start_date": "2005-08-28",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Hargreaves Lansdown",
+          "policy_number": "ISA466960",
+          "current_value": 68778.0,
+          "monthly_contribution": 432.0,
+          "start_date": "2015-10-09",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "life_insurance",
+          "provider": "Aviva",
+          "policy_number": "LIF890870",
+          "current_value": 116268.0,
+          "monthly_contribution": null,
+          "start_date": null,
+          "renewal_date": "2026-06-08",
+          "maturity_date": null,
+          "notes": "Level term"
+        }
+      ],
+      "total_portfolio_value": 1351541.0,
+      "risk_profile": {
+        "attitude_to_risk": "medium",
+        "capacity_for_loss": "medium",
+        "investment_experience": "moderate",
+        "time_horizon_years": 13,
+        "last_assessed": "2025-04-01",
+        "notes": null
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-08-25",
+          "meeting_type": "phone",
+          "duration_minutes": 45,
+          "summary": "Ad-hoc call regarding market conditions. Provided reassurance about long-term strategy.",
+          "transcript": null,
+          "key_points": [
+            "Interested in sustainable investments"
+          ],
+          "action_items": [],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Provide ISA top-up options",
+          "deadline": "2026-01-25",
+          "status": "overdue",
+          "created_date": "2026-01-07",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Send pension transfer analysis",
+          "deadline": "2026-02-08",
+          "status": "pending",
+          "created_date": "2026-01-19",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Follow up on signed LOA",
+          "deadline": "2026-02-14",
+          "status": "pending",
+          "created_date": "2026-02-05",
+          "completed_date": null,
+          "notes": null
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2025-12-18T13:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Quick catch-up call",
+          "duration_minutes": 41,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-11-02T17:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Portfolio review session",
+          "duration_minutes": 56,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-08-12T09:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Answered questions about pension options",
+          "duration_minutes": 36,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-06-24T14:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Portfolio review session",
+          "duration_minutes": 14,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-06-07T15:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Retirement planning discussion",
+          "duration_minutes": 59,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-03-06T14:00:00",
+          "method": "email",
+          "direction": "outbound",
+          "summary": "Client requested callback",
+          "duration_minutes": null,
+          "next_action": null
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-09-12",
+        "next_review_due": "2026-09-12",
+        "review_status": "completed",
+        "suitability_confirmed": true,
+        "suitability_date": "2025-09-12",
+        "value_delivered": [
+          "Optimised tax efficiency of withdrawals"
+        ],
+        "notes": null
+      },
+      "client_since": "2015-12-17",
+      "assigned_advisor": "default",
+      "tags": [],
+      "notes": null
+    },
+    {
+      "id": "CLT-2024006",
+      "title": "Mr",
+      "first_name": "David",
+      "last_name": "Patel",
+      "date_of_birth": "1947-01-05",
+      "national_insurance": null,
+      "occupation": "Solicitor",
+      "employer": "Legal Associates",
+      "annual_income": 85000.0,
+      "contact_info": {
+        "email": "david.patel@btinternet.com",
+        "phone": "02666 656711",
+        "mobile": "07452 546173",
+        "address": {
+          "line1": "191 Station Road",
+          "line2": null,
+          "city": "Bristol",
+          "county": "Avon",
+          "postcode": "BS1 1AA",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "phone",
+        "best_time_to_call": "Evening"
+      },
+      "marital_status": "single",
+      "family_members": [
+        {
+          "name": "Richard",
+          "relationship": "child",
+          "date_of_birth": "2006-11-10",
+          "notes": "Lives abroad"
+        },
+        {
+          "name": "George",
+          "relationship": "child",
+          "date_of_birth": "2013-07-17",
+          "notes": "Lives abroad"
+        }
+      ],
+      "life_events": [],
+      "concerns": [],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Legal & General",
+          "policy_number": "PEN326895",
+          "current_value": 407241.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2010-11-10",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Personal pension"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Royal London",
+          "policy_number": "PEN205409",
+          "current_value": 456537.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2004-05-09",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Personal pension"
+        }
+      ],
+      "total_portfolio_value": 863778.0,
+      "risk_profile": {
+        "attitude_to_risk": "low",
+        "capacity_for_loss": "very_low",
+        "investment_experience": "none",
+        "time_horizon_years": 10,
+        "last_assessed": "2025-08-27",
+        "notes": null
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-06-05",
+          "meeting_type": "video_call",
+          "duration_minutes": 60,
+          "summary": "Protection review. Assessed current life cover and critical illness needs.",
+          "transcript": null,
+          "key_points": [
+            "Interested in sustainable investments"
+          ],
+          "action_items": [],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-06-01",
+          "meeting_type": "video_call",
+          "duration_minutes": 30,
+          "summary": "Annual review with Mr Patel. Discussed portfolio performance and rebalancing options.",
+          "transcript": null,
+          "key_points": [
+            "Client happy with current strategy"
+          ],
+          "action_items": [],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-02-08",
+          "meeting_type": "video_call",
+          "duration_minutes": 60,
+          "summary": "Pension consolidation discussion with Mr Patel. Reviewed old workplace schemes.",
+          "transcript": null,
+          "key_points": [
+            "Interested in sustainable investments"
+          ],
+          "action_items": [],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [],
+      "interactions": [
+        {
+          "interaction_date": "2025-06-28T10:00:00",
+          "method": "video_call",
+          "direction": "inbound",
+          "summary": "Portfolio review session",
+          "duration_minutes": 14,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2025-04-24T10:00:00",
+          "method": "email",
+          "direction": "inbound",
+          "summary": "Client requested callback",
+          "duration_minutes": null,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-04-18T13:00:00",
+          "method": "email",
+          "direction": "inbound",
+          "summary": "Sent portfolio valuation update",
+          "duration_minutes": null,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-04-05T15:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Discussed market conditions",
+          "duration_minutes": 53,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-03-27T12:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Retirement planning discussion",
+          "duration_minutes": 33,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2025-03-17T12:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Answered questions about pension options",
+          "duration_minutes": 20,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-02-13T16:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Answered questions about pension options",
+          "duration_minutes": 23,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2025-02-06T16:00:00",
+          "method": "email",
+          "direction": "inbound",
+          "summary": "Sent meeting confirmation",
+          "duration_minutes": null,
+          "next_action": null
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-04-15",
+        "next_review_due": "2026-04-15",
+        "review_status": "completed",
+        "suitability_confirmed": true,
+        "suitability_date": "2025-04-15",
+        "value_delivered": [
+          "Rebalanced portfolio to match risk profile"
+        ],
+        "notes": null
+      },
+      "client_since": "2022-09-21",
+      "assigned_advisor": "default",
+      "tags": [
+        "regular-saver"
+      ],
+      "notes": null
+    },
+    {
+      "id": "CLT-2024007",
+      "title": "Dr",
+      "first_name": "Sarah",
+      "last_name": "Singh",
+      "date_of_birth": "1959-09-06",
+      "national_insurance": null,
+      "occupation": "Marketing Director",
+      "employer": "Brand Agency Ltd",
+      "annual_income": 80000.0,
+      "contact_info": {
+        "email": "sarah.singh@gmail.com",
+        "phone": "02690 142185",
+        "mobile": "07881 893005",
+        "address": {
+          "line1": "45 Park Avenue",
+          "line2": null,
+          "city": "Bath",
+          "county": "Somerset",
+          "postcode": "BA1 1AA",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "phone",
+        "best_time_to_call": "Evening"
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "Michael",
+          "relationship": "spouse",
+          "date_of_birth": "1959-11-21",
+          "notes": null
+        },
+        {
+          "name": "Elizabeth",
+          "relationship": "child",
+          "date_of_birth": "1994-04-04",
+          "notes": null
+        },
+        {
+          "name": "Andrew",
+          "relationship": "child",
+          "date_of_birth": "2009-12-08",
+          "notes": "Lives abroad"
+        },
+        {
+          "name": "Robert",
+          "relationship": "grandchild",
+          "date_of_birth": "2020-03-26",
+          "notes": null
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "birthday",
+          "event_date": "2026-03-26",
+          "description": "Robert's birthday coming up",
+          "related_person": "Robert",
+          "source": "client_mentioned",
+          "created_at": "2026-02-01T19:47:38.498592"
+        },
+        {
+          "event_type": "anniversary",
+          "event_date": "2026-03-04",
+          "description": "Wedding anniversary",
+          "related_person": null,
+          "source": "mentioned_in_meeting",
+          "created_at": "2026-02-01T19:47:38.498596"
+        },
+        {
+          "event_type": "birth",
+          "event_date": "2025-05-21",
+          "description": "New grandchild born",
+          "related_person": null,
+          "source": "client_mentioned",
+          "created_at": "2026-02-01T19:47:38.498599"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "drawdown vs annuity",
+          "details": "Uncertain about retirement income strategy",
+          "severity": "low",
+          "date_raised": "2025-09-17",
+          "status": "monitoring",
+          "last_discussed": null,
+          "notes": null
+        },
+        {
+          "topic": "pension consolidation",
+          "details": "Unsure whether to consolidate old pensions",
+          "severity": "medium",
+          "date_raised": "2025-06-21",
+          "status": "monitoring",
+          "last_discussed": "2026-01-24",
+          "notes": null
+        },
+        {
+          "topic": "market volatility",
+          "details": "Worried about market fluctuations affecting pension value",
+          "severity": "high",
+          "date_raised": "2025-03-26",
+          "status": "active",
+          "last_discussed": "2025-11-13",
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Fidelity",
+          "policy_number": "PEN953085",
+          "current_value": 418720.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2012-05-03",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Hargreaves Lansdown",
+          "policy_number": "PEN192337",
+          "current_value": 184897.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2005-08-29",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Personal pension"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Scottish Widows",
+          "policy_number": "PEN910075",
+          "current_value": 231904.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2019-05-26",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Fidelity",
+          "policy_number": "ISA533321",
+          "current_value": 24209.0,
+          "monthly_contribution": 196.0,
+          "start_date": "2020-10-24",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        }
+      ],
+      "total_portfolio_value": 859730.0,
+      "risk_profile": {
+        "attitude_to_risk": "high",
+        "capacity_for_loss": "very_low",
+        "investment_experience": "none",
+        "time_horizon_years": 19,
+        "last_assessed": "2025-11-07",
+        "notes": null
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-09-12",
+          "meeting_type": "video_call",
+          "duration_minutes": 60,
+          "summary": "Protection review. Assessed current life cover and critical illness needs.",
+          "transcript": null,
+          "key_points": [
+            "Considering increasing pension contributions"
+          ],
+          "action_items": [
+            "Follow up on risk questionnaire"
+          ],
+          "concerns_raised": [
+            "drawdown vs annuity"
+          ],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-05-16",
+          "meeting_type": "in_person",
+          "duration_minutes": 90,
+          "summary": "Initial fact-find meeting. Gathered information about financial goals and circumstances.",
+          "transcript": null,
+          "key_points": [
+            "Considering increasing pension contributions"
+          ],
+          "action_items": [],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-04-24",
+          "meeting_type": "phone",
+          "duration_minutes": 45,
+          "summary": "Pension consolidation discussion with Dr Singh. Reviewed old workplace schemes.",
+          "transcript": null,
+          "key_points": [
+            "Interested in sustainable investments"
+          ],
+          "action_items": [],
+          "concerns_raised": [
+            "drawdown vs annuity"
+          ],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Arrange call to discuss inheritance planning",
+          "deadline": "2026-02-19",
+          "status": "pending",
+          "created_date": "2026-01-26",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Send annual review summary",
+          "deadline": "2026-02-06",
+          "status": "pending",
+          "created_date": "2026-01-19",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Provide ISA top-up options",
+          "deadline": "2026-02-01",
+          "status": "pending",
+          "created_date": "2026-01-08",
+          "completed_date": null,
+          "notes": null
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2025-12-24T16:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Quick catch-up call",
+          "duration_minutes": 46,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-12-11T17:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Answered questions about pension options",
+          "duration_minutes": 31,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-08-16T17:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Quick catch-up call",
+          "duration_minutes": 60,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-05-23T09:00:00",
+          "method": "email",
+          "direction": "outbound",
+          "summary": "Sent portfolio valuation update",
+          "duration_minutes": null,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-04-28T15:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Answered questions about pension options",
+          "duration_minutes": 49,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-04-14T15:00:00",
+          "method": "email",
+          "direction": "outbound",
+          "summary": "Sent portfolio valuation update",
+          "duration_minutes": null,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2025-03-21T10:00:00",
+          "method": "email",
+          "direction": "outbound",
+          "summary": "Responded to query about pension statement",
+          "duration_minutes": null,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-01-15T16:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Retirement planning discussion",
+          "duration_minutes": 47,
+          "next_action": null
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2026-01-17",
+        "next_review_due": "2027-01-17",
+        "review_status": "completed",
+        "suitability_confirmed": false,
+        "suitability_date": "2026-01-17",
+        "value_delivered": [
+          "Reviewed and updated protection cover"
+        ],
+        "notes": null
+      },
+      "client_since": "2019-01-08",
+      "assigned_advisor": "default",
+      "tags": [
+        "protection-focus"
+      ],
+      "notes": null
+    },
+    {
+      "id": "CLT-2024008",
+      "title": "Dr",
+      "first_name": "Catherine",
+      "last_name": "Patterson",
+      "date_of_birth": "1985-07-31",
+      "national_insurance": null,
+      "occupation": "Marketing Director",
+      "employer": "Brand Agency Ltd",
+      "annual_income": 80000.0,
+      "contact_info": {
+        "email": "catherine.patterson@outlook.com",
+        "phone": "01572 768891",
+        "mobile": "07360 581894",
+        "address": {
+          "line1": "66 High Street",
+          "line2": null,
+          "city": "Oxford",
+          "county": "Oxfordshire",
+          "postcode": "OX1 1AA",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "phone",
+        "best_time_to_call": "Evening"
+      },
+      "marital_status": "single",
+      "family_members": [
+        {
+          "name": "Henry",
+          "relationship": "child",
+          "date_of_birth": "2012-03-16",
+          "notes": null
+        },
+        {
+          "name": "Sarah",
+          "relationship": "child",
+          "date_of_birth": "2015-11-03",
+          "notes": null
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "wedding",
+          "event_date": "2026-06-30",
+          "description": "Daughter's wedding",
+          "related_person": null,
+          "source": "mentioned_in_meeting",
+          "created_at": "2026-02-01T19:47:38.498760"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "care home costs",
+          "details": "Worried about funding potential care needs",
+          "severity": "low",
+          "date_raised": "2025-03-20",
+          "status": "active",
+          "last_discussed": "2025-08-16",
+          "notes": null
+        },
+        {
+          "topic": "leaving enough for spouse",
+          "details": "Want to ensure spouse is provided for",
+          "severity": "high",
+          "date_raised": "2025-11-22",
+          "status": "monitoring",
+          "last_discussed": null,
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Royal London",
+          "policy_number": "PEN308894",
+          "current_value": 221690.0,
+          "monthly_contribution": 873.0,
+          "start_date": "2010-11-02",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Legal & General",
+          "policy_number": "PEN499889",
+          "current_value": 319852.0,
+          "monthly_contribution": 367.0,
+          "start_date": "2012-11-21",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Personal pension"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Royal London",
+          "policy_number": "PEN123005",
+          "current_value": 455178.0,
+          "monthly_contribution": 674.0,
+          "start_date": "2008-11-16",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Personal pension"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Aviva",
+          "policy_number": "PEN693419",
+          "current_value": 473544.0,
+          "monthly_contribution": 702.0,
+          "start_date": "2017-06-15",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Fidelity",
+          "policy_number": "ISA973294",
+          "current_value": 85024.0,
+          "monthly_contribution": 497.0,
+          "start_date": "2023-12-17",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        }
+      ],
+      "total_portfolio_value": 1555288.0,
+      "risk_profile": {
+        "attitude_to_risk": "very_high",
+        "capacity_for_loss": "high",
+        "investment_experience": "limited",
+        "time_horizon_years": 18,
+        "last_assessed": "2025-03-02",
+        "notes": null
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-12-16",
+          "meeting_type": "video_call",
+          "duration_minutes": 45,
+          "summary": "Retirement planning session. Discussed target retirement date and income requirements.",
+          "transcript": null,
+          "key_points": [
+            "Considering increasing pension contributions"
+          ],
+          "action_items": [
+            "Provide comparison of consolidation options"
+          ],
+          "concerns_raised": [
+            "care home costs"
+          ],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-07-28",
+          "meeting_type": "in_person",
+          "duration_minutes": 90,
+          "summary": "Ad-hoc call regarding market conditions. Provided reassurance about long-term strategy.",
+          "transcript": null,
+          "key_points": [
+            "Wants to review protection needs"
+          ],
+          "action_items": [
+            "Provide comparison of consolidation options"
+          ],
+          "concerns_raised": [
+            "care home costs"
+          ],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [],
+      "interactions": [
+        {
+          "interaction_date": "2026-01-24T13:00:00",
+          "method": "video_call",
+          "direction": "inbound",
+          "summary": "Retirement planning discussion",
+          "duration_minutes": 28,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2025-12-13T12:00:00",
+          "method": "video_call",
+          "direction": "inbound",
+          "summary": "Retirement planning discussion",
+          "duration_minutes": 34,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2025-11-21T09:00:00",
+          "method": "email",
+          "direction": "outbound",
+          "summary": "Client requested callback",
+          "duration_minutes": null,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-08-11T10:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Answered questions about pension options",
+          "duration_minutes": 53,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-06-04T09:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Portfolio review session",
+          "duration_minutes": 19,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-04-07T15:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Annual review meeting",
+          "duration_minutes": 48,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-03-12T16:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Portfolio review session",
+          "duration_minutes": 31,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-02-19T15:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Annual review meeting",
+          "duration_minutes": 55,
+          "next_action": "Send information"
+        }
+      ],
+      "compliance": {
+        "last_annual_review": null,
+        "next_review_due": "2026-04-07",
+        "review_status": "pending",
+        "suitability_confirmed": true,
+        "suitability_date": null,
+        "value_delivered": [
+          "Reviewed and updated protection cover"
+        ],
+        "notes": null
+      },
+      "client_since": "2015-05-15",
+      "assigned_advisor": "default",
+      "tags": [
+        "pre-retiree",
+        "retiree"
+      ],
+      "notes": null
+    },
+    {
+      "id": "CLT-2024009",
+      "title": "Mrs",
+      "first_name": "Patricia",
+      "last_name": "White",
+      "date_of_birth": "1985-09-23",
+      "national_insurance": null,
+      "occupation": "Accountant",
+      "employer": "Price & Partners",
+      "annual_income": 65000.0,
+      "contact_info": {
+        "email": "patricia.white@gmail.com",
+        "phone": "01757 770556",
+        "mobile": "07711 122394",
+        "address": {
+          "line1": "13 Mill Lane",
+          "line2": null,
+          "city": "Oxford",
+          "county": "Oxfordshire",
+          "postcode": "OX1 1AA",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "email",
+        "best_time_to_call": "Afternoon"
+      },
+      "marital_status": "widowed",
+      "family_members": [
+        {
+          "name": "Charles",
+          "relationship": "child",
+          "date_of_birth": "2011-03-12",
+          "notes": "Lives locally"
+        },
+        {
+          "name": "Charles",
+          "relationship": "child",
+          "date_of_birth": "2011-08-27",
+          "notes": "Lives abroad"
+        },
+        {
+          "name": "Mary",
+          "relationship": "child",
+          "date_of_birth": "2019-09-03",
+          "notes": null
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "anniversary",
+          "event_date": "2026-05-26",
+          "description": "Wedding anniversary",
+          "related_person": null,
+          "source": "mentioned_in_meeting",
+          "created_at": "2026-02-01T19:47:38.498909"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "leaving enough for spouse",
+          "details": "Want to ensure spouse is provided for",
+          "severity": "low",
+          "date_raised": "2025-06-14",
+          "status": "monitoring",
+          "last_discussed": null,
+          "notes": null
+        },
+        {
+          "topic": "inflation",
+          "details": "Concerned about inflation eroding savings",
+          "severity": "high",
+          "date_raised": "2026-01-09",
+          "status": "monitoring",
+          "last_discussed": "2025-08-16",
+          "notes": null
+        },
+        {
+          "topic": "pension consolidation",
+          "details": "Unsure whether to consolidate old pensions",
+          "severity": "high",
+          "date_raised": "2025-08-30",
+          "status": "active",
+          "last_discussed": "2026-01-24",
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Standard Life",
+          "policy_number": "PEN666456",
+          "current_value": 151414.0,
+          "monthly_contribution": 817.0,
+          "start_date": "2003-11-30",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Aviva",
+          "policy_number": "PEN238205",
+          "current_value": 27791.0,
+          "monthly_contribution": 366.0,
+          "start_date": "2017-09-19",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Old employer scheme"
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Hargreaves Lansdown",
+          "policy_number": "ISA282710",
+          "current_value": 79564.0,
+          "monthly_contribution": 126.0,
+          "start_date": "2016-06-03",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "life_insurance",
+          "provider": "Aviva",
+          "policy_number": "LIF881886",
+          "current_value": 133322.0,
+          "monthly_contribution": null,
+          "start_date": null,
+          "renewal_date": "2026-10-03",
+          "maturity_date": null,
+          "notes": "Level term"
+        }
+      ],
+      "total_portfolio_value": 392091.0,
+      "risk_profile": {
+        "attitude_to_risk": "low",
+        "capacity_for_loss": "very_low",
+        "investment_experience": "moderate",
+        "time_horizon_years": 22,
+        "last_assessed": "2025-07-27",
+        "notes": null
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-08-20",
+          "meeting_type": "in_person",
+          "duration_minutes": 60,
+          "summary": "Ad-hoc call regarding market conditions. Provided reassurance about long-term strategy.",
+          "transcript": null,
+          "key_points": [
+            "Needs to update beneficiary details"
+          ],
+          "action_items": [],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Send annual review summary",
+          "deadline": "2026-02-10",
+          "status": "pending",
+          "created_date": "2026-01-21",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Provide protection quote comparison",
+          "deadline": "2026-01-25",
+          "status": "overdue",
+          "created_date": "2025-12-29",
+          "completed_date": null,
+          "notes": null
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2025-12-28T10:00:00",
+          "method": "email",
+          "direction": "inbound",
+          "summary": "Client requested callback",
+          "duration_minutes": null,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-08-24T15:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Arranged follow-up meeting",
+          "duration_minutes": 14,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-07-05T14:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Portfolio review session",
+          "duration_minutes": 8,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2025-07-04T14:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Quick catch-up call",
+          "duration_minutes": 51,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-03-30T13:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Answered questions about pension options",
+          "duration_minutes": 14,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-01-15T14:00:00",
+          "method": "email",
+          "direction": "inbound",
+          "summary": "Sent meeting confirmation",
+          "duration_minutes": null,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-01-03T17:00:00",
+          "method": "video_call",
+          "direction": "inbound",
+          "summary": "Retirement planning discussion",
+          "duration_minutes": 33,
+          "next_action": null
+        }
+      ],
+      "compliance": {
+        "last_annual_review": null,
+        "next_review_due": "2026-02-12",
+        "review_status": "pending",
+        "suitability_confirmed": true,
+        "suitability_date": null,
+        "value_delivered": [
+          "Consolidated 3 pensions saving \u00a3450/year in fees"
+        ],
+        "notes": null
+      },
+      "client_since": "2021-10-30",
+      "assigned_advisor": "default",
+      "tags": [
+        "regular-saver",
+        "pre-retiree"
+      ],
+      "notes": null
+    },
+    {
+      "id": "CLT-2024010",
+      "title": "Ms",
+      "first_name": "Sarah",
+      "last_name": "Clark",
+      "date_of_birth": "1968-07-25",
+      "national_insurance": null,
+      "occupation": "Software Engineer",
+      "employer": "Tech Solutions Ltd",
+      "annual_income": 75000.0,
+      "contact_info": {
+        "email": "sarah.clark@gmail.com",
+        "phone": "01485 540226",
+        "mobile": "07564 457455",
+        "address": {
+          "line1": "41 Mill Lane",
+          "line2": null,
+          "city": "London",
+          "county": "Greater London",
+          "postcode": "SW1A 1AA",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "phone",
+        "best_time_to_call": "Evening"
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "Anne",
+          "relationship": "spouse",
+          "date_of_birth": "1970-09-08",
+          "notes": null
+        },
+        {
+          "name": "Henry",
+          "relationship": "grandchild",
+          "date_of_birth": "2024-11-09",
+          "notes": null
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "retirement",
+          "event_date": "2026-04-08",
+          "description": "Retirement party planned",
+          "related_person": null,
+          "source": "mentioned_in_meeting",
+          "created_at": "2026-02-01T19:47:38.499032"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "inflation",
+          "details": "Concerned about inflation eroding savings",
+          "severity": "low",
+          "date_raised": "2025-08-08",
+          "status": "active",
+          "last_discussed": null,
+          "notes": null
+        },
+        {
+          "topic": "inheritance tax",
+          "details": "Concerned about IHT liability for children",
+          "severity": "high",
+          "date_raised": "2025-02-18",
+          "status": "monitoring",
+          "last_discussed": "2025-08-14",
+          "notes": null
+        },
+        {
+          "topic": "drawdown vs annuity",
+          "details": "Uncertain about retirement income strategy",
+          "severity": "medium",
+          "date_raised": "2026-01-08",
+          "status": "active",
+          "last_discussed": "2025-08-31",
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "life_insurance",
+          "provider": "AIG",
+          "policy_number": "LIF609253",
+          "current_value": 418282.0,
+          "monthly_contribution": null,
+          "start_date": null,
+          "renewal_date": "2026-09-16",
+          "maturity_date": null,
+          "notes": "Level term"
+        }
+      ],
+      "total_portfolio_value": 418282.0,
+      "risk_profile": {
+        "attitude_to_risk": "very_high",
+        "capacity_for_loss": "very_low",
+        "investment_experience": "limited",
+        "time_horizon_years": 29,
+        "last_assessed": "2025-08-06",
+        "notes": null
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2026-01-28",
+          "meeting_type": "in_person",
+          "duration_minutes": 45,
+          "summary": "Protection review. Assessed current life cover and critical illness needs.",
+          "transcript": null,
+          "key_points": [
+            "Interested in sustainable investments"
+          ],
+          "action_items": [],
+          "concerns_raised": [
+            "inflation"
+          ],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Send pension transfer analysis",
+          "deadline": "2026-02-14",
+          "status": "pending",
+          "created_date": "2026-02-06",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Send annual review summary",
+          "deadline": "2026-02-04",
+          "status": "pending",
+          "created_date": "2026-01-28",
+          "completed_date": null,
+          "notes": null
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2025-12-23T14:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Portfolio review session",
+          "duration_minutes": 30,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-09-05T10:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Arranged follow-up meeting",
+          "duration_minutes": 15,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-06-22T15:00:00",
+          "method": "video_call",
+          "direction": "inbound",
+          "summary": "Retirement planning discussion",
+          "duration_minutes": 60,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2025-02-12T14:00:00",
+          "method": "email",
+          "direction": "outbound",
+          "summary": "Sent portfolio valuation update",
+          "duration_minutes": null,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-01-15T14:00:00",
+          "method": "email",
+          "direction": "outbound",
+          "summary": "Responded to query about pension statement",
+          "duration_minutes": null,
+          "next_action": null
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-03-07",
+        "next_review_due": "2026-03-07",
+        "review_status": "completed",
+        "suitability_confirmed": true,
+        "suitability_date": "2025-03-07",
+        "value_delivered": [],
+        "notes": null
+      },
+      "client_since": "2016-08-22",
+      "assigned_advisor": "default",
+      "tags": [
+        "retiree"
+      ],
+      "notes": null
+    },
+    {
+      "id": "CLT-2024011",
+      "title": "Mrs",
+      "first_name": "Susan",
+      "last_name": "Stewart",
+      "date_of_birth": "1946-05-01",
+      "national_insurance": null,
+      "occupation": "Retired",
+      "employer": null,
+      "annual_income": 46181.0,
+      "contact_info": {
+        "email": "susan.stewart@outlook.com",
+        "phone": "02169 591699",
+        "mobile": "07552 762055",
+        "address": {
+          "line1": "78 Mill Lane",
+          "line2": null,
+          "city": "Edinburgh",
+          "county": "Midlothian",
+          "postcode": "EH1 1AA",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "email",
+        "best_time_to_call": "Evening"
+      },
+      "marital_status": "divorced",
+      "family_members": [
+        {
+          "name": "Michael",
+          "relationship": "child",
+          "date_of_birth": "2019-04-18",
+          "notes": null
+        },
+        {
+          "name": "William",
+          "relationship": "child",
+          "date_of_birth": "2020-01-13",
+          "notes": "Lives abroad"
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "wedding",
+          "event_date": "2026-06-11",
+          "description": "Daughter's wedding",
+          "related_person": null,
+          "source": "mentioned_in_meeting",
+          "created_at": "2026-02-01T19:47:38.499139"
+        },
+        {
+          "event_type": "birth",
+          "event_date": "2025-09-27",
+          "description": "New grandchild born",
+          "related_person": null,
+          "source": "client_mentioned",
+          "created_at": "2026-02-01T19:47:38.499142"
+        }
+      ],
+      "concerns": [],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Fidelity",
+          "policy_number": "PEN585188",
+          "current_value": 324259.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2012-06-06",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Vanguard",
+          "policy_number": "ISA437145",
+          "current_value": 168598.0,
+          "monthly_contribution": 343.0,
+          "start_date": "2020-08-15",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        }
+      ],
+      "total_portfolio_value": 492857.0,
+      "risk_profile": {
+        "attitude_to_risk": "medium",
+        "capacity_for_loss": "high",
+        "investment_experience": "limited",
+        "time_horizon_years": 16,
+        "last_assessed": "2025-02-18",
+        "notes": null
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-12-29",
+          "meeting_type": "in_person",
+          "duration_minutes": 60,
+          "summary": "Retirement planning session. Discussed target retirement date and income requirements.",
+          "transcript": null,
+          "key_points": [
+            "Client happy with current strategy"
+          ],
+          "action_items": [
+            "Arrange meeting with spouse"
+          ],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-07-17",
+          "meeting_type": "phone",
+          "duration_minutes": 60,
+          "summary": "Protection review. Assessed current life cover and critical illness needs.",
+          "transcript": null,
+          "key_points": [
+            "Considering increasing pension contributions"
+          ],
+          "action_items": [
+            "Send pension projection"
+          ],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-06-21",
+          "meeting_type": "in_person",
+          "duration_minutes": 60,
+          "summary": "Ad-hoc call regarding market conditions. Provided reassurance about long-term strategy.",
+          "transcript": null,
+          "key_points": [
+            "Wants to review protection needs"
+          ],
+          "action_items": [
+            "Follow up on risk questionnaire"
+          ],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-01-26",
+          "meeting_type": "video_call",
+          "duration_minutes": 45,
+          "summary": "Initial fact-find meeting. Gathered information about financial goals and circumstances.",
+          "transcript": null,
+          "key_points": [
+            "Wants to review protection needs"
+          ],
+          "action_items": [
+            "Follow up on risk questionnaire"
+          ],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Arrange call to discuss inheritance planning",
+          "deadline": "2026-01-30",
+          "status": "overdue",
+          "created_date": "2026-01-14",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Send annual review summary",
+          "deadline": "2026-02-08",
+          "status": "pending",
+          "created_date": "2026-01-20",
+          "completed_date": null,
+          "notes": null
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2025-12-23T13:00:00",
+          "method": "email",
+          "direction": "inbound",
+          "summary": "Sent meeting confirmation",
+          "duration_minutes": null,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-10-14T14:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Answered questions about pension options",
+          "duration_minutes": 13,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-08-16T11:00:00",
+          "method": "video_call",
+          "direction": "inbound",
+          "summary": "Portfolio review session",
+          "duration_minutes": 47,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-06-18T13:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Annual review meeting",
+          "duration_minutes": 39,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-05-16T14:00:00",
+          "method": "email",
+          "direction": "outbound",
+          "summary": "Sent meeting confirmation",
+          "duration_minutes": null,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-04-01T15:00:00",
+          "method": "email",
+          "direction": "inbound",
+          "summary": "Responded to query about pension statement",
+          "duration_minutes": null,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-01-27T16:00:00",
+          "method": "email",
+          "direction": "outbound",
+          "summary": "Sent meeting confirmation",
+          "duration_minutes": null,
+          "next_action": null
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-06-20",
+        "next_review_due": "2026-06-20",
+        "review_status": "completed",
+        "suitability_confirmed": true,
+        "suitability_date": "2025-06-20",
+        "value_delivered": [],
+        "notes": null
+      },
+      "client_since": "2019-04-14",
+      "assigned_advisor": "default",
+      "tags": [
+        "pension-focus",
+        "protection-focus"
+      ],
+      "notes": null
+    },
+    {
+      "id": "CLT-2024012",
+      "title": "Mr",
+      "first_name": "Andrew",
+      "last_name": "Davis",
+      "date_of_birth": "1945-05-14",
+      "national_insurance": null,
+      "occupation": "Retired",
+      "employer": null,
+      "annual_income": 58810.0,
+      "contact_info": {
+        "email": "andrew.davis@gmail.com",
+        "phone": "01379 571145",
+        "mobile": "07625 254506",
+        "address": {
+          "line1": "112 High Street",
+          "line2": null,
+          "city": "Bristol",
+          "county": "Avon",
+          "postcode": "BS1 1AA",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "email",
+        "best_time_to_call": null
+      },
+      "marital_status": "divorced",
+      "family_members": [
+        {
+          "name": "James",
+          "relationship": "child",
+          "date_of_birth": "1992-02-29",
+          "notes": null
+        }
+      ],
+      "life_events": [],
+      "concerns": [
+        {
+          "topic": "inheritance tax",
+          "details": "Concerned about IHT liability for children",
+          "severity": "low",
+          "date_raised": "2025-08-30",
+          "status": "active",
+          "last_discussed": null,
+          "notes": null
+        },
+        {
+          "topic": "pension consolidation",
+          "details": "Unsure whether to consolidate old pensions",
+          "severity": "medium",
+          "date_raised": "2025-03-10",
+          "status": "monitoring",
+          "last_discussed": "2026-01-03",
+          "notes": null
+        },
+        {
+          "topic": "running out of money",
+          "details": "Anxiety about longevity and pension lasting",
+          "severity": "medium",
+          "date_raised": "2025-04-01",
+          "status": "monitoring",
+          "last_discussed": null,
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Scottish Widows",
+          "policy_number": "PEN493124",
+          "current_value": 137722.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2000-08-18",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Personal pension"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Scottish Widows",
+          "policy_number": "PEN979940",
+          "current_value": 394710.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2014-07-30",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Personal pension"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Standard Life",
+          "policy_number": "PEN244283",
+          "current_value": 40081.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2006-06-08",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "SIPP"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Standard Life",
+          "policy_number": "PEN895702",
+          "current_value": 389904.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2010-07-09",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "SIPP"
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Hargreaves Lansdown",
+          "policy_number": "ISA119927",
+          "current_value": 77088.0,
+          "monthly_contribution": 210.0,
+          "start_date": "2016-09-04",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        }
+      ],
+      "total_portfolio_value": 1039505.0,
+      "risk_profile": {
+        "attitude_to_risk": "very_low",
+        "capacity_for_loss": "medium",
+        "investment_experience": "moderate",
+        "time_horizon_years": 8,
+        "last_assessed": "2025-07-27",
+        "notes": null
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2026-01-31",
+          "meeting_type": "in_person",
+          "duration_minutes": 45,
+          "summary": "Ad-hoc call regarding market conditions. Provided reassurance about long-term strategy.",
+          "transcript": null,
+          "key_points": [
+            "Considering increasing pension contributions"
+          ],
+          "action_items": [],
+          "concerns_raised": [
+            "inheritance tax"
+          ],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-12-28",
+          "meeting_type": "phone",
+          "duration_minutes": 60,
+          "summary": "Retirement planning session. Discussed target retirement date and income requirements.",
+          "transcript": null,
+          "key_points": [
+            "Needs to update beneficiary details"
+          ],
+          "action_items": [
+            "Send pension projection"
+          ],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-12-19",
+          "meeting_type": "phone",
+          "duration_minutes": 30,
+          "summary": "Ad-hoc call regarding market conditions. Provided reassurance about long-term strategy.",
+          "transcript": null,
+          "key_points": [
+            "Considering increasing pension contributions"
+          ],
+          "action_items": [],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-06-05",
+          "meeting_type": "phone",
+          "duration_minutes": 30,
+          "summary": "Annual review with Mr Davis. Discussed portfolio performance and rebalancing options.",
+          "transcript": null,
+          "key_points": [
+            "Interested in sustainable investments"
+          ],
+          "action_items": [
+            "Follow up on risk questionnaire"
+          ],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [],
+      "interactions": [
+        {
+          "interaction_date": "2026-01-09T12:00:00",
+          "method": "email",
+          "direction": "outbound",
+          "summary": "Sent meeting confirmation",
+          "duration_minutes": null,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-11-23T10:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Annual review meeting",
+          "duration_minutes": 23,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-04-28T16:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Answered questions about pension options",
+          "duration_minutes": 23,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2025-03-08T11:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Portfolio review session",
+          "duration_minutes": 35,
+          "next_action": null
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-07-11",
+        "next_review_due": "2026-07-11",
+        "review_status": "completed",
+        "suitability_confirmed": true,
+        "suitability_date": "2025-07-11",
+        "value_delivered": [
+          "Rebalanced portfolio to match risk profile"
+        ],
+        "notes": null
+      },
+      "client_since": "2018-10-20",
+      "assigned_advisor": "default",
+      "tags": [],
+      "notes": null
+    },
+    {
+      "id": "CLT-2024013",
+      "title": "Dr",
+      "first_name": "Victoria",
+      "last_name": "White",
+      "date_of_birth": "1964-11-16",
+      "national_insurance": null,
+      "occupation": "Civil Servant",
+      "employer": "HMRC",
+      "annual_income": 55000.0,
+      "contact_info": {
+        "email": "victoria.white@gmail.com",
+        "phone": "02776 410000",
+        "mobile": "07413 567576",
+        "address": {
+          "line1": "155 Park Avenue",
+          "line2": null,
+          "city": "Manchester",
+          "county": "Greater Manchester",
+          "postcode": "M1 1AE",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "email",
+        "best_time_to_call": null
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "James",
+          "relationship": "spouse",
+          "date_of_birth": "1968-02-25",
+          "notes": null
+        },
+        {
+          "name": "John",
+          "relationship": "child",
+          "date_of_birth": "1992-09-21",
+          "notes": null
+        },
+        {
+          "name": "Charlotte",
+          "relationship": "child",
+          "date_of_birth": "2012-02-28",
+          "notes": null
+        },
+        {
+          "name": "Charlotte",
+          "relationship": "child",
+          "date_of_birth": "2000-02-20",
+          "notes": "Lives abroad"
+        },
+        {
+          "name": "James",
+          "relationship": "grandchild",
+          "date_of_birth": "2014-03-15",
+          "notes": null
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "birthday",
+          "event_date": "2026-02-25",
+          "description": "James's birthday coming up",
+          "related_person": "James",
+          "source": "client_mentioned",
+          "created_at": "2026-02-01T19:47:38.499447"
+        },
+        {
+          "event_type": "retirement",
+          "event_date": "2026-03-05",
+          "description": "Retirement party planned",
+          "related_person": null,
+          "source": "mentioned_in_meeting",
+          "created_at": "2026-02-01T19:47:38.499452"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "drawdown vs annuity",
+          "details": "Uncertain about retirement income strategy",
+          "severity": "high",
+          "date_raised": "2025-07-17",
+          "status": "monitoring",
+          "last_discussed": null,
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Aviva",
+          "policy_number": "PEN232361",
+          "current_value": 55249.0,
+          "monthly_contribution": 241.0,
+          "start_date": "2017-06-17",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Personal pension"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Aegon",
+          "policy_number": "PEN501451",
+          "current_value": 317399.0,
+          "monthly_contribution": 33.0,
+          "start_date": "2013-07-27",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Old employer scheme"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Hargreaves Lansdown",
+          "policy_number": "PEN488984",
+          "current_value": 215042.0,
+          "monthly_contribution": 454.0,
+          "start_date": "2017-02-11",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Standard Life",
+          "policy_number": "PEN655178",
+          "current_value": 212387.0,
+          "monthly_contribution": 407.0,
+          "start_date": "2007-01-19",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Personal pension"
+        }
+      ],
+      "total_portfolio_value": 800077.0,
+      "risk_profile": {
+        "attitude_to_risk": "high",
+        "capacity_for_loss": "high",
+        "investment_experience": "extensive",
+        "time_horizon_years": 29,
+        "last_assessed": "2025-07-06",
+        "notes": null
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-06-14",
+          "meeting_type": "phone",
+          "duration_minutes": 60,
+          "summary": "Pension consolidation discussion with Dr White. Reviewed old workplace schemes.",
+          "transcript": null,
+          "key_points": [
+            "Interested in sustainable investments"
+          ],
+          "action_items": [
+            "Follow up on risk questionnaire"
+          ],
+          "concerns_raised": [
+            "drawdown vs annuity"
+          ],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Follow up on signed LOA",
+          "deadline": "2026-02-02",
+          "status": "pending",
+          "created_date": "2026-01-15",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Provide ISA top-up options",
+          "deadline": "2026-02-07",
+          "status": "pending",
+          "created_date": "2026-01-24",
+          "completed_date": null,
+          "notes": null
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2025-10-21T11:00:00",
+          "method": "email",
+          "direction": "outbound",
+          "summary": "Sent portfolio valuation update",
+          "duration_minutes": null,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2025-04-23T14:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Discussed market conditions",
+          "duration_minutes": 9,
+          "next_action": "Follow up next week"
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-12-25",
+        "next_review_due": "2026-12-25",
+        "review_status": "completed",
+        "suitability_confirmed": false,
+        "suitability_date": "2025-12-25",
+        "value_delivered": [],
+        "notes": null
+      },
+      "client_since": "2015-10-31",
+      "assigned_advisor": "default",
+      "tags": [
+        "protection-focus"
+      ],
+      "notes": null
+    },
+    {
+      "id": "CLT-2024014",
+      "title": "Mr",
+      "first_name": "Henry",
+      "last_name": "Jones",
+      "date_of_birth": "1959-05-29",
+      "national_insurance": null,
+      "occupation": "Retired",
+      "employer": null,
+      "annual_income": 35614.0,
+      "contact_info": {
+        "email": "henry.jones@btinternet.com",
+        "phone": "02966 182690",
+        "mobile": "07356 305837",
+        "address": {
+          "line1": "163 Station Road",
+          "line2": null,
+          "city": "Leeds",
+          "county": "West Yorkshire",
+          "postcode": "LS1 1AA",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "phone",
+        "best_time_to_call": "Afternoon"
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "Anne",
+          "relationship": "spouse",
+          "date_of_birth": "1960-12-25",
+          "notes": null
+        },
+        {
+          "name": "Sarah",
+          "relationship": "grandchild",
+          "date_of_birth": "2024-01-09",
+          "notes": null
+        }
+      ],
+      "life_events": [],
+      "concerns": [],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Aviva",
+          "policy_number": "PEN965322",
+          "current_value": 472870.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2000-08-20",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Aviva",
+          "policy_number": "PEN772612",
+          "current_value": 424237.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2012-12-07",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Personal pension"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Legal & General",
+          "policy_number": "PEN904214",
+          "current_value": 319964.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2009-05-05",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "isa",
+          "provider": "AJ Bell",
+          "policy_number": "ISA773088",
+          "current_value": 89192.0,
+          "monthly_contribution": 347.0,
+          "start_date": "2017-09-30",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "life_insurance",
+          "provider": "AIG",
+          "policy_number": "LIF411882",
+          "current_value": 337787.0,
+          "monthly_contribution": null,
+          "start_date": null,
+          "renewal_date": "2026-03-11",
+          "maturity_date": null,
+          "notes": "Level term"
+        }
+      ],
+      "total_portfolio_value": 1644050.0,
+      "risk_profile": {
+        "attitude_to_risk": "very_low",
+        "capacity_for_loss": "high",
+        "investment_experience": "limited",
+        "time_horizon_years": 13,
+        "last_assessed": "2025-07-28",
+        "notes": null
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-08-24",
+          "meeting_type": "in_person",
+          "duration_minutes": 45,
+          "summary": "Initial fact-find meeting. Gathered information about financial goals and circumstances.",
+          "transcript": null,
+          "key_points": [
+            "Considering increasing pension contributions"
+          ],
+          "action_items": [
+            "Follow up on risk questionnaire"
+          ],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-01-07",
+          "meeting_type": "video_call",
+          "duration_minutes": 90,
+          "summary": "Retirement planning session. Discussed target retirement date and income requirements.",
+          "transcript": null,
+          "key_points": [
+            "Wants to review protection needs"
+          ],
+          "action_items": [
+            "Follow up on risk questionnaire"
+          ],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [],
+      "interactions": [
+        {
+          "interaction_date": "2026-01-20T10:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Answered questions about pension options",
+          "duration_minutes": 18,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2026-01-07T09:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Quick catch-up call",
+          "duration_minutes": 23,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-10-26T11:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Quick catch-up call",
+          "duration_minutes": 24,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-09-27T11:00:00",
+          "method": "email",
+          "direction": "inbound",
+          "summary": "Sent meeting confirmation",
+          "duration_minutes": null,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-03-22T15:00:00",
+          "method": "email",
+          "direction": "inbound",
+          "summary": "Sent meeting confirmation",
+          "duration_minutes": null,
+          "next_action": "Follow up next week"
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-07-28",
+        "next_review_due": "2026-07-28",
+        "review_status": "completed",
+        "suitability_confirmed": false,
+        "suitability_date": "2025-07-28",
+        "value_delivered": [],
+        "notes": null
+      },
+      "client_since": "2021-04-20",
+      "assigned_advisor": "default",
+      "tags": [],
+      "notes": null
+    },
+    {
+      "id": "CLT-2024015",
+      "title": "Ms",
+      "first_name": "Sarah",
+      "last_name": "Williams",
+      "date_of_birth": "1952-04-06",
+      "national_insurance": null,
+      "occupation": "Marketing Director",
+      "employer": "Brand Agency Ltd",
+      "annual_income": 80000.0,
+      "contact_info": {
+        "email": "sarah.williams@btinternet.com",
+        "phone": "02671 483366",
+        "mobile": "07873 251275",
+        "address": {
+          "line1": "51 Station Road",
+          "line2": null,
+          "city": "Liverpool",
+          "county": "Merseyside",
+          "postcode": "L1 1AA",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "phone",
+        "best_time_to_call": "Morning"
+      },
+      "marital_status": "widowed",
+      "family_members": [],
+      "life_events": [],
+      "concerns": [],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Hargreaves Lansdown",
+          "policy_number": "PEN256175",
+          "current_value": 337855.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2020-01-12",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Old employer scheme"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Aegon",
+          "policy_number": "PEN742848",
+          "current_value": 187001.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2003-08-24",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "SIPP"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Royal London",
+          "policy_number": "PEN722565",
+          "current_value": 196356.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2011-05-18",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "SIPP"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Royal London",
+          "policy_number": "PEN597960",
+          "current_value": 447687.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2000-05-16",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Personal pension"
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Hargreaves Lansdown",
+          "policy_number": "ISA536774",
+          "current_value": 163014.0,
+          "monthly_contribution": 257.0,
+          "start_date": "2023-12-08",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        }
+      ],
+      "total_portfolio_value": 1331913.0,
+      "risk_profile": {
+        "attitude_to_risk": "low",
+        "capacity_for_loss": "very_low",
+        "investment_experience": "limited",
+        "time_horizon_years": 25,
+        "last_assessed": "2025-10-04",
+        "notes": null
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-11-17",
+          "meeting_type": "phone",
+          "duration_minutes": 30,
+          "summary": "Initial fact-find meeting. Gathered information about financial goals and circumstances.",
+          "transcript": null,
+          "key_points": [
+            "Needs to update beneficiary details"
+          ],
+          "action_items": [],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-10-26",
+          "meeting_type": "video_call",
+          "duration_minutes": 90,
+          "summary": "Annual review with Ms Williams. Discussed portfolio performance and rebalancing options.",
+          "transcript": null,
+          "key_points": [
+            "Interested in sustainable investments"
+          ],
+          "action_items": [],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-04-11",
+          "meeting_type": "phone",
+          "duration_minutes": 90,
+          "summary": "Pension consolidation discussion with Ms Williams. Reviewed old workplace schemes.",
+          "transcript": null,
+          "key_points": [
+            "Client happy with current strategy"
+          ],
+          "action_items": [
+            "Provide comparison of consolidation options"
+          ],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-02-12",
+          "meeting_type": "phone",
+          "duration_minutes": 30,
+          "summary": "Pension consolidation discussion with Ms Williams. Reviewed old workplace schemes.",
+          "transcript": null,
+          "key_points": [
+            "Interested in sustainable investments"
+          ],
+          "action_items": [
+            "Arrange meeting with spouse"
+          ],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-02-04",
+          "meeting_type": "in_person",
+          "duration_minutes": 90,
+          "summary": "Pension consolidation discussion with Ms Williams. Reviewed old workplace schemes.",
+          "transcript": null,
+          "key_points": [
+            "Wants to review protection needs"
+          ],
+          "action_items": [],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Provide ISA top-up options",
+          "deadline": "2026-02-08",
+          "status": "pending",
+          "created_date": "2026-01-22",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Send annual review summary",
+          "deadline": "2026-02-08",
+          "status": "pending",
+          "created_date": "2026-01-21",
+          "completed_date": null,
+          "notes": null
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2025-10-20T17:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Answered questions about pension options",
+          "duration_minutes": 11,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-09-06T10:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Retirement planning discussion",
+          "duration_minutes": 57,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2025-08-07T16:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Portfolio review session",
+          "duration_minutes": 35,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-04-21T13:00:00",
+          "method": "email",
+          "direction": "outbound",
+          "summary": "Sent meeting confirmation",
+          "duration_minutes": null,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-02-12T16:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Arranged follow-up meeting",
+          "duration_minutes": 40,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2025-01-01T13:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Annual review meeting",
+          "duration_minutes": 20,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2025-01-01T11:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Arranged follow-up meeting",
+          "duration_minutes": 50,
+          "next_action": null
+        }
+      ],
+      "compliance": {
+        "last_annual_review": null,
+        "next_review_due": "2026-03-18",
+        "review_status": "pending",
+        "suitability_confirmed": true,
+        "suitability_date": null,
+        "value_delivered": [
+          "Optimised tax efficiency of withdrawals"
+        ],
+        "notes": null
+      },
+      "client_since": "2015-01-22",
+      "assigned_advisor": "default",
+      "tags": [
+        "retiree",
+        "protection-focus"
+      ],
+      "notes": null
+    },
+    {
+      "id": "CLT-2024016",
+      "title": "Mr",
+      "first_name": "David",
+      "last_name": "Chen",
+      "date_of_birth": "1960-01-04",
+      "national_insurance": null,
+      "occupation": "Marketing Director",
+      "employer": "Brand Agency Ltd",
+      "annual_income": 80000.0,
+      "contact_info": {
+        "email": "david.chen@outlook.com",
+        "phone": "02957 284327",
+        "mobile": "07137 976822",
+        "address": {
+          "line1": "102 Park Avenue",
+          "line2": null,
+          "city": "London",
+          "county": "Greater London",
+          "postcode": "SW1A 1AA",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "email",
+        "best_time_to_call": "Evening"
+      },
+      "marital_status": "single",
+      "family_members": [],
+      "life_events": [
+        {
+          "event_type": "new_job",
+          "event_date": "2025-09-22",
+          "description": "Started new position",
+          "related_person": null,
+          "source": "client_mentioned",
+          "created_at": "2026-02-01T19:47:38.499784"
+        }
+      ],
+      "concerns": [],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Aegon",
+          "policy_number": "PEN398384",
+          "current_value": 258209.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2014-05-20",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "SIPP"
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Vanguard",
+          "policy_number": "ISA992400",
+          "current_value": 142176.0,
+          "monthly_contribution": 339.0,
+          "start_date": "2018-01-22",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        }
+      ],
+      "total_portfolio_value": 400385.0,
+      "risk_profile": {
+        "attitude_to_risk": "high",
+        "capacity_for_loss": "medium",
+        "investment_experience": "limited",
+        "time_horizon_years": 17,
+        "last_assessed": "2025-02-14",
+        "notes": null
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2026-01-24",
+          "meeting_type": "video_call",
+          "duration_minutes": 90,
+          "summary": "Initial fact-find meeting. Gathered information about financial goals and circumstances.",
+          "transcript": null,
+          "key_points": [
+            "Considering increasing pension contributions"
+          ],
+          "action_items": [
+            "Provide comparison of consolidation options"
+          ],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-06-27",
+          "meeting_type": "phone",
+          "duration_minutes": 30,
+          "summary": "Ad-hoc call regarding market conditions. Provided reassurance about long-term strategy.",
+          "transcript": null,
+          "key_points": [
+            "Considering increasing pension contributions"
+          ],
+          "action_items": [],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [],
+      "interactions": [
+        {
+          "interaction_date": "2025-10-03T16:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Arranged follow-up meeting",
+          "duration_minutes": 42,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-09-20T14:00:00",
+          "method": "video_call",
+          "direction": "inbound",
+          "summary": "Annual review meeting",
+          "duration_minutes": 47,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-06-01T14:00:00",
+          "method": "email",
+          "direction": "inbound",
+          "summary": "Sent meeting confirmation",
+          "duration_minutes": null,
+          "next_action": "Send information"
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-02-05",
+        "next_review_due": "2026-02-05",
+        "review_status": "due_soon",
+        "suitability_confirmed": true,
+        "suitability_date": "2025-02-05",
+        "value_delivered": [
+          "Reviewed and updated protection cover"
+        ],
+        "notes": null
+      },
+      "client_since": "2019-02-14",
+      "assigned_advisor": "default",
+      "tags": [
+        "retiree",
+        "regular-saver"
+      ],
+      "notes": null
+    },
+    {
+      "id": "CLT-2024017",
+      "title": "Mr",
+      "first_name": "David",
+      "last_name": "Jones",
+      "date_of_birth": "1945-03-18",
+      "national_insurance": null,
+      "occupation": "Retired",
+      "employer": null,
+      "annual_income": 30365.0,
+      "contact_info": {
+        "email": "david.jones@btinternet.com",
+        "phone": "01677 217659",
+        "mobile": "07163 969032",
+        "address": {
+          "line1": "141 Station Road",
+          "line2": null,
+          "city": "Cambridge",
+          "county": "Cambridgeshire",
+          "postcode": "CB1 1AA",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "email",
+        "best_time_to_call": "Afternoon"
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "Andrew",
+          "relationship": "spouse",
+          "date_of_birth": "1946-11-02",
+          "notes": null
+        },
+        {
+          "name": "Victoria",
+          "relationship": "child",
+          "date_of_birth": "2017-07-30",
+          "notes": null
+        }
+      ],
+      "life_events": [],
+      "concerns": [],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Hargreaves Lansdown",
+          "policy_number": "PEN238353",
+          "current_value": 289089.0,
+          "monthly_contribution": 0.0,
+          "start_date": "2009-04-26",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "SIPP"
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Fidelity",
+          "policy_number": "ISA805448",
+          "current_value": 90784.0,
+          "monthly_contribution": 470.0,
+          "start_date": "2015-03-31",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        }
+      ],
+      "total_portfolio_value": 379873.0,
+      "risk_profile": {
+        "attitude_to_risk": "low",
+        "capacity_for_loss": "very_low",
+        "investment_experience": "none",
+        "time_horizon_years": 24,
+        "last_assessed": "2026-01-14",
+        "notes": null
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-04-29",
+          "meeting_type": "video_call",
+          "duration_minutes": 60,
+          "summary": "Annual review with Mr Jones. Discussed portfolio performance and rebalancing options.",
+          "transcript": null,
+          "key_points": [
+            "Client happy with current strategy"
+          ],
+          "action_items": [
+            "Arrange meeting with spouse"
+          ],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Arrange call to discuss inheritance planning",
+          "deadline": "2026-02-17",
+          "status": "pending",
+          "created_date": "2026-01-30",
+          "completed_date": null,
+          "notes": null
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2026-01-30T09:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Quick catch-up call",
+          "duration_minutes": 39,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-12-02T11:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Portfolio review session",
+          "duration_minutes": 13,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-10-06T12:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Answered questions about pension options",
+          "duration_minutes": 22,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-06-16T15:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Answered questions about pension options",
+          "duration_minutes": 46,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2025-01-25T10:00:00",
+          "method": "email",
+          "direction": "outbound",
+          "summary": "Sent portfolio valuation update",
+          "duration_minutes": null,
+          "next_action": null
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-02-21",
+        "next_review_due": "2026-02-21",
+        "review_status": "due_soon",
+        "suitability_confirmed": true,
+        "suitability_date": "2025-02-21",
+        "value_delivered": [],
+        "notes": null
+      },
+      "client_since": "2023-04-22",
+      "assigned_advisor": "default",
+      "tags": [],
+      "notes": null
+    },
+    {
+      "id": "CLT-2024018",
+      "title": "Mrs",
+      "first_name": "Patricia",
+      "last_name": "Patel",
+      "date_of_birth": "1978-04-25",
+      "national_insurance": null,
+      "occupation": "Business Owner",
+      "employer": "Self-employed",
+      "annual_income": 120000.0,
+      "contact_info": {
+        "email": "patricia.patel@outlook.com",
+        "phone": "02997 250219",
+        "mobile": "07776 646571",
+        "address": {
+          "line1": "57 Park Avenue",
+          "line2": null,
+          "city": "Edinburgh",
+          "county": "Midlothian",
+          "postcode": "EH1 1AA",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "phone",
+        "best_time_to_call": "Evening"
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "Michael",
+          "relationship": "spouse",
+          "date_of_birth": "1983-11-13",
+          "notes": null
+        },
+        {
+          "name": "Charlotte",
+          "relationship": "child",
+          "date_of_birth": "2016-11-26",
+          "notes": null
+        },
+        {
+          "name": "Elizabeth",
+          "relationship": "child",
+          "date_of_birth": "2003-02-18",
+          "notes": "Lives abroad"
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "retirement",
+          "event_date": "2026-07-02",
+          "description": "Retirement party planned",
+          "related_person": null,
+          "source": "mentioned_in_meeting",
+          "created_at": "2026-02-01T19:47:38.500003"
+        },
+        {
+          "event_type": "new_job",
+          "event_date": "2025-10-12",
+          "description": "Started new position",
+          "related_person": null,
+          "source": "client_mentioned",
+          "created_at": "2026-02-01T19:47:38.500006"
+        }
+      ],
+      "concerns": [],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Aegon",
+          "policy_number": "PEN830132",
+          "current_value": 238274.0,
+          "monthly_contribution": 418.0,
+          "start_date": "2003-05-07",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Personal pension"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Fidelity",
+          "policy_number": "PEN292811",
+          "current_value": 415531.0,
+          "monthly_contribution": 550.0,
+          "start_date": "2010-08-15",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Old employer scheme"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Legal & General",
+          "policy_number": "PEN415344",
+          "current_value": 469598.0,
+          "monthly_contribution": 724.0,
+          "start_date": "2003-03-28",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "SIPP"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Aviva",
+          "policy_number": "PEN689704",
+          "current_value": 236361.0,
+          "monthly_contribution": 991.0,
+          "start_date": "2009-05-05",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Old employer scheme"
+        },
+        {
+          "policy_type": "isa",
+          "provider": "AJ Bell",
+          "policy_number": "ISA313214",
+          "current_value": 96576.0,
+          "monthly_contribution": 431.0,
+          "start_date": "2015-11-20",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "life_insurance",
+          "provider": "Zurich",
+          "policy_number": "LIF196955",
+          "current_value": 380827.0,
+          "monthly_contribution": null,
+          "start_date": null,
+          "renewal_date": "2026-05-10",
+          "maturity_date": null,
+          "notes": "Level term"
+        }
+      ],
+      "total_portfolio_value": 1837167.0,
+      "risk_profile": {
+        "attitude_to_risk": "very_low",
+        "capacity_for_loss": "very_low",
+        "investment_experience": "none",
+        "time_horizon_years": 18,
+        "last_assessed": "2025-11-22",
+        "notes": null
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-10-17",
+          "meeting_type": "video_call",
+          "duration_minutes": 45,
+          "summary": "Retirement planning session. Discussed target retirement date and income requirements.",
+          "transcript": null,
+          "key_points": [
+            "Considering increasing pension contributions"
+          ],
+          "action_items": [
+            "Send pension projection"
+          ],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-08-27",
+          "meeting_type": "in_person",
+          "duration_minutes": 30,
+          "summary": "Retirement planning session. Discussed target retirement date and income requirements.",
+          "transcript": null,
+          "key_points": [
+            "Considering increasing pension contributions"
+          ],
+          "action_items": [
+            "Arrange meeting with spouse"
+          ],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-04-24",
+          "meeting_type": "phone",
+          "duration_minutes": 60,
+          "summary": "Retirement planning session. Discussed target retirement date and income requirements.",
+          "transcript": null,
+          "key_points": [
+            "Considering increasing pension contributions"
+          ],
+          "action_items": [],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-01-17",
+          "meeting_type": "in_person",
+          "duration_minutes": 45,
+          "summary": "Annual review with Mrs Patel. Discussed portfolio performance and rebalancing options.",
+          "transcript": null,
+          "key_points": [
+            "Interested in sustainable investments"
+          ],
+          "action_items": [
+            "Provide comparison of consolidation options"
+          ],
+          "concerns_raised": [],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [
+        {
+          "commitment": "Send annual review summary",
+          "deadline": "2026-02-02",
+          "status": "pending",
+          "created_date": "2026-01-16",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Follow up on signed LOA",
+          "deadline": "2026-02-17",
+          "status": "pending",
+          "created_date": "2026-02-09",
+          "completed_date": null,
+          "notes": null
+        },
+        {
+          "commitment": "Provide ISA top-up options",
+          "deadline": "2026-01-29",
+          "status": "overdue",
+          "created_date": "2026-01-22",
+          "completed_date": null,
+          "notes": null
+        }
+      ],
+      "interactions": [
+        {
+          "interaction_date": "2025-07-21T12:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Arranged follow-up meeting",
+          "duration_minutes": 53,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-04-23T15:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Answered questions about pension options",
+          "duration_minutes": 26,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-01-28T17:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Discussed market conditions",
+          "duration_minutes": 38,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-01-26T16:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Arranged follow-up meeting",
+          "duration_minutes": 15,
+          "next_action": null
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-10-05",
+        "next_review_due": "2026-10-05",
+        "review_status": "completed",
+        "suitability_confirmed": false,
+        "suitability_date": "2025-10-05",
+        "value_delivered": [],
+        "notes": null
+      },
+      "client_since": "2017-06-14",
+      "assigned_advisor": "default",
+      "tags": [
+        "protection-focus",
+        "pre-retiree"
+      ],
+      "notes": null
+    },
+    {
+      "id": "CLT-2024019",
+      "title": "Ms",
+      "first_name": "Helen",
+      "last_name": "Campbell",
+      "date_of_birth": "1970-07-20",
+      "national_insurance": null,
+      "occupation": "Doctor",
+      "employer": "NHS Trust",
+      "annual_income": 95000.0,
+      "contact_info": {
+        "email": "helen.campbell@btinternet.com",
+        "phone": "01614 952657",
+        "mobile": "07814 806774",
+        "address": {
+          "line1": "111 Church Road",
+          "line2": null,
+          "city": "Bristol",
+          "county": "Avon",
+          "postcode": "BS1 1AA",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "email",
+        "best_time_to_call": "Morning"
+      },
+      "marital_status": "married",
+      "family_members": [
+        {
+          "name": "Patricia",
+          "relationship": "spouse",
+          "date_of_birth": "1968-02-26",
+          "notes": null
+        },
+        {
+          "name": "Richard",
+          "relationship": "child",
+          "date_of_birth": "2004-12-28",
+          "notes": "Lives abroad"
+        },
+        {
+          "name": "Peter",
+          "relationship": "child",
+          "date_of_birth": "1995-03-22",
+          "notes": "Lives abroad"
+        }
+      ],
+      "life_events": [
+        {
+          "event_type": "birthday",
+          "event_date": "2026-02-26",
+          "description": "Patricia's birthday coming up",
+          "related_person": "Patricia",
+          "source": "client_mentioned",
+          "created_at": "2026-02-01T19:47:38.500153"
+        },
+        {
+          "event_type": "birthday",
+          "event_date": "2026-03-22",
+          "description": "Peter's birthday coming up",
+          "related_person": "Peter",
+          "source": "client_mentioned",
+          "created_at": "2026-02-01T19:47:38.500156"
+        },
+        {
+          "event_type": "birth",
+          "event_date": "2025-02-13",
+          "description": "New grandchild born",
+          "related_person": null,
+          "source": "client_mentioned",
+          "created_at": "2026-02-01T19:47:38.500160"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "market volatility",
+          "details": "Worried about market fluctuations affecting pension value",
+          "severity": "medium",
+          "date_raised": "2026-01-23",
+          "status": "active",
+          "last_discussed": "2025-10-22",
+          "notes": null
+        },
+        {
+          "topic": "inheritance tax",
+          "details": "Concerned about IHT liability for children",
+          "severity": "low",
+          "date_raised": "2025-08-31",
+          "status": "active",
+          "last_discussed": "2025-09-08",
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Legal & General",
+          "policy_number": "PEN831105",
+          "current_value": 138414.0,
+          "monthly_contribution": 307.0,
+          "start_date": "2015-05-05",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Aviva",
+          "policy_number": "PEN198042",
+          "current_value": 232482.0,
+          "monthly_contribution": 388.0,
+          "start_date": "2008-06-16",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "SIPP"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Aviva",
+          "policy_number": "PEN767678",
+          "current_value": 24954.0,
+          "monthly_contribution": 719.0,
+          "start_date": "2003-11-04",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Hargreaves Lansdown",
+          "policy_number": "PEN986392",
+          "current_value": 247493.0,
+          "monthly_contribution": 660.0,
+          "start_date": "2017-08-04",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Personal pension"
+        },
+        {
+          "policy_type": "isa",
+          "provider": "Hargreaves Lansdown",
+          "policy_number": "ISA653815",
+          "current_value": 21154.0,
+          "monthly_contribution": 217.0,
+          "start_date": "2017-05-15",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": null
+        },
+        {
+          "policy_type": "life_insurance",
+          "provider": "AIG",
+          "policy_number": "LIF384263",
+          "current_value": 124411.0,
+          "monthly_contribution": null,
+          "start_date": null,
+          "renewal_date": "2026-03-12",
+          "maturity_date": null,
+          "notes": "Level term"
+        }
+      ],
+      "total_portfolio_value": 788908.0,
+      "risk_profile": {
+        "attitude_to_risk": "medium",
+        "capacity_for_loss": "high",
+        "investment_experience": "extensive",
+        "time_horizon_years": 29,
+        "last_assessed": "2025-12-19",
+        "notes": null
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-05-20",
+          "meeting_type": "in_person",
+          "duration_minutes": 45,
+          "summary": "Initial fact-find meeting. Gathered information about financial goals and circumstances.",
+          "transcript": null,
+          "key_points": [
+            "Considering increasing pension contributions"
+          ],
+          "action_items": [],
+          "concerns_raised": [
+            "market volatility"
+          ],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [],
+      "interactions": [
+        {
+          "interaction_date": "2025-12-19T13:00:00",
+          "method": "email",
+          "direction": "inbound",
+          "summary": "Sent portfolio valuation update",
+          "duration_minutes": null,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2025-11-14T15:00:00",
+          "method": "video_call",
+          "direction": "inbound",
+          "summary": "Portfolio review session",
+          "duration_minutes": 29,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2025-08-03T17:00:00",
+          "method": "email",
+          "direction": "outbound",
+          "summary": "Client requested callback",
+          "duration_minutes": null,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-07-31T13:00:00",
+          "method": "email",
+          "direction": "inbound",
+          "summary": "Sent portfolio valuation update",
+          "duration_minutes": null,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-07-31T10:00:00",
+          "method": "email",
+          "direction": "inbound",
+          "summary": "Sent meeting confirmation",
+          "duration_minutes": null,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-06-25T16:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Annual review meeting",
+          "duration_minutes": 6,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-05-25T12:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Quick catch-up call",
+          "duration_minutes": 16,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-03-23T15:00:00",
+          "method": "phone",
+          "direction": "inbound",
+          "summary": "Arranged follow-up meeting",
+          "duration_minutes": 55,
+          "next_action": "Send information"
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-04-20",
+        "next_review_due": "2026-04-20",
+        "review_status": "completed",
+        "suitability_confirmed": true,
+        "suitability_date": "2025-04-20",
+        "value_delivered": [
+          "Optimised tax efficiency of withdrawals"
+        ],
+        "notes": null
+      },
+      "client_since": "2022-09-08",
+      "assigned_advisor": "default",
+      "tags": [
+        "retiree"
+      ],
+      "notes": null
+    },
+    {
+      "id": "CLT-2024020",
+      "title": "Ms",
+      "first_name": "Sarah",
+      "last_name": "Taylor",
+      "date_of_birth": "1979-09-13",
+      "national_insurance": null,
+      "occupation": "Nurse",
+      "employer": "NHS Trust",
+      "annual_income": 38000.0,
+      "contact_info": {
+        "email": "sarah.taylor@btinternet.com",
+        "phone": "01838 755395",
+        "mobile": "07607 722651",
+        "address": {
+          "line1": "158 Church Road",
+          "line2": null,
+          "city": "Edinburgh",
+          "county": "Midlothian",
+          "postcode": "EH1 1AA",
+          "country": "United Kingdom"
+        },
+        "preferred_contact_method": "phone",
+        "best_time_to_call": "Morning"
+      },
+      "marital_status": "divorced",
+      "family_members": [],
+      "life_events": [
+        {
+          "event_type": "wedding",
+          "event_date": "2026-05-17",
+          "description": "Daughter's wedding",
+          "related_person": null,
+          "source": "mentioned_in_meeting",
+          "created_at": "2026-02-01T19:47:38.500286"
+        },
+        {
+          "event_type": "birth",
+          "event_date": "2025-03-13",
+          "description": "New grandchild born",
+          "related_person": null,
+          "source": "client_mentioned",
+          "created_at": "2026-02-01T19:47:38.500289"
+        }
+      ],
+      "concerns": [
+        {
+          "topic": "inflation",
+          "details": "Concerned about inflation eroding savings",
+          "severity": "medium",
+          "date_raised": "2025-12-04",
+          "status": "monitoring",
+          "last_discussed": null,
+          "notes": null
+        },
+        {
+          "topic": "pension consolidation",
+          "details": "Unsure whether to consolidate old pensions",
+          "severity": "high",
+          "date_raised": "2025-10-31",
+          "status": "monitoring",
+          "last_discussed": "2026-01-25",
+          "notes": null
+        },
+        {
+          "topic": "care home costs",
+          "details": "Worried about funding potential care needs",
+          "severity": "high",
+          "date_raised": "2025-06-09",
+          "status": "monitoring",
+          "last_discussed": null,
+          "notes": null
+        }
+      ],
+      "policies": [
+        {
+          "policy_type": "pension",
+          "provider": "Aegon",
+          "policy_number": "PEN982495",
+          "current_value": 345159.0,
+          "monthly_contribution": 389.0,
+          "start_date": "2018-01-12",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Personal pension"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Hargreaves Lansdown",
+          "policy_number": "PEN450996",
+          "current_value": 245766.0,
+          "monthly_contribution": 835.0,
+          "start_date": "2018-06-21",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Old employer scheme"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Royal London",
+          "policy_number": "PEN436241",
+          "current_value": 336256.0,
+          "monthly_contribution": 970.0,
+          "start_date": "2015-08-05",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Old employer scheme"
+        },
+        {
+          "policy_type": "pension",
+          "provider": "Hargreaves Lansdown",
+          "policy_number": "PEN429445",
+          "current_value": 113133.0,
+          "monthly_contribution": 987.0,
+          "start_date": "2008-12-06",
+          "renewal_date": null,
+          "maturity_date": null,
+          "notes": "Personal pension"
+        },
+        {
+          "policy_type": "life_insurance",
+          "provider": "AIG",
+          "policy_number": "LIF703853",
+          "current_value": 227100.0,
+          "monthly_contribution": null,
+          "start_date": null,
+          "renewal_date": "2026-07-18",
+          "maturity_date": null,
+          "notes": "Level term"
+        }
+      ],
+      "total_portfolio_value": 1267414.0,
+      "risk_profile": {
+        "attitude_to_risk": "very_low",
+        "capacity_for_loss": "low",
+        "investment_experience": "limited",
+        "time_horizon_years": 21,
+        "last_assessed": "2025-11-03",
+        "notes": null
+      },
+      "meeting_notes": [
+        {
+          "meeting_date": "2025-09-30",
+          "meeting_type": "video_call",
+          "duration_minutes": 90,
+          "summary": "Retirement planning session. Discussed target retirement date and income requirements.",
+          "transcript": null,
+          "key_points": [
+            "Needs to update beneficiary details"
+          ],
+          "action_items": [
+            "Arrange meeting with spouse"
+          ],
+          "concerns_raised": [
+            "inflation"
+          ],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-07-31",
+          "meeting_type": "video_call",
+          "duration_minutes": 45,
+          "summary": "Initial fact-find meeting. Gathered information about financial goals and circumstances.",
+          "transcript": null,
+          "key_points": [
+            "Wants to review protection needs"
+          ],
+          "action_items": [
+            "Send pension projection"
+          ],
+          "concerns_raised": [
+            "inflation"
+          ],
+          "life_events_mentioned": []
+        },
+        {
+          "meeting_date": "2025-05-31",
+          "meeting_type": "phone",
+          "duration_minutes": 30,
+          "summary": "Ad-hoc call regarding market conditions. Provided reassurance about long-term strategy.",
+          "transcript": null,
+          "key_points": [
+            "Interested in sustainable investments"
+          ],
+          "action_items": [
+            "Arrange meeting with spouse"
+          ],
+          "concerns_raised": [
+            "inflation"
+          ],
+          "life_events_mentioned": []
+        }
+      ],
+      "follow_ups": [],
+      "interactions": [
+        {
+          "interaction_date": "2025-12-28T13:00:00",
+          "method": "email",
+          "direction": "inbound",
+          "summary": "Sent portfolio valuation update",
+          "duration_minutes": null,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2025-12-08T09:00:00",
+          "method": "email",
+          "direction": "outbound",
+          "summary": "Responded to query about pension statement",
+          "duration_minutes": null,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-08-06T16:00:00",
+          "method": "email",
+          "direction": "outbound",
+          "summary": "Client requested callback",
+          "duration_minutes": null,
+          "next_action": "Follow up next week"
+        },
+        {
+          "interaction_date": "2025-08-06T13:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Answered questions about pension options",
+          "duration_minutes": 38,
+          "next_action": "Send information"
+        },
+        {
+          "interaction_date": "2025-06-17T14:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Answered questions about pension options",
+          "duration_minutes": 27,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-05-29T10:00:00",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "Discussed market conditions",
+          "duration_minutes": 12,
+          "next_action": null
+        },
+        {
+          "interaction_date": "2025-03-24T09:00:00",
+          "method": "video_call",
+          "direction": "outbound",
+          "summary": "Retirement planning discussion",
+          "duration_minutes": 55,
+          "next_action": "Send information"
+        }
+      ],
+      "compliance": {
+        "last_annual_review": "2025-08-15",
+        "next_review_due": "2026-08-15",
+        "review_status": "completed",
+        "suitability_confirmed": true,
+        "suitability_date": "2025-08-15",
+        "value_delivered": [
+          "Optimised tax efficiency of withdrawals"
+        ],
+        "notes": null
+      },
+      "client_since": "2023-12-12",
+      "assigned_advisor": "default",
+      "tags": [
+        "regular-saver"
+      ],
+      "notes": null
+    }
+  ],
+  "last_updated": "2026-02-01T19:47:38.500357",
+  "version": "1.0.0"
+}
