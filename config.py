@@ -14,6 +14,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).parent
 DATA_DIR = BASE_DIR / "data"
 CLIENTS_FILE = DATA_DIR / "clients.json"
+CHROMA_PERSIST_DIR = str(BASE_DIR / "chroma_db")
 
 # LLM Configuration
 LLM_PROVIDER = os.getenv("LLM_PROVIDER", "groq")  # "groq" (free) or "openai"

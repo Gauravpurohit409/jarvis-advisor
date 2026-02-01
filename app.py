@@ -18,6 +18,7 @@ st.set_page_config(
 # Imports after page config
 from services.client_service import ClientService
 from services.llm_service import LLMService
+from services.vector_store import VectorStoreService, get_vector_store
 
 
 # ============== INITIALIZATION ==============
@@ -27,7 +28,14 @@ def init_services():
     """Initialize services (cached)"""
     client_service = ClientService()
     llm_service = LLMService()
-    return client_service, llm_service
+    vector_store = get_vector_store()
+    
+    # Index clients if vector store is empty
+    if vector_store.is_available() and vector_store.collection.count() == 0:
+        clients = client_service.get_all_clients()
+        vector_store.index_all_clients(clients)
+    
+    return client_service, llm_service, vector_store
 
 
 def init_session_state():
@@ -101,9 +109,9 @@ def render_sidebar(client_service: ClientService):
         
         st.divider()
         
-        # Quick Client Search
-        st.subheader("🔍 Quick Search")
-        search_query = st.text_input("Search clients...", placeholder="Name")
+        # Quick Client Search (by name)
+        st.subheader("🔍 Search")
+        search_query = st.text_input("Search by name...", placeholder="Name", key="name_search")
         
         if search_query:
             results = client_service.search_by_name(search_query)
@@ -112,18 +120,40 @@ def render_sidebar(client_service: ClientService):
                     st.session_state.selected_client = client.id
                     st.session_state.current_view = "clients"
         
+        # Semantic Search
+        st.caption("🧠 Smart Search")
+        semantic_query = st.text_input("Natural language...", placeholder="e.g. worried about retirement", key="semantic_search")
+        
+        if semantic_query and 'vector_store' in st.session_state:
+            vs = st.session_state.vector_store
+            if vs and vs.is_available():
+                client_ids = vs.search_clients(semantic_query, n_results=5)
+                if client_ids:
+                    for cid in client_ids:
+                        client = client_service.get_client_by_id(cid)
+                        if client:
+                            if st.button(f"🎯 {client.full_name}", key=f"semantic_{client.id}"):
+                                st.session_state.selected_client = client.id
+                                st.session_state.current_view = "clients"
+                else:
+                    st.caption("No matches found")
+        
         st.divider()
         
         # LLM Status
         st.caption(f"LLM: {st.session_state.get('llm_provider', 'Loading...')}")
 
 
-def render_chat(client_service: ClientService, llm_service: LLMService):
-    """Render chat interface"""
+def render_chat(client_service: ClientService, llm_service: LLMService, vector_store: VectorStoreService):
+    """Render chat interface with semantic search"""
     st.header("💬 Chat with Jarvis")
     
     # Store LLM provider name
     st.session_state.llm_provider = llm_service.provider_name
+    
+    # Show vector store status
+    if vector_store.is_available():
+        st.caption(f"🧠 Semantic search active ({vector_store.collection.count()} documents indexed)")
     
     # Quick action buttons
     col1, col2, col3, col4 = st.columns(4)
@@ -172,19 +202,40 @@ def render_chat(client_service: ClientService, llm_service: LLMService):
         # Generate response
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
-                # Get context
-                briefing_data = client_service.get_daily_briefing_data()
-                context = format_chat_context(briefing_data, client_service, prompt)
-                
-                # Generate response
-                response = llm_service.chat(
-                    user_message=prompt,
-                    context=context,
-                    conversation_history=st.session_state.messages[:-1][-6:]  # Last 6 messages for context
-                )
-                
-                st.markdown(response)
-                st.session_state.messages.append({"role": "assistant", "content": response})
+                try:
+                    # Get context from multiple sources
+                    briefing_data = client_service.get_daily_briefing_data()
+                    
+                    # Use semantic search for relevant context
+                    semantic_context = ""
+                    if vector_store.is_available():
+                        semantic_context = vector_store.get_relevant_context(prompt, n_results=5)
+                    
+                    # Combine with keyword-based context
+                    keyword_context = format_chat_context(briefing_data, client_service, prompt)
+                    
+                    full_context = keyword_context
+                    if semantic_context:
+                        full_context += "\n\n" + semantic_context
+                    
+                    # Generate response
+                    response = llm_service.chat(
+                        user_message=prompt,
+                        context=full_context,
+                        conversation_history=st.session_state.messages[:-1][-6:]  # Last 6 messages for context
+                    )
+                    
+                    st.markdown(response)
+                    st.session_state.messages.append({"role": "assistant", "content": response})
+                except Exception as e:
+                    error_msg = str(e)
+                    if "connection" in error_msg.lower() or "api" in error_msg.lower():
+                        st.error("⚠️ Connection error. Please check your internet connection and try again.")
+                    else:
+                        st.error(f"⚠️ Error: {error_msg}")
+                    # Remove the pending user message from history
+                    if st.session_state.messages and st.session_state.messages[-1]["role"] == "user":
+                        st.session_state.messages.pop()
     
     # Clear chat button
     if st.session_state.messages:
@@ -564,7 +615,9 @@ def main():
     init_session_state()
     
     try:
-        client_service, llm_service = init_services()
+        client_service, llm_service, vector_store = init_services()
+        # Store vector_store in session state for sidebar access
+        st.session_state.vector_store = vector_store
     except Exception as e:
         st.error(f"Error initializing services: {e}")
         st.info("Make sure to run `python data/mock_generator.py` first to generate client data.")
@@ -574,7 +627,7 @@ def main():
     
     # Route to current view
     if st.session_state.current_view == "chat":
-        render_chat(client_service, llm_service)
+        render_chat(client_service, llm_service, vector_store)
     elif st.session_state.current_view == "dashboard":
         render_dashboard(client_service)
     elif st.session_state.current_view == "clients":

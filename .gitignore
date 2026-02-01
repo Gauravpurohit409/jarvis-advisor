@@ -13,6 +13,9 @@ venv/
 .idea/
 .vscode/
 *.swp
+
+# ChromaDB
+chroma_db/
 *.swo
 
 # OS

@@ -62,14 +62,20 @@ class GroqProvider(BaseLLMProvider):
         if not self.client:
             raise RuntimeError("Groq client not initialized")
         
-        response = self.client.chat.completions.create(
-            model=self.model,
-            messages=messages,
-            temperature=temperature,
-            max_tokens=2048
-        )
-        
-        return response.choices[0].message.content
+        try:
+            response = self.client.chat.completions.create(
+                model=self.model,
+                messages=messages,
+                temperature=temperature,
+                max_tokens=2048
+            )
+            return response.choices[0].message.content
+        except Exception as e:
+            # Handle connection errors, API errors, etc.
+            error_msg = str(e)
+            if "APIConnectionError" in error_msg or "Connection error" in error_msg:
+                raise RuntimeError(f"Groq API connection failed. Please check your internet connection.")
+            raise RuntimeError(f"Groq API error: {error_msg}")
 
 
 class OpenAIProvider(BaseLLMProvider):
