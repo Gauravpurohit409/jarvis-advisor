@@ -138,80 +138,80 @@ class MockProvider(BaseLLMProvider):
         if "briefing" in user_message or "morning" in user_message or "today" in user_message:
             return """Good morning! Here's your daily briefing:
 
-📋 **Priority Actions:**
-• 3 clients have overdue annual reviews
-• 2 follow-up commitments are due this week
-• Mrs. Patterson's birthday is in 5 days (turning 65 - pension access milestone!)
+            📋 **Priority Actions:**
+            • 3 clients have overdue annual reviews
+            • 2 follow-up commitments are due this week
+            • Mrs. Patterson's birthday is in 5 days (turning 65 - pension access milestone!)
 
-📞 **Clients to Contact:**
-• Mr. Singh - no contact in 95 days, has active concern about market volatility
-• Mrs. Chen - review due in 2 weeks, schedule meeting
+            📞 **Clients to Contact:**
+            • Mr. Singh - no contact in 95 days, has active concern about market volatility
+            • Mrs. Chen - review due in 2 weeks, schedule meeting
 
-💡 **Opportunities:**
-• Mr. Thompson mentioned daughter's wedding - consider protection review
-• 2 clients approaching tax year end - ISA top-up reminder
+            💡 **Opportunities:**
+            • Mr. Thompson mentioned daughter's wedding - consider protection review
+            • 2 clients approaching tax year end - ISA top-up reminder
 
-Would you like me to draft any emails or provide more details on any client?"""
+            Would you like me to draft any emails or provide more details on any client?"""
         
         elif "client" in user_message or any(name in user_message for name in ["patterson", "singh", "chen", "thompson"]):
             return """Here's what I found about this client:
 
-**Overview:**
-• Long-standing client since 2018
-• Portfolio value: £287,000 across 3 pension schemes
-• Last contacted: 45 days ago via video call
+            **Overview:**
+            • Long-standing client since 2018
+            • Portfolio value: £287,000 across 3 pension schemes
+            • Last contacted: 45 days ago via video call
 
-**Key Concerns (Active):**
-• Inheritance tax planning - raised 6 months ago, severity: High
-• Worried about market volatility affecting retirement plans
+            **Key Concerns (Active):**
+            • Inheritance tax planning - raised 6 months ago, severity: High
+            • Worried about market volatility affecting retirement plans
 
-**Upcoming:**
-• Annual review due in 3 weeks
-• Birthday next month (milestone: 65)
+            **Upcoming:**
+            • Annual review due in 3 weeks
+            • Birthday next month (milestone: 65)
 
-**Recent Notes:**
-• Last meeting discussed pension consolidation options
-• Action item: Send comparison of transfer fees (pending)
+            **Recent Notes:**
+            • Last meeting discussed pension consolidation options
+            • Action item: Send comparison of transfer fees (pending)
 
-**Family:**
-• Spouse: Margaret
-• 2 adult children, 3 grandchildren
-• Mentioned daughter's wedding planned for summer
+            **Family:**
+            • Spouse: Margaret
+            • 2 adult children, 3 grandchildren
+            • Mentioned daughter's wedding planned for summer
 
-Would you like me to draft a check-in email or schedule a review?"""
+            Would you like me to draft a check-in email or schedule a review?"""
         
         elif "email" in user_message or "draft" in user_message:
             return """Here's a draft email:
 
----
-**Subject:** Checking in - thinking of you
+            ---
+            **Subject:** Checking in - thinking of you
 
-Dear Mrs. Patterson,
+            Dear Mrs. Patterson,
 
-I hope this email finds you well. I wanted to reach out as it's been a little while since we last spoke.
+            I hope this email finds you well. I wanted to reach out as it's been a little while since we last spoke.
 
-I remember you mentioned some concerns about inheritance tax planning during our last conversation, and I wanted to let you know I've been researching some options that might be helpful for your situation.
+            I remember you mentioned some concerns about inheritance tax planning during our last conversation, and I wanted to let you know I've been researching some options that might be helpful for your situation.
 
-Also, I noticed your birthday is coming up next month - a significant milestone! This might be a good time to review your pension access options now that you're approaching 65.
+            Also, I noticed your birthday is coming up next month - a significant milestone! This might be a good time to review your pension access options now that you're approaching 65.
 
-Would you have time for a brief call next week to catch up? I'm available Tuesday or Thursday afternoon if either works for you.
+            Would you have time for a brief call next week to catch up? I'm available Tuesday or Thursday afternoon if either works for you.
 
-Warm regards,
-[Advisor Name]
+            Warm regards,
+            [Advisor Name]
 
----
+            ---
 
-Shall I adjust the tone or add anything specific?"""
+            Shall I adjust the tone or add anything specific?"""
         
         else:
             return """I'm here to help you stay proactive with your clients. I can:
 
-• **Daily Briefing** - Show priority actions, overdue reviews, upcoming events
-• **Client Lookup** - Get full context on any client quickly
-• **Draft Emails** - Birthday wishes, review reminders, check-ins
-• **Find Clients** - Search by concerns, last contact, upcoming events
+            • **Daily Briefing** - Show priority actions, overdue reviews, upcoming events
+            • **Client Lookup** - Get full context on any client quickly
+            • **Draft Emails** - Birthday wishes, review reminders, check-ins
+            • **Find Clients** - Search by concerns, last contact, upcoming events
 
-What would you like to know?"""
+            What would you like to know?"""
 
 
 class LLMService:
@@ -267,35 +267,35 @@ class LLMService:
         """Get the system prompt for Jarvis"""
         return """You are Jarvis, a proactive AI assistant for UK Independent Financial Advisors (IFAs).
 
-Your role is to help advisors:
-1. Stay proactive instead of reactive
-2. Remember important client details (life events, concerns, commitments)
-3. Track compliance requirements (annual reviews, Consumer Duty)
-4. Surface the right information at the right time
-5. Draft personalized client communications
+    Your role is to help advisors:
+    1. Stay proactive instead of reactive
+    2. Remember important client details (life events, concerns, commitments)
+    3. Track compliance requirements (annual reviews, Consumer Duty)
+    4. Surface the right information at the right time
+    5. Draft personalized client communications
 
-Context you have access to:
-- Client profiles (demographics, family, occupation)
-- Meeting notes and conversation history
-- Active concerns and anxieties clients have expressed
-- Follow-up commitments the advisor has made
-- Policy and portfolio information
-- Compliance status (review dates, suitability)
-- Upcoming life events and milestones
+    Context you have access to:
+    - Client profiles (demographics, family, occupation)
+    - Meeting notes and conversation history
+    - Active concerns and anxieties clients have expressed
+    - Follow-up commitments the advisor has made
+    - Policy and portfolio information
+    - Compliance status (review dates, suitability)
+    - Upcoming life events and milestones
 
-Guidelines:
-- Be concise and actionable
-- Prioritize what's most urgent/important
-- Reference specific client details when relevant
-- Suggest proactive actions the advisor can take
-- Format responses clearly with bullets/sections
-- Use a professional but warm tone
+    Guidelines:
+    - Be concise and actionable
+    - Prioritize what's most urgent/important
+    - Reference specific client details when relevant
+    - Suggest proactive actions the advisor can take
+    - Format responses clearly with bullets/sections
+    - Use a professional but warm tone
 
-UK Financial Advice Context:
-- FCA Consumer Duty requires demonstrating ongoing value
-- Annual reviews must happen within 12 months
-- Milestone birthdays (55, 60, 65, 75) have pension significance
-- Tax year ends 5th April (ISA/pension deadlines)"""
+    UK Financial Advice Context:
+    - FCA Consumer Duty requires demonstrating ongoing value
+    - Annual reviews must happen within 12 months
+    - Milestone birthdays (55, 60, 65, 75) have pension significance
+    - Tax year ends 5th April (ISA/pension deadlines)"""
     
     def chat(
         self, 
