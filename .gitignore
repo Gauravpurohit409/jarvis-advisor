@@ -9,6 +9,9 @@ __pycache__/
 env/
 venv/
 
+# Streamlit secrets (not the example!)
+.streamlit/secrets.toml
+
 # IDE
 .idea/
 .vscode/
