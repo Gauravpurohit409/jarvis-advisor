@@ -40,9 +40,41 @@ class ClientService:
         self._clients = db.clients
         print(f"Loaded {len(self._clients)} clients")
     
+    def _save_clients(self):
+        """Save clients to JSON file"""
+        db = ClientDatabase(clients=self._clients)
+        with open(self.data_file, "w") as f:
+            json.dump(db.model_dump(mode='json'), f, indent=2, default=str)
+    
     def reload(self):
         """Reload clients from file"""
         self._load_clients()
+    
+    def add_client(self, client: Client) -> bool:
+        """Add a new client and save to file"""
+        # Check for duplicate ID
+        if self.get_client_by_id(client.id):
+            return False
+        
+        self._clients.append(client)
+        self._save_clients()
+        return True
+    
+    def add_client_from_dict(self, client_data: dict) -> tuple[bool, str, Optional[Client]]:
+        """
+        Add a new client from dictionary data.
+        Returns (success, message, client)
+        """
+        try:
+            client = Client(**client_data)
+            if self.get_client_by_id(client.id):
+                return False, f"Client with ID {client.id} already exists", None
+            
+            self._clients.append(client)
+            self._save_clients()
+            return True, f"Successfully added client: {client.full_name}", client
+        except Exception as e:
+            return False, f"Error parsing client data: {str(e)}", None
     
     # ============== BASIC CRUD ==============
     

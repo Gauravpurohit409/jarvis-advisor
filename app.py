@@ -48,7 +48,7 @@ def init_session_state():
     if "selected_client" not in st.session_state:
         st.session_state.selected_client = None
     if "current_view" not in st.session_state:
-        st.session_state.current_view = "chat"
+        st.session_state.current_view = "dashboard"
     if "client_filter" not in st.session_state:
         st.session_state.client_filter = None
 
@@ -67,14 +67,14 @@ def render_sidebar(client_service: ClientService):
         st.subheader("Navigation")
         view = st.radio(
             "View",
-            ["💬 Chat", "🚨 Alerts", "📊 Dashboard", "🏛️ Compliance", "👥 Clients", "📧 Email Drafts"],
+            ["� Dashboard", "🚨 Alerts", "💬 Chat", "🏛️ Compliance", "👥 Clients", "📧 Email Drafts"],
             label_visibility="collapsed"
         )
         
         view_mapping = {
-            "💬 Chat": "chat",
-            "🚨 Alerts": "alerts",
             "📊 Dashboard": "dashboard",
+            "🚨 Alerts": "alerts",
+            "💬 Chat": "chat",
             "🏛️ Compliance": "compliance",
             "👥 Clients": "clients",
             "📧 Email Drafts": "emails"
@@ -89,14 +89,14 @@ def render_sidebar(client_service: ClientService):
                 st.session_state.current_view = "alerts"
             elif "Compliance" in view:
                 st.session_state.current_view = "compliance"
-            elif "Dashboard" in view:
-                st.session_state.current_view = "dashboard"
+            elif "Chat" in view:
+                st.session_state.current_view = "chat"
             elif "Client" in view:
                 st.session_state.current_view = "clients"
             elif "Email" in view:
                 st.session_state.current_view = "emails"
             else:
-                st.session_state.current_view = "chat"
+                st.session_state.current_view = "dashboard"
         
         st.divider()
         
@@ -613,8 +613,8 @@ def _get_email_type_for_alert(alert_type: AlertType) -> str:
     return mapping.get(alert_type, "check_in")
 
 
-def render_clients(client_service: ClientService):
-    """Render clients list view"""
+def render_clients(client_service: ClientService, vector_store: VectorStoreService):
+    """Render clients list view with upload capability"""
     
     # Check if we have a filter from dashboard click
     active_filter = st.session_state.get("client_filter")
@@ -636,6 +636,374 @@ def render_clients(client_service: ClientService):
         if st.button("❌ Clear Filter", key="clear_filter"):
             st.session_state.client_filter = None
             st.rerun()
+    
+    # ============== ADD NEW CLIENT SECTION ==============
+    with st.expander("➕ Add New Client", expanded=False):
+        st.write("Upload a Word (.docx) or Excel (.xlsx) file with client details. Jarvis will extract the data and show you what's missing.")
+        
+        tab1, tab2, tab3 = st.tabs(["📄 Upload Document", "📝 Manual Entry", "📋 JSON Upload"])
+        
+        with tab1:
+            st.info("💡 **Supported formats:** Word (.docx), Excel (.xlsx), Text (.txt). Documents with couples/partners are supported!")
+            
+            uploaded_doc = st.file_uploader(
+                "Upload Client Document", 
+                type=["docx", "xlsx", "xls", "txt"],
+                key="doc_upload",
+                help="Upload a document containing client information"
+            )
+            
+            if uploaded_doc:
+                from services.document_parser import document_parser
+                
+                # Parse the document for multiple people
+                file_bytes = uploaded_doc.read()
+                people, shared_data = document_parser.parse_document_multi(file_bytes, uploaded_doc.name)
+                
+                if len(people) == 0 or (len(people) == 1 and "_error" in people[0]):
+                    error_msg = people[0].get("_error", "Could not extract data from document") if people else "Could not extract data from document"
+                    st.error(f"❌ {error_msg}")
+                else:
+                    # Multiple people detected
+                    if len(people) > 1:
+                        st.success(f"👥 **Found {len(people)} people in document!**")
+                        
+                        # Show all people found
+                        st.write("**People detected:**")
+                        for i, person in enumerate(people):
+                            name = f"{person.get('first_name', 'Unknown')} {person.get('last_name', '')}"
+                            occ = person.get('occupation', 'Not specified')
+                            st.write(f"  {i+1}. **{name}** - {occ}")
+                        
+                        if shared_data:
+                            st.write("**Shared household data:**")
+                            for key, value in shared_data.items():
+                                nice_key = key.replace('_', ' ').title()
+                                if key == "portfolio":
+                                    st.write(f"  • {nice_key}: £{value:,.0f}")
+                                else:
+                                    st.write(f"  • {nice_key}: {value}")
+                        
+                        # Let user select which person to add
+                        person_options = [f"{p.get('first_name', 'Unknown')} {p.get('last_name', '')}" for p in people]
+                        selected_person_idx = st.selectbox(
+                            "**Select person to add as primary client:**", 
+                            range(len(people)),
+                            format_func=lambda x: person_options[x],
+                            key="select_person"
+                        )
+                        
+                        # Use selected person's data merged with shared data
+                        extracted_data = {**shared_data, **people[selected_person_idx]}
+                        
+                        # Offer to add the other person as family member
+                        other_idx = 1 - selected_person_idx if len(people) == 2 else None
+                        if other_idx is not None:
+                            add_as_family = st.checkbox(
+                                f"Add {person_options[other_idx]} as family member (spouse/partner)", 
+                                value=True,
+                                key="add_as_family"
+                            )
+                            if add_as_family:
+                                st.session_state["family_member_data"] = people[other_idx]
+                        
+                        st.divider()
+                    else:
+                        # Single person
+                        extracted_data = {**shared_data, **people[0]} if shared_data else people[0]
+                        st.success(f"✅ Extracted {len(extracted_data)} fields from document")
+                    
+                    # Get missing fields
+                    missing_fields = document_parser._get_missing_fields(extracted_data)
+                    
+                    if extracted_data:
+                        st.write("**📋 Extracted Data:**")
+                        for key, value in extracted_data.items():
+                            if key not in ["_error"]:
+                                nice_key = key.replace('_', ' ').title()
+                                if key in ["income", "portfolio"] and value:
+                                    st.write(f"- **{nice_key}:** £{value:,.0f}")
+                                else:
+                                    st.write(f"- **{nice_key}:** {value}")
+                    
+                    # Show missing fields warning
+                    if missing_fields:
+                        st.warning(f"⚠️ **Missing required fields:** {', '.join([f.replace('_', ' ').title() for f in missing_fields])}")
+                        st.write("Please fill in the missing information below:")
+                    
+                    st.divider()
+                    st.write("**Complete Client Details:**")
+                    
+                    # Generate ID
+                    existing_ids = [c.id for c in client_service.get_all_clients()]
+                    auto_id = document_parser.generate_client_id(existing_ids)
+                    
+                    # Form with pre-filled values from extraction
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        doc_id = st.text_input("Client ID *", value=auto_id, key="doc_id")
+                        doc_title = st.selectbox("Title *", ["Mr", "Mrs", "Ms", "Dr", "Miss"], 
+                            index=["Mr", "Mrs", "Ms", "Dr", "Miss"].index(extracted_data.get("title", "Mr")) if extracted_data.get("title") in ["Mr", "Mrs", "Ms", "Dr", "Miss"] else 0,
+                            key="doc_title")
+                        doc_first = st.text_input("First Name *", value=extracted_data.get("first_name", ""), key="doc_first",
+                            help="⚠️ Required" if "first_name" in missing_fields else None)
+                        doc_last = st.text_input("Last Name *", value=extracted_data.get("last_name", ""), key="doc_last",
+                            help="⚠️ Required" if "last_name" in missing_fields else None)
+                        
+                        # Handle date of birth
+                        dob_value = None
+                        if extracted_data.get("date_of_birth"):
+                            try:
+                                from datetime import datetime as dt
+                                dob_value = dt.strptime(extracted_data["date_of_birth"], "%Y-%m-%d").date()
+                            except:
+                                pass
+                        doc_dob = st.date_input("Date of Birth *", value=dob_value, key="doc_dob",
+                            help="⚠️ Required" if "date_of_birth" in missing_fields else None)
+                        doc_occupation = st.text_input("Occupation", value=extracted_data.get("occupation", ""), key="doc_occupation")
+                        doc_employer = st.text_input("Employer", value=extracted_data.get("employer", ""), key="doc_employer")
+                    
+                    with col2:
+                        doc_email = st.text_input("Email *", value=extracted_data.get("email", ""), key="doc_email",
+                            help="⚠️ Required" if "email" in missing_fields else None)
+                        doc_phone = st.text_input("Phone *", value=extracted_data.get("phone", ""), key="doc_phone",
+                            help="⚠️ Required" if "phone" in missing_fields else None)
+                        doc_address = st.text_input("Address Line 1 *", value=extracted_data.get("address_line1", ""), key="doc_address",
+                            help="⚠️ Required" if "address_line1" in missing_fields else None)
+                        doc_city = st.text_input("City *", value=extracted_data.get("city", ""), key="doc_city",
+                            help="⚠️ Required" if "city" in missing_fields else None)
+                        doc_postcode = st.text_input("Postcode *", value=extracted_data.get("postcode", ""), key="doc_postcode",
+                            help="⚠️ Required" if "postcode" in missing_fields else None)
+                        
+                        marital_options = ["single", "married", "divorced", "widowed", "civil_partnership"]
+                        marital_index = 0
+                        # If couple detected, default to married
+                        if len(people) > 1:
+                            marital_index = marital_options.index("married")
+                        elif extracted_data.get("marital_status") in marital_options:
+                            marital_index = marital_options.index(extracted_data["marital_status"])
+                        doc_marital = st.selectbox("Marital Status", marital_options, index=marital_index, key="doc_marital")
+                    
+                    # Financial info
+                    income_val = int(extracted_data.get("income", 0) or 0)
+                    portfolio_val = int(extracted_data.get("portfolio", 0) or 0)
+                    doc_income = st.number_input("Annual Income (£)", min_value=0, value=income_val, step=1000, key="doc_income")
+                    doc_portfolio = st.number_input("Portfolio Value (£)", min_value=0, value=portfolio_val, step=1000, key="doc_portfolio")
+                    
+                    # Add button
+                    if st.button("✅ Add Client & Index", key="add_from_doc"):
+                        # Validate required fields
+                        if all([doc_id, doc_first, doc_last, doc_dob, doc_email, doc_phone, doc_address, doc_city, doc_postcode]):
+                            from datetime import date as date_type
+                            
+                            # Build family members list
+                            family_members = []
+                            family_data = st.session_state.get("family_member_data")
+                            if family_data and st.session_state.get("add_as_family", False):
+                                family_member = {
+                                    "name": f"{family_data.get('first_name', '')} {family_data.get('last_name', '')}".strip(),
+                                    "relationship": "spouse",
+                                    "age": None,
+                                    "occupation": family_data.get("occupation"),
+                                    "dependent": False
+                                }
+                                # Calculate age from DOB if available
+                                if family_data.get("date_of_birth"):
+                                    try:
+                                        from datetime import datetime as dt
+                                        fam_dob = dt.strptime(family_data["date_of_birth"], "%Y-%m-%d").date()
+                                        family_member["age"] = (date_type.today() - fam_dob).days // 365
+                                    except:
+                                        pass
+                                family_members.append(family_member)
+                            
+                            client_data = {
+                                "id": doc_id,
+                                "title": doc_title,
+                                "first_name": doc_first,
+                                "last_name": doc_last,
+                                "date_of_birth": doc_dob.isoformat() if doc_dob else None,
+                                "occupation": doc_occupation or None,
+                                "employer": doc_employer or None,
+                                "annual_income": doc_income if doc_income > 0 else None,
+                                "total_portfolio_value": doc_portfolio if doc_portfolio > 0 else None,
+                                "marital_status": doc_marital,
+                                "contact_info": {
+                                    "email": doc_email,
+                                    "phone": doc_phone,
+                                    "address": {
+                                        "line1": doc_address,
+                                        "city": doc_city,
+                                        "postcode": doc_postcode,
+                                        "country": "United Kingdom"
+                                    }
+                                },
+                                "client_since": date_type.today().isoformat(),
+                                "policies": [],
+                                "concerns": [],
+                                "family_members": family_members,
+                                "life_events": [],
+                                "meeting_notes": [],
+                                "follow_ups": [],
+                                "interactions": []
+                            }
+                            
+                            success, message, new_client = client_service.add_client_from_dict(client_data)
+                            if success and new_client:
+                                family_note = ""
+                                if family_members:
+                                    family_note = f" (with spouse: {family_members[0]['name']})"
+                                if vector_store.is_available():
+                                    vector_store.index_client(new_client)
+                                    st.success(f"✅ {message}{family_note} and indexed for semantic search!")
+                                else:
+                                    st.success(f"✅ {message}{family_note}")
+                                # Clear family member data
+                                if "family_member_data" in st.session_state:
+                                    del st.session_state["family_member_data"]
+                                st.balloons()
+                                st.rerun()
+                            else:
+                                st.error(f"❌ {message}")
+                        else:
+                            st.error("❌ Please fill in all required fields marked with *")
+        
+        with tab2:
+            st.write("Enter client details manually:")
+            
+            # Generate auto ID
+            existing_ids = [c.id for c in client_service.get_all_clients()]
+            from services.document_parser import document_parser
+            auto_id = document_parser.generate_client_id(existing_ids)
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                new_id = st.text_input("Client ID *", value=auto_id, key="manual_id")
+                new_title = st.selectbox("Title *", ["Mr", "Mrs", "Ms", "Dr", "Miss"], key="manual_title")
+                new_first = st.text_input("First Name *", placeholder="John", key="manual_first")
+                new_last = st.text_input("Last Name *", placeholder="Smith", key="manual_last")
+                new_dob = st.date_input("Date of Birth *", value=None, key="manual_dob")
+                new_occupation = st.text_input("Occupation", placeholder="Accountant", key="manual_occupation")
+            
+            with col2:
+                new_email = st.text_input("Email *", placeholder="john.smith@email.com", key="manual_email")
+                new_phone = st.text_input("Phone *", placeholder="07700 900123", key="manual_phone")
+                new_address_line1 = st.text_input("Address Line 1 *", placeholder="123 High Street", key="manual_address")
+                new_city = st.text_input("City *", placeholder="London", key="manual_city")
+                new_postcode = st.text_input("Postcode *", placeholder="SW1A 1AA", key="manual_postcode")
+                new_marital = st.selectbox("Marital Status", ["single", "married", "divorced", "widowed", "civil_partnership"], key="manual_marital")
+            
+            new_income = st.number_input("Annual Income (£)", min_value=0, value=0, step=1000, key="manual_income")
+            new_portfolio = st.number_input("Total Portfolio Value (£)", min_value=0, value=0, step=1000, key="manual_portfolio")
+            
+            if st.button("✅ Add Client", key="add_manual"):
+                if all([new_id, new_first, new_last, new_dob, new_email, new_phone, new_address_line1, new_city, new_postcode]):
+                    from datetime import date as date_type
+                    client_data = {
+                        "id": new_id,
+                        "title": new_title,
+                        "first_name": new_first,
+                        "last_name": new_last,
+                        "date_of_birth": new_dob.isoformat() if new_dob else None,
+                        "occupation": new_occupation or None,
+                        "annual_income": new_income if new_income > 0 else None,
+                        "total_portfolio_value": new_portfolio if new_portfolio > 0 else None,
+                        "marital_status": new_marital,
+                        "contact_info": {
+                            "email": new_email,
+                            "phone": new_phone,
+                            "address": {
+                                "line1": new_address_line1,
+                                "city": new_city,
+                                "postcode": new_postcode,
+                                "country": "United Kingdom"
+                            }
+                        },
+                        "client_since": date_type.today().isoformat(),
+                        "policies": [],
+                        "concerns": [],
+                        "family_members": [],
+                        "life_events": [],
+                        "meeting_notes": [],
+                        "follow_ups": [],
+                        "interactions": []
+                    }
+                    
+                    success, message, new_client = client_service.add_client_from_dict(client_data)
+                    if success and new_client:
+                        if vector_store.is_available():
+                            vector_store.index_client(new_client)
+                            st.success(f"✅ {message} and indexed for semantic search!")
+                        else:
+                            st.success(f"✅ {message}")
+                        st.balloons()
+                        st.rerun()
+                    else:
+                        st.error(f"❌ {message}")
+                else:
+                    st.warning("Please fill in all required fields (*)")
+        
+        with tab3:
+            st.write("Upload a JSON file with complete client data:")
+            uploaded_json = st.file_uploader(
+                "Upload Client JSON", 
+                type=["json"],
+                key="json_upload",
+                help="Upload a JSON file with client data following the schema"
+            )
+            
+            if uploaded_json:
+                try:
+                    client_data = json.load(uploaded_json)
+                    st.json(client_data)
+                    
+                    if st.button("✅ Add Client & Index", key="add_from_json"):
+                        success, message, new_client = client_service.add_client_from_dict(client_data)
+                        if success and new_client:
+                            if vector_store.is_available():
+                                vector_store.index_client(new_client)
+                                st.success(f"✅ {message} and indexed for semantic search!")
+                            else:
+                                st.success(f"✅ {message}")
+                            st.balloons()
+                            st.rerun()
+                        else:
+                            st.error(f"❌ {message}")
+                except json.JSONDecodeError as e:
+                    st.error(f"Invalid JSON file: {e}")
+            
+            # Download template button
+            st.divider()
+            sample_template = {
+                "id": "client_014",
+                "title": "Mr",
+                "first_name": "John",
+                "last_name": "Smith",
+                "date_of_birth": "1975-06-15",
+                "occupation": "Software Engineer",
+                "annual_income": 85000,
+                "total_portfolio_value": 450000,
+                "marital_status": "married",
+                "contact_info": {
+                    "email": "john.smith@email.com",
+                    "phone": "07700 900123",
+                    "address": {
+                        "line1": "123 High Street",
+                        "city": "Manchester",
+                        "postcode": "M1 1AA",
+                        "country": "United Kingdom"
+                    }
+                },
+                "client_since": "2020-03-15"
+            }
+            st.download_button(
+                "📥 Download JSON Template",
+                json.dumps(sample_template, indent=2),
+                "client_template.json",
+                "application/json"
+            )
+    
+    st.divider()
     
     # Filters row
     col1, col2, col3 = st.columns(3)
@@ -1029,7 +1397,7 @@ def main():
     elif st.session_state.current_view == "compliance":
         render_compliance(client_service)
     elif st.session_state.current_view == "clients":
-        render_clients(client_service)
+        render_clients(client_service, vector_store)
     elif st.session_state.current_view == "emails":
         render_emails(client_service, llm_service)
 
