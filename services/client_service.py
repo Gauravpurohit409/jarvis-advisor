@@ -76,6 +76,94 @@ class ClientService:
         except Exception as e:
             return False, f"Error parsing client data: {str(e)}", None
     
+    def log_interaction(self, client_id: str, method: str, direction: str, summary: str, duration_minutes: int = None) -> tuple[bool, str]:
+        """
+        Log a new interaction for a client (call, meeting, email, etc.)
+        This updates the client's last_contact_date.
+        """
+        from datetime import datetime
+        from data.schema import Interaction, ContactMethod
+        
+        client = self.get_client_by_id(client_id)
+        if not client:
+            return False, f"Client {client_id} not found"
+        
+        try:
+            # Map string to ContactMethod enum
+            method_map = {
+                "phone": ContactMethod.PHONE,
+                "email": ContactMethod.EMAIL,
+                "in_person": ContactMethod.IN_PERSON,
+                "video": ContactMethod.VIDEO_CALL,
+                "video_call": ContactMethod.VIDEO_CALL,
+                "sms": ContactMethod.SMS,
+            }
+            contact_method = method_map.get(method.lower(), ContactMethod.PHONE)
+            
+            interaction = Interaction(
+                interaction_date=datetime.now(),
+                method=contact_method,
+                direction=direction,
+                summary=summary,
+                duration_minutes=duration_minutes
+            )
+            
+            client.interactions.append(interaction)
+            self._save_clients()
+            
+            return True, f"Logged {method} contact for {client.full_name}"
+        except Exception as e:
+            return False, f"Error logging interaction: {str(e)}"
+    
+    def update_review_status(self, client_id: str, status: str, next_review_date: date = None) -> tuple[bool, str]:
+        """
+        Update a client's review status and optionally set next review date.
+        """
+        client = self.get_client_by_id(client_id)
+        if not client:
+            return False, f"Client {client_id} not found"
+        
+        try:
+            client.compliance.review_status = status
+            if status == "completed":
+                client.compliance.last_annual_review = date.today()
+                # Set next review to 1 year from now if not specified
+                if next_review_date:
+                    client.compliance.next_review_due = next_review_date
+                else:
+                    client.compliance.next_review_due = date.today().replace(year=date.today().year + 1)
+            elif next_review_date:
+                client.compliance.next_review_due = next_review_date
+            
+            self._save_clients()
+            return True, f"Updated review status for {client.full_name}"
+        except Exception as e:
+            return False, f"Error updating review status: {str(e)}"
+    
+    def complete_follow_up(self, client_id: str, commitment: str, notes: str = None) -> tuple[bool, str]:
+        """
+        Mark a follow-up as completed.
+        """
+        from data.schema import FollowUpStatus
+        
+        client = self.get_client_by_id(client_id)
+        if not client:
+            return False, f"Client {client_id} not found"
+        
+        try:
+            for follow_up in client.follow_ups:
+                if follow_up.commitment == commitment and follow_up.status == FollowUpStatus.PENDING:
+                    follow_up.status = FollowUpStatus.COMPLETED
+                    follow_up.completed_date = date.today()
+                    if notes:
+                        follow_up.notes = notes
+                    self._save_clients()
+                    return True, f"Completed follow-up: {commitment[:30]}..."
+            
+            return False, "Follow-up not found or already completed"
+        except Exception as e:
+            return False, f"Error completing follow-up: {str(e)}"
+    
     # ============== BASIC CRUD ==============
     
     def get_all_clients(self) -> List[Client]:

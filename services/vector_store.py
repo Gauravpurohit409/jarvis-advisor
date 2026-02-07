@@ -36,13 +36,26 @@ class VectorStoreService:
     def _initialize(self):
         """Initialize ChromaDB client and collection"""
         try:
+            # Disable ChromaDB telemetry completely
+            import os as _os
+            _os.environ["ANONYMIZED_TELEMETRY"] = "False"
+            _os.environ["CHROMA_TELEMETRY"] = "False"
+            
+            # Monkey-patch posthog to prevent telemetry errors
+            try:
+                import posthog
+                posthog.capture = lambda *args, **kwargs: None
+                posthog.identify = lambda *args, **kwargs: None
+            except ImportError:
+                pass
+            
             import chromadb
             from chromadb.config import Settings
             
             # Create persist directory if needed
             os.makedirs(self.persist_directory, exist_ok=True)
             
-            # Initialize persistent client
+            # Initialize persistent client with telemetry disabled
             self.client = chromadb.PersistentClient(
                 path=self.persist_directory,
                 settings=Settings(

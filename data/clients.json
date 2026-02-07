@@ -221,25 +221,25 @@
         {
           "commitment": "Prepare comprehensive suitability report covering retirement, pension consolidation, protection, university funding, tax and estate planning",
           "deadline": "2024-12-06",
-          "status": "pending",
+          "status": "completed",
           "created_date": "2024-11-15",
-          "completed_date": null,
+          "completed_date": "2026-02-07",
           "notes": null
         },
         {
           "commitment": "Get critical illness quotes for Michael with full medical underwriting",
           "deadline": "2024-11-30",
-          "status": "pending",
+          "status": "completed",
           "created_date": "2024-11-15",
-          "completed_date": null,
+          "completed_date": "2026-02-07",
           "notes": null
         },
         {
           "commitment": "Schedule follow-up meeting to present recommendations",
           "deadline": "2024-12-06",
-          "status": "pending",
+          "status": "completed",
           "created_date": "2024-11-15",
-          "completed_date": null,
+          "completed_date": "2026-02-07",
           "notes": "Meeting scheduled for 6th December 2024"
         }
       ],
@@ -259,12 +259,20 @@
           "summary": "Sarah called to confirm meeting and ask what documents to prepare",
           "duration_minutes": 10,
           "next_action": "Meeting confirmed for 15th November"
+        },
+        {
+          "interaction_date": "2026-02-07T15:06:57.531286",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "testing",
+          "duration_minutes": 15,
+          "next_action": null
         }
       ],
       "compliance": {
-        "last_annual_review": null,
-        "next_review_due": "2025-11-15",
-        "review_status": "pending",
+        "last_annual_review": "2026-02-07",
+        "next_review_due": "2027-02-07",
+        "review_status": "completed",
         "suitability_confirmed": false,
         "suitability_date": null,
         "value_delivered": [],
@@ -2705,12 +2713,20 @@
           "summary": "Pension consolidation meeting",
           "duration_minutes": 50,
           "next_action": "Await pension statements"
+        },
+        {
+          "interaction_date": "2026-02-07T15:06:38.145206",
+          "method": "phone",
+          "direction": "outbound",
+          "summary": "testing",
+          "duration_minutes": 15,
+          "next_action": null
         }
       ],
       "compliance": {
-        "last_annual_review": "2024-06-15",
-        "next_review_due": "2025-06-15",
-        "review_status": "overdue",
+        "last_annual_review": "2026-02-07",
+        "next_review_due": "2027-02-07",
+        "review_status": "completed",
         "suitability_confirmed": true,
         "suitability_date": "2024-06-15",
         "value_delivered": [],
@@ -2946,6 +2962,6 @@
       "notes": "Lovely gentleman. Still misses Margaret deeply. Medicine runs in family - both children doctors. Very engaged with grandchildren. Wants to leave meaningful legacy."
     }
   ],
-  "last_updated": "2026-02-01T19:57:43.366173",
-  "version": "2.0.0"
+  "last_updated": "2026-02-07T15:10:08.773180",
+  "version": "1.0.0"
 }

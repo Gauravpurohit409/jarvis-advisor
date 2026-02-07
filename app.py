@@ -63,40 +63,25 @@ def render_sidebar(client_service: ClientService):
         
         st.divider()
         
-        # Navigation
+        # Navigation using buttons for better state control
         st.subheader("Navigation")
-        view = st.radio(
-            "View",
-            ["� Dashboard", "🚨 Alerts", "💬 Chat", "🏛️ Compliance", "👥 Clients", "📧 Email Drafts"],
-            label_visibility="collapsed"
-        )
         
-        view_mapping = {
-            "📊 Dashboard": "dashboard",
-            "🚨 Alerts": "alerts",
-            "💬 Chat": "chat",
-            "🏛️ Compliance": "compliance",
-            "👥 Clients": "clients",
-            "📧 Email Drafts": "emails"
-        }
+        nav_items = [
+            ("📊 Dashboard", "dashboard"),
+            ("🚨 Alerts", "alerts"),
+            ("💬 Chat", "chat"),
+            ("🏛️ Compliance", "compliance"),
+            ("👥 Clients", "clients"),
+            ("📧 Email Drafts", "emails"),
+        ]
         
-        # Debug: ensure proper mapping
-        if view in view_mapping:
-            st.session_state.current_view = view_mapping[view]
-        else:
-            # Fallback for encoding issues
-            if "Alert" in view:
-                st.session_state.current_view = "alerts"
-            elif "Compliance" in view:
-                st.session_state.current_view = "compliance"
-            elif "Chat" in view:
-                st.session_state.current_view = "chat"
-            elif "Client" in view:
-                st.session_state.current_view = "clients"
-            elif "Email" in view:
-                st.session_state.current_view = "emails"
-            else:
-                st.session_state.current_view = "dashboard"
+        current = st.session_state.get("current_view", "dashboard")
+        
+        for label, key in nav_items:
+            btn_label = f"▸ {label}" if current == key else label
+            if st.button(btn_label, key=f"nav_{key}", use_container_width=True):
+                st.session_state.current_view = key
+                st.rerun()
         
         st.divider()
         
@@ -1007,14 +992,26 @@ def render_clients(client_service: ClientService, vector_store: VectorStoreServi
     
     # Filters row
     col1, col2, col3 = st.columns(3)
+    
+    # Map session filter to dropdown index
+    status_options = ["All", "Review Overdue", "Due in 30 Days", "Dormant (90+ days)", "Has Active Concerns", "Pending Follow-ups"]
+    filter_to_index = {
+        "all": 0,
+        "reviews_overdue": 1,
+        "reviews_due_soon": 2,
+        "dormant": 3,
+        "active_concerns": 4,
+        "pending_followups": 5,
+    }
+    default_status_idx = filter_to_index.get(active_filter, 0)
+    
     with col1:
         search = st.text_input("🔍 Search by name", "")
     with col2:
         filter_concern = st.selectbox("Filter by concern", 
             ["All", "retirement", "inheritance tax", "protection", "care home costs", "pension"])
     with col3:
-        filter_status = st.selectbox("Filter by status",
-            ["All", "Review Overdue", "Due in 30 Days", "Dormant (90+ days)", "Has Active Concerns", "Pending Follow-ups"])
+        filter_status = st.selectbox("Filter by status", status_options, index=default_status_idx)
     
     # Get clients based on filter
     if search:
@@ -1023,16 +1020,16 @@ def render_clients(client_service: ClientService, vector_store: VectorStoreServi
     elif filter_concern != "All":
         clients = client_service.search_by_concern(filter_concern)
         st.session_state.client_filter = None
-    elif filter_status == "Review Overdue" or active_filter == "reviews_overdue":
+    elif filter_status == "Review Overdue":
         clients = client_service.get_clients_review_overdue()
-    elif filter_status == "Due in 30 Days" or active_filter == "reviews_due_soon":
+    elif filter_status == "Due in 30 Days":
         briefing = client_service.get_daily_briefing_data()
         clients = briefing["reviews_due_soon"]
-    elif filter_status == "Dormant (90+ days)" or active_filter == "dormant":
+    elif filter_status == "Dormant (90+ days)":
         clients = client_service.get_dormant_clients(90)
     elif filter_status == "Has Active Concerns":
         clients = client_service.get_clients_with_active_concerns()
-    elif filter_status == "Pending Follow-ups" or active_filter == "pending_followups":
+    elif filter_status == "Pending Follow-ups":
         clients = [c for c in client_service.get_all_clients() if c.pending_follow_ups]
     else:
         clients = client_service.get_all_clients()
@@ -1072,11 +1069,83 @@ def render_clients(client_service: ClientService, vector_store: VectorStoreServi
                 st.write(f"Review Status: {client.compliance.review_status}")
                 st.write(f"Next Review Due: {client.compliance.next_review_due}")
             
+            # Pending Follow-ups section
+            if client.pending_follow_ups:
+                st.write("**📋 Pending Follow-ups:**")
+                for followup in client.pending_follow_ups:
+                    fu_col1, fu_col2 = st.columns([3, 1])
+                    with fu_col1:
+                        overdue = "🔴 OVERDUE" if followup.deadline < date.today() else ""
+                        st.write(f"• {followup.commitment} (Due: {followup.deadline}) {overdue}")
+                    with fu_col2:
+                        if st.button("✅ Done", key=f"complete_fu_{client.id}_{followup.commitment[:10]}", use_container_width=True):
+                            success, msg = client_service.complete_follow_up(client.id, followup.commitment)
+                            if success:
+                                st.success(msg)
+                                st.rerun()
+                            else:
+                                st.error(msg)
+            
             # Recent meetings
             if client.meeting_notes:
                 st.write("**Recent Meeting Notes:**")
                 for note in client.meeting_notes[:2]:
                     st.caption(f"{note.meeting_date}: {note.summary}")
+            
+            # Action buttons
+            st.divider()
+            action_col1, action_col2, action_col3 = st.columns(3)
+            
+            with action_col1:
+                if st.button("📞 Log Contact", key=f"log_contact_{client.id}", use_container_width=True):
+                    st.session_state[f"show_log_form_{client.id}"] = True
+            
+            with action_col2:
+                if st.button("✅ Mark Review Done", key=f"mark_review_{client.id}", use_container_width=True):
+                    success, msg = client_service.update_review_status(client.id, "completed")
+                    if success:
+                        st.success(msg)
+                        st.rerun()
+                    else:
+                        st.error(msg)
+            
+            with action_col3:
+                if st.button("📧 Draft Email", key=f"draft_email_{client.id}", use_container_width=True):
+                    st.session_state.draft_for = client.id
+                    st.session_state.draft_type = "check_in"
+                    st.session_state.current_view = "emails"
+                    st.rerun()
+            
+            # Log contact form (shown when button clicked)
+            if st.session_state.get(f"show_log_form_{client.id}", False):
+                st.write("**Log New Contact:**")
+                log_col1, log_col2 = st.columns(2)
+                with log_col1:
+                    contact_method = st.selectbox("Method", ["Phone", "Email", "In_Person", "Video"], key=f"method_{client.id}")
+                    direction = st.selectbox("Direction", ["Outbound", "Inbound"], key=f"dir_{client.id}")
+                with log_col2:
+                    duration = st.number_input("Duration (mins)", min_value=0, value=15, key=f"dur_{client.id}")
+                summary = st.text_input("Summary", placeholder="Brief note about the contact", key=f"sum_{client.id}")
+                
+                log_btn_col1, log_btn_col2 = st.columns(2)
+                with log_btn_col1:
+                    if st.button("✅ Save Contact", key=f"save_log_{client.id}", use_container_width=True):
+                        if summary:
+                            success, msg = client_service.log_interaction(
+                                client.id, contact_method.lower(), direction.lower(), summary, duration
+                            )
+                            if success:
+                                st.success(msg)
+                                st.session_state[f"show_log_form_{client.id}"] = False
+                                st.rerun()
+                            else:
+                                st.error(msg)
+                        else:
+                            st.warning("Please enter a summary")
+                with log_btn_col2:
+                    if st.button("❌ Cancel", key=f"cancel_log_{client.id}", use_container_width=True):
+                        st.session_state[f"show_log_form_{client.id}"] = False
+                        st.rerun()
 
 
 def render_emails(client_service: ClientService, llm_service: LLMService):
@@ -1095,16 +1164,17 @@ def render_emails(client_service: ClientService, llm_service: LLMService):
         # Client selection
         clients = client_service.get_all_clients()
         client_names = {f"{c.full_name} ({c.id})": c.id for c in clients}
+        client_name_list = list(client_names.keys())
         
-        # Pre-select if coming from button
-        default_index = 0
+        # Pre-select client if coming from button - set widget state directly
         if draft_for:
-            for i, (name, cid) in enumerate(client_names.items()):
+            for name, cid in client_names.items():
                 if cid == draft_for:
-                    default_index = i
+                    st.session_state["email_client_select"] = name
                     break
+            del st.session_state["draft_for"]
         
-        selected = st.selectbox("Select Client", list(client_names.keys()), index=default_index)
+        selected = st.selectbox("Select Client", client_name_list, key="email_client_select")
         selected_client_id = client_names[selected]
         
         # Email type - expanded for alert types
@@ -1118,32 +1188,26 @@ def render_emails(client_service: ClientService, llm_service: LLMService):
             "Retirement Planning": "retirement_planning",
             "General Update": "general_update"
         }
+        email_type_list = list(email_types.keys())
         
-        default_type = 0
+        # Pre-select email type if coming from button - set widget state directly
         if draft_type:
-            for i, (name, etype) in enumerate(email_types.items()):
+            for name, etype in email_types.items():
                 if etype == draft_type:
-                    default_type = i
+                    st.session_state["email_type_select"] = name
                     break
+            del st.session_state["draft_type"]
         
-        selected_type = st.selectbox("Email Type", list(email_types.keys()), index=default_type)
+        selected_type = st.selectbox("Email Type", email_type_list, key="email_type_select")
         email_type = email_types[selected_type]
         
         # Include alert context if coming from alerts page
-        alert_context = st.session_state.get("alert_context", "")
+        alert_context = st.session_state.pop("alert_context", "")
         additional_context = st.text_area("Additional context (optional)", 
             value=alert_context,
             placeholder="Any specific points to include...")
         
         generate_btn = st.button("✨ Generate Draft", type="primary", use_container_width=True)
-        
-        # Clear the session state after using
-        if "draft_for" in st.session_state:
-            del st.session_state.draft_for
-        if "draft_type" in st.session_state:
-            del st.session_state.draft_type
-        if "alert_context" in st.session_state:
-            del st.session_state.alert_context
     
     with col2:
         st.subheader("Email Preview")
