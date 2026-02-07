@@ -41,8 +41,60 @@ def init_services():
     return client_service, llm_service, vector_store
 
 
+# Valid page names for URL routing
+VALID_PAGES = {"dashboard", "alerts", "chat", "compliance", "clients", "emails"}
+
+
+def sync_url_to_state():
+    """Read URL query params and sync to session state (on page load)"""
+    params = st.query_params
+    page = params.get("page", "dashboard")
+    
+    if page in VALID_PAGES:
+        if "current_view" not in st.session_state or st.session_state.get("_url_initialized") != True:
+            st.session_state.current_view = page
+            st.session_state._url_initialized = True
+    
+    # Also check for client_id in URL
+    client_id = params.get("client")
+    if client_id and "selected_client" not in st.session_state:
+        st.session_state.selected_client = client_id
+
+
+def sync_state_to_url():
+    """Update URL query params to match current session state"""
+    current_view = st.session_state.get("current_view", "dashboard")
+    selected_client = st.session_state.get("selected_client")
+    
+    new_params = {"page": current_view}
+    
+    # Add client ID to URL if viewing a specific client
+    if selected_client and current_view == "clients":
+        new_params["client"] = selected_client
+    
+    # Only update if changed to avoid unnecessary reruns
+    current_params = dict(st.query_params)
+    if current_params.get("page") != new_params.get("page") or current_params.get("client") != new_params.get("client"):
+        st.query_params.update(new_params)
+
+
+def navigate_to(view: str, client_id: str = None, **kwargs):
+    """Navigate to a view and update URL"""
+    st.session_state.current_view = view
+    if client_id:
+        st.session_state.selected_client = client_id
+    # Update any additional state
+    for key, value in kwargs.items():
+        st.session_state[key] = value
+    # URL will be synced in main()
+    st.rerun()
+
+
 def init_session_state():
     """Initialize session state variables"""
+    # Sync URL to state first (for initial page load / bookmarks)
+    sync_url_to_state()
+    
     if "messages" not in st.session_state:
         st.session_state.messages = []
     if "selected_client" not in st.session_state:
@@ -417,11 +469,11 @@ def render_dashboard(client_service: ClientService):
         st.subheader("📋 Overdue Follow-ups")
         if briefing["overdue_follow_ups"]:
             for client in briefing["overdue_follow_ups"][:5]:
-                for followup in client.overdue_follow_ups:
+                for ofu_idx, followup in enumerate(client.overdue_follow_ups):
                     with st.expander(f"{client.full_name}: {followup.commitment}"):
                         st.write(f"**Was due:** {followup.deadline}")
                         st.write(f"**Created:** {followup.created_date}")
-                        if st.button("📧 Draft Follow-up", key=f"followup_{client.id}_{followup.commitment[:10]}"):
+                        if st.button("📧 Draft Follow-up", key=f"followup_{client.id}_{ofu_idx}"):
                             st.session_state.draft_for = client.id
                             st.session_state.draft_type = "follow_up"
                             st.session_state.current_view = "emails"
@@ -990,7 +1042,219 @@ def render_clients(client_service: ClientService, vector_store: VectorStoreServi
     
     st.divider()
     
-    # Filters row
+    # ============== SELECTED CLIENT DETAIL VIEW ==============
+    selected_client_id = st.session_state.get("selected_client")
+    if selected_client_id:
+        client = client_service.get_client_by_id(selected_client_id)
+        if client:
+            # Show detailed client view
+            st.subheader(f"📋 Client Details: {client.full_name}")
+            
+            # Back button
+            if st.button("← Back to Client List", key="back_to_list"):
+                st.session_state.selected_client = None
+                st.rerun()
+            
+            st.divider()
+            
+            # Client overview in columns
+            col1, col2, col3 = st.columns(3)
+            
+            with col1:
+                st.markdown("### 👤 Personal Information")
+                st.write(f"**Name:** {client.title} {client.first_name} {client.last_name}")
+                st.write(f"**Date of Birth:** {client.date_of_birth} (Age: {client.age})")
+                st.write(f"**Marital Status:** {client.marital_status.title()}")
+                st.write(f"**Occupation:** {client.occupation or 'Not specified'}")
+                st.write(f"**Employer:** {client.employer or 'Not specified'}")
+                st.write(f"**Annual Income:** £{client.annual_income:,.0f}" if client.annual_income else "**Annual Income:** Not specified")
+                st.write(f"**Client Since:** {client.client_since}")
+            
+            with col2:
+                st.markdown("### 📞 Contact Information")
+                st.write(f"**Email:** {client.contact_info.email}")
+                st.write(f"**Phone:** {client.contact_info.phone}")
+                if client.contact_info.mobile:
+                    st.write(f"**Mobile:** {client.contact_info.mobile}")
+                st.write(f"**Address:**")
+                st.write(f"  {client.contact_info.address.line1}")
+                if client.contact_info.address.line2:
+                    st.write(f"  {client.contact_info.address.line2}")
+                st.write(f"  {client.contact_info.address.city}, {client.contact_info.address.postcode}")
+                st.write(f"**Preferred Contact:** {client.contact_info.preferred_contact_method.value}")
+                if client.contact_info.best_time_to_call:
+                    st.write(f"**Best Time to Call:** {client.contact_info.best_time_to_call}")
+            
+            with col3:
+                st.markdown("### 💰 Portfolio Summary")
+                st.write(f"**Total Value:** £{client.total_portfolio_value:,.0f}" if client.total_portfolio_value else "**Total Value:** Not calculated")
+                if client.risk_profile:
+                    st.write(f"**Risk Attitude:** {client.risk_profile.attitude_to_risk.value.replace('_', ' ').title()}")
+                    st.write(f"**Capacity for Loss:** {client.risk_profile.capacity_for_loss.value.replace('_', ' ').title()}")
+                    st.write(f"**Time Horizon:** {client.risk_profile.time_horizon_years} years")
+                    st.write(f"**Last Assessed:** {client.risk_profile.last_assessed}")
+                st.write(f"**Last Contact:** {client.days_since_last_contact} days ago" if client.days_since_last_contact else "**Last Contact:** Never")
+            
+            st.divider()
+            
+            # Family Members
+            if client.family_members:
+                st.markdown("### 👨‍👩‍👧‍👦 Family Members")
+                fam_cols = st.columns(min(len(client.family_members), 4))
+                for idx, member in enumerate(client.family_members):
+                    with fam_cols[idx % 4]:
+                        st.write(f"**{member.name}** ({member.relationship})")
+                        if member.date_of_birth:
+                            st.caption(f"DOB: {member.date_of_birth}")
+                        if member.notes:
+                            st.caption(member.notes)
+                st.divider()
+            
+            # Two column layout for policies and concerns
+            detail_col1, detail_col2 = st.columns(2)
+            
+            with detail_col1:
+                st.markdown("### 📜 Policies")
+                if client.policies:
+                    for policy in client.policies:
+                        with st.container():
+                            policy_value = f"£{policy.current_value:,.0f}" if policy.current_value else "N/A"
+                            st.write(f"**{policy.policy_type.value.upper()}** - {policy.provider}")
+                            st.caption(f"Value: {policy_value} | Policy #: {policy.policy_number or 'N/A'}")
+                            if policy.renewal_date:
+                                st.caption(f"Renewal: {policy.renewal_date}")
+                            if policy.notes:
+                                st.caption(f"📝 {policy.notes}")
+                            st.write("---")
+                else:
+                    st.info("No policies on record")
+            
+            with detail_col2:
+                st.markdown("### ⚠️ Concerns")
+                if client.concerns:
+                    for concern in client.concerns:
+                        status_emoji = "🔴" if concern.status.value == "active" else "🟡" if concern.status.value == "monitoring" else "🟢"
+                        severity_color = "🔥" if concern.severity.value == "high" else "⚡" if concern.severity.value == "medium" else ""
+                        st.write(f"{status_emoji} **{concern.topic.title()}** {severity_color}")
+                        st.caption(concern.details)
+                        st.caption(f"Status: {concern.status.value} | Raised: {concern.date_raised}")
+                        st.write("---")
+                else:
+                    st.success("No concerns on record")
+            
+            st.divider()
+            
+            # Compliance and Follow-ups
+            comp_col1, comp_col2 = st.columns(2)
+            
+            with comp_col1:
+                st.markdown("### ✅ Compliance")
+                review_status_emoji = "🔴" if client.compliance.review_status == "overdue" else "🟡" if client.compliance.review_status == "pending" else "🟢"
+                st.write(f"**Review Status:** {review_status_emoji} {client.compliance.review_status.title()}")
+                st.write(f"**Last Review:** {client.compliance.last_annual_review}")
+                st.write(f"**Next Review Due:** {client.compliance.next_review_due}")
+                if client.compliance.value_delivered:
+                    st.write("**Value Delivered:**")
+                    for value in client.compliance.value_delivered:
+                        st.caption(f"✓ {value}")
+            
+            with comp_col2:
+                st.markdown("### 📋 Follow-ups")
+                if client.follow_ups:
+                    for fu in client.follow_ups:
+                        status_emoji = "✅" if fu.status.value == "completed" else "🔴" if fu.deadline < date.today() else "🟡"
+                        st.write(f"{status_emoji} {fu.commitment}")
+                        st.caption(f"Due: {fu.deadline} | Status: {fu.status.value}")
+                else:
+                    st.info("No follow-ups on record")
+            
+            st.divider()
+            
+            # Recent Interactions
+            st.markdown("### 📞 Recent Interactions")
+            if client.interactions:
+                for interaction in client.interactions[:5]:
+                    int_date = interaction.interaction_date.strftime("%Y-%m-%d") if hasattr(interaction.interaction_date, 'strftime') else str(interaction.interaction_date)[:10]
+                    direction_emoji = "📤" if interaction.direction == "outbound" else "📥"
+                    st.write(f"{direction_emoji} **{int_date}** via {interaction.method.value} - {interaction.summary}")
+            else:
+                st.info("No interactions recorded")
+            
+            st.divider()
+            
+            # Action buttons
+            st.markdown("### 🎯 Quick Actions")
+            action_col1, action_col2, action_col3, action_col4 = st.columns(4)
+            
+            with action_col1:
+                if st.button("📧 Draft Email", key="detail_draft_email", use_container_width=True):
+                    st.session_state.draft_for = client.id
+                    st.session_state.draft_type = "check_in"
+                    st.session_state.current_view = "emails"
+                    st.rerun()
+            
+            with action_col2:
+                if st.button("✅ Mark Review Done", key="detail_mark_review", use_container_width=True):
+                    success, msg = client_service.update_review_status(client.id, "completed")
+                    if success:
+                        st.success(msg)
+                        st.rerun()
+                    else:
+                        st.error(msg)
+            
+            with action_col3:
+                if st.button("📞 Log Contact", key="detail_log_contact", use_container_width=True):
+                    st.session_state["show_detail_log_form"] = True
+            
+            with action_col4:
+                if st.button("← Back to List", key="detail_back", use_container_width=True):
+                    st.session_state.selected_client = None
+                    st.rerun()
+            
+            # Log contact form
+            if st.session_state.get("show_detail_log_form", False):
+                st.write("**Log New Contact:**")
+                log_col1, log_col2 = st.columns(2)
+                with log_col1:
+                    contact_method = st.selectbox("Method", ["Phone", "Email", "In_Person", "Video"], key="detail_method")
+                    direction = st.selectbox("Direction", ["Outbound", "Inbound"], key="detail_dir")
+                with log_col2:
+                    duration = st.number_input("Duration (mins)", min_value=0, value=15, key="detail_dur")
+                summary = st.text_input("Summary", placeholder="Brief note about the contact", key="detail_sum")
+                
+                log_btn_col1, log_btn_col2 = st.columns(2)
+                with log_btn_col1:
+                    if st.button("✅ Save Contact", key="detail_save_contact", use_container_width=True):
+                        if summary:
+                            from data.schema import ContactMethod as CM
+                            method_map = {"Phone": CM.PHONE, "Email": CM.EMAIL, "In_Person": CM.IN_PERSON, "Video": CM.VIDEO_CALL}
+                            success, msg = client_service.log_interaction(
+                                client.id, 
+                                method_map[contact_method],
+                                direction.lower(),
+                                summary,
+                                duration if duration > 0 else None
+                            )
+                            if success:
+                                st.success(msg)
+                                st.session_state["show_detail_log_form"] = False
+                                st.rerun()
+                            else:
+                                st.error(msg)
+                        else:
+                            st.warning("Please enter a summary")
+                with log_btn_col2:
+                    if st.button("❌ Cancel", key="detail_cancel_log", use_container_width=True):
+                        st.session_state["show_detail_log_form"] = False
+                        st.rerun()
+            
+            # Don't show the client list when viewing details
+            return
+        else:
+            # Client not found, clear selection
+            st.session_state.selected_client = None
+    
+    # ============== CLIENT LIST SECTION ==============
     col1, col2, col3 = st.columns(3)
     
     # Map session filter to dropdown index
@@ -1072,13 +1336,13 @@ def render_clients(client_service: ClientService, vector_store: VectorStoreServi
             # Pending Follow-ups section
             if client.pending_follow_ups:
                 st.write("**📋 Pending Follow-ups:**")
-                for followup in client.pending_follow_ups:
+                for fu_idx, followup in enumerate(client.pending_follow_ups):
                     fu_col1, fu_col2 = st.columns([3, 1])
                     with fu_col1:
                         overdue = "🔴 OVERDUE" if followup.deadline < date.today() else ""
                         st.write(f"• {followup.commitment} (Due: {followup.deadline}) {overdue}")
                     with fu_col2:
-                        if st.button("✅ Done", key=f"complete_fu_{client.id}_{followup.commitment[:10]}", use_container_width=True):
+                        if st.button("✅ Done", key=f"complete_fu_{client.id}_{fu_idx}", use_container_width=True):
                             success, msg = client_service.complete_follow_up(client.id, followup.commitment)
                             if success:
                                 st.success(msg)
@@ -1448,6 +1712,9 @@ def main():
         st.error(f"Error initializing services: {e}")
         st.info("Make sure to run `python data/mock_generator.py` first to generate client data.")
         return
+    
+    # Sync current state to URL (for navigation changes)
+    sync_state_to_url()
     
     render_sidebar(client_service)
     
