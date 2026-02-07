@@ -2,6 +2,14 @@
 
 > **Your AI-powered second brain for client relationship management**
 
+<p align="center">
+  <a href="https://gauravpurohit409-jarvis-advisor-app-3gyfll.streamlit.app/" target="_blank">
+    <img src="https://img.shields.io/badge/🚀_Live_Demo-Click_Here-success?style=for-the-badge&logo=streamlit" alt="Live Demo"/>
+  </a>
+</p>
+
+### 🌐 **[Try the Live Demo →](https://gauravpurohit409-jarvis-advisor-app-3gyfll.streamlit.app/)**
+
 An intelligent assistant that helps UK Independent Financial Advisors (IFAs) stay proactive with their clients. Built for the **AdvisoryAI Hack-to-Hire Hackathon**.
 
 ![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
