@@ -1746,7 +1746,9 @@ def main():
     init_session_state()
     
     try:
-        client_service, llm_service, vector_store = init_services()
+        # Show loading message during initialization (only visible when actually loading)
+        with st.spinner("🚀 Initializing Jarvis... Loading client data and setting up semantic search. This may take a moment on first load."):
+            client_service, llm_service, vector_store = init_services()
         # Store vector_store in session state for sidebar access
         st.session_state.vector_store = vector_store
     except Exception as e:
