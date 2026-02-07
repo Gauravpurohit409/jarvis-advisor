@@ -33,10 +33,16 @@ def init_services():
     llm_service = LLMService()
     vector_store = get_vector_store()
     
-    # Index clients if vector store is empty
-    if vector_store.is_available() and vector_store.collection.count() == 0:
+    # Index clients if vector store is empty or client count changed
+    if vector_store.is_available():
         clients = client_service.get_all_clients()
-        vector_store.index_all_clients(clients)
+        # Get unique client IDs from vector store
+        existing_docs = vector_store.collection.count()
+        # Re-index if empty or if client count doesn't match indexed clients
+        # Each client has at least 1 document (overview), so if docs < clients, reindex needed
+        if existing_docs == 0 or existing_docs < len(clients):
+            vector_store.clear_collection()
+            vector_store.index_all_clients(clients)
     
     return client_service, llm_service, vector_store
 
@@ -215,34 +221,29 @@ def render_chat(client_service: ClientService, llm_service: LLMService, vector_s
     if vector_store.is_available():
         st.caption(f"🧠 Semantic search active ({vector_store.collection.count()} documents indexed)")
     
-    # Quick action buttons
+    # Quick action buttons - set pending message and rerun
     col1, col2, col3, col4 = st.columns(4)
     with col1:
         if st.button("🌅 Daily Briefing", use_container_width=True):
-            st.session_state.messages.append({
-                "role": "user", 
-                "content": "Give me my daily briefing. What should I focus on today?"
-            })
+            st.session_state.pending_chat_message = "Give me my daily briefing. What should I focus on today?"
+            st.rerun()
     with col2:
         if st.button("⚠️ Overdue Reviews", use_container_width=True):
-            st.session_state.messages.append({
-                "role": "user",
-                "content": "Which clients have overdue annual reviews?"
-            })
+            st.session_state.pending_chat_message = "Which clients have overdue annual reviews?"
+            st.rerun()
     with col3:
         if st.button("📞 Who to Call", use_container_width=True):
-            st.session_state.messages.append({
-                "role": "user",
-                "content": "Which clients should I call this week? Prioritize by urgency."
-            })
+            st.session_state.pending_chat_message = "Which clients should I call this week? Prioritize by urgency."
+            st.rerun()
     with col4:
         if st.button("🎂 Upcoming Birthdays", use_container_width=True):
-            st.session_state.messages.append({
-                "role": "user",
-                "content": "Show me upcoming client birthdays in the next 30 days."
-            })
+            st.session_state.pending_chat_message = "Show me upcoming client birthdays in the next 30 days."
+            st.rerun()
     
     st.divider()
+    
+    # Check for pending message from quick action buttons
+    pending_message = st.session_state.pop("pending_chat_message", None)
     
     # Chat messages container
     chat_container = st.container()
@@ -252,8 +253,15 @@ def render_chat(client_service: ClientService, llm_service: LLMService, vector_s
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
     
-    # Chat input
-    if prompt := st.chat_input("Ask Jarvis anything about your clients..."):
+    # Get prompt from either chat input or pending message
+    prompt = st.chat_input("Ask Jarvis anything about your clients...")
+    
+    # Use pending message if no direct input
+    if pending_message and not prompt:
+        prompt = pending_message
+    
+    # Process the prompt
+    if prompt:
         st.session_state.messages.append({"role": "user", "content": prompt})
         
         with st.chat_message("user"):
@@ -913,22 +921,25 @@ def render_clients(client_service: ClientService, vector_store: VectorStoreServi
             from services.document_parser import document_parser
             auto_id = document_parser.generate_client_id(existing_ids)
             
+            # Check if form should be cleared
+            clear_form = st.session_state.pop("clear_manual_form", False)
+            
             col1, col2 = st.columns(2)
             with col1:
-                new_id = st.text_input("Client ID *", value=auto_id, key="manual_id")
-                new_title = st.selectbox("Title *", ["Mr", "Mrs", "Ms", "Dr", "Miss"], key="manual_title")
-                new_first = st.text_input("First Name *", placeholder="John", key="manual_first")
-                new_last = st.text_input("Last Name *", placeholder="Smith", key="manual_last")
+                new_id = st.text_input("Client ID *", value=auto_id if clear_form else st.session_state.get("manual_id", auto_id), key="manual_id")
+                new_title = st.selectbox("Title *", ["Mr", "Mrs", "Ms", "Dr", "Miss"], index=0 if clear_form else None, key="manual_title")
+                new_first = st.text_input("First Name *", placeholder="John", value="" if clear_form else st.session_state.get("manual_first", ""), key="manual_first")
+                new_last = st.text_input("Last Name *", placeholder="Smith", value="" if clear_form else st.session_state.get("manual_last", ""), key="manual_last")
                 new_dob = st.date_input("Date of Birth *", value=None, key="manual_dob")
-                new_occupation = st.text_input("Occupation", placeholder="Accountant", key="manual_occupation")
+                new_occupation = st.text_input("Occupation", placeholder="Accountant", value="" if clear_form else st.session_state.get("manual_occupation", ""), key="manual_occupation")
             
             with col2:
-                new_email = st.text_input("Email *", placeholder="john.smith@email.com", key="manual_email")
-                new_phone = st.text_input("Phone *", placeholder="07700 900123", key="manual_phone")
-                new_address_line1 = st.text_input("Address Line 1 *", placeholder="123 High Street", key="manual_address")
-                new_city = st.text_input("City *", placeholder="London", key="manual_city")
-                new_postcode = st.text_input("Postcode *", placeholder="SW1A 1AA", key="manual_postcode")
-                new_marital = st.selectbox("Marital Status", ["single", "married", "divorced", "widowed", "civil_partnership"], key="manual_marital")
+                new_email = st.text_input("Email *", placeholder="john.smith@email.com", value="" if clear_form else st.session_state.get("manual_email", ""), key="manual_email")
+                new_phone = st.text_input("Phone *", placeholder="07700 900123", value="" if clear_form else st.session_state.get("manual_phone", ""), key="manual_phone")
+                new_address_line1 = st.text_input("Address Line 1 *", placeholder="123 High Street", value="" if clear_form else st.session_state.get("manual_address", ""), key="manual_address")
+                new_city = st.text_input("City *", placeholder="London", value="" if clear_form else st.session_state.get("manual_city", ""), key="manual_city")
+                new_postcode = st.text_input("Postcode *", placeholder="SW1A 1AA", value="" if clear_form else st.session_state.get("manual_postcode", ""), key="manual_postcode")
+                new_marital = st.selectbox("Marital Status", ["single", "married", "divorced", "widowed", "civil_partnership"], index=0 if clear_form else None, key="manual_marital")
             
             new_income = st.number_input("Annual Income (£)", min_value=0, value=0, step=1000, key="manual_income")
             new_portfolio = st.number_input("Total Portfolio Value (£)", min_value=0, value=0, step=1000, key="manual_portfolio")
@@ -974,6 +985,12 @@ def render_clients(client_service: ClientService, vector_store: VectorStoreServi
                         else:
                             st.success(f"✅ {message}")
                         st.balloons()
+                        # Set flag to clear form on next render
+                        st.session_state.clear_manual_form = True
+                        # Clear all form keys from session state
+                        for key in list(st.session_state.keys()):
+                            if key.startswith("manual_"):
+                                del st.session_state[key]
                         st.rerun()
                     else:
                         st.error(f"❌ {message}")
@@ -1416,9 +1433,14 @@ def render_emails(client_service: ClientService, llm_service: LLMService):
     """Render email drafting view"""
     st.header("📧 Email Drafts")
     
-    # Check if we came from a button click
+    # Check if we came from a button click (dashboard, alerts, etc.)
     draft_for = st.session_state.get("draft_for")
     draft_type = st.session_state.get("draft_type")
+    auto_generate = draft_for is not None and draft_type is not None
+    
+    # Clear previous draft when coming from a button click
+    if auto_generate and "current_draft" in st.session_state:
+        del st.session_state.current_draft
     
     col1, col2 = st.columns([1, 2])
     
@@ -1476,7 +1498,17 @@ def render_emails(client_service: ClientService, llm_service: LLMService):
     with col2:
         st.subheader("Email Preview")
         
-        if generate_btn:
+        # Check if we should generate:
+        # 1. User clicked generate button
+        # 2. User clicked regenerate
+        # 3. Auto-generate from dashboard/alerts redirect
+        should_generate = generate_btn or st.session_state.get("regenerate_email", False) or auto_generate
+        
+        # Clear regenerate flag if it was set
+        if st.session_state.get("regenerate_email"):
+            st.session_state.regenerate_email = False
+        
+        if should_generate:
             with st.spinner("Drafting email..."):
                 client_summary = client_service.get_client_summary(selected_client_id)
                 
@@ -1487,6 +1519,12 @@ def render_emails(client_service: ClientService, llm_service: LLMService):
                 )
                 
                 st.session_state.current_draft = email_draft
+                # Store the parameters used for this draft
+                st.session_state.last_draft_params = {
+                    "client_id": selected_client_id,
+                    "email_type": email_type,
+                    "context": additional_context
+                }
         
         if "current_draft" in st.session_state:
             st.markdown(st.session_state.current_draft)
@@ -1497,11 +1535,14 @@ def render_emails(client_service: ClientService, llm_service: LLMService):
                     st.info("Draft copied! (Use Ctrl+C on the text)")
             with col_b:
                 if st.button("🔄 Regenerate"):
+                    # Set flag to regenerate on next run
+                    st.session_state.regenerate_email = True
                     if "current_draft" in st.session_state:
                         del st.session_state.current_draft
                     st.rerun()
         else:
             st.info("Select a client and email type, then click 'Generate Draft' to create an email.")
+
 
 
 def render_compliance(client_service: ClientService):

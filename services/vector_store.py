@@ -180,12 +180,13 @@ class VectorStoreService:
         if not self.is_available():
             return 0
         
+        print(f"Starting to index {len(clients)} clients...", flush=True)
         success_count = 0
         for client in clients:
             if self.index_client(client):
                 success_count += 1
         
-        print(f"Indexed {success_count}/{len(clients)} clients. Total documents: {self.collection.count()}")
+        print(f"Indexed {success_count}/{len(clients)} clients. Total documents: {self.collection.count()}", flush=True)
         return success_count
     
     def search(self, query: str, n_results: int = 5, doc_type: str = None) -> List[Dict[str, Any]]:

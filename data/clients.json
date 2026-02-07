@@ -1700,9 +1700,9 @@
         {
           "commitment": "Follow up on critical illness cover quote from Vitality",
           "deadline": "2026-03-07",
-          "status": "pending",
+          "status": "completed",
           "created_date": "2026-02-06",
-          "completed_date": null,
+          "completed_date": "2026-02-07",
           "notes": null
         }
       ],
@@ -1805,9 +1805,9 @@
         }
       ],
       "compliance": {
-        "last_annual_review": "2024-12-17",
-        "next_review_due": "2025-09-08",
-        "review_status": "overdue",
+        "last_annual_review": "2026-02-07",
+        "next_review_due": "2027-02-07",
+        "review_status": "completed",
         "suitability_confirmed": false,
         "suitability_date": null,
         "value_delivered": [
@@ -9247,9 +9247,9 @@
         }
       ],
       "compliance": {
-        "last_annual_review": "2025-08-12",
-        "next_review_due": "2026-08-12",
-        "review_status": "pending",
+        "last_annual_review": "2026-02-07",
+        "next_review_due": "2027-02-07",
+        "review_status": "completed",
         "suitability_confirmed": false,
         "suitability_date": null,
         "value_delivered": [
@@ -10426,8 +10426,8 @@
         }
       ],
       "compliance": {
-        "last_annual_review": "2025-08-20",
-        "next_review_due": "2026-08-20",
+        "last_annual_review": "2026-02-07",
+        "next_review_due": "2027-02-07",
         "review_status": "completed",
         "suitability_confirmed": true,
         "suitability_date": "2025-08-20",
@@ -31736,6 +31736,6 @@
       "notes": null
     }
   ],
-  "last_updated": "2026-02-07T15:49:03.036993",
+  "last_updated": "2026-02-07T19:05:13.175807",
   "version": "1.0.0"
 }

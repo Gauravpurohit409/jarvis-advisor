@@ -366,14 +366,32 @@ class LLMService:
         if additional_context:
             context += f"\n\nADDITIONAL CONTEXT:\n{additional_context}"
         
+        format_instructions = """
+
+FORMAT REQUIREMENTS:
+- Start directly with "Subject:" line (no markdown heading)
+- Then a blank line
+- Then "Dear [Name]," greeting
+- Write 2-4 paragraphs of body text
+- End with appropriate sign-off like "Kind regards," or "Best wishes,"
+- Sign off with "[Advisor Name]" as placeholder (this email will be sent by the financial advisor, NOT by an AI)
+- Do NOT use any markdown headings (no # symbols)
+- Do NOT use bold or italic formatting
+- Keep it as plain text email format
+- Do NOT sign as "Jarvis" or any AI - this is a draft for the human advisor to send"""
+        
         prompts = {
-            "birthday": "Draft a warm birthday email for this client. Make it personal by referencing what you know about them.",
-            "review_reminder": "Draft a professional email reminding this client their annual review is due. Emphasize the value of the review.",
-            "check_in": "Draft a friendly check-in email. Reference any concerns they've expressed or life events happening.",
-            "follow_up": "Draft a follow-up email. Reference any commitments made or actions pending.",
+            "birthday": f"Draft a warm birthday email for this client. Make it personal by referencing what you know about them (family, interests, recent conversations).{format_instructions}",
+            "review_reminder": f"Draft a professional email reminding this client their annual review is due. Emphasize the value of the review and what you'll cover.{format_instructions}",
+            "check_in": f"Draft a friendly check-in email. Reference any concerns they've expressed or life events happening.{format_instructions}",
+            "follow_up": f"Draft a follow-up email. Reference any commitments made or actions pending.{format_instructions}",
+            "policy_renewal": f"Draft an email about their upcoming policy renewal. Explain the importance of reviewing their cover.{format_instructions}",
+            "policy_maturity": f"Draft an email about their policy reaching maturity. Explain the options available to them.{format_instructions}",
+            "retirement_planning": f"Draft an email about retirement planning. Reference their retirement timeline and any concerns.{format_instructions}",
+            "general_update": f"Draft a general update email. Keep it friendly and reference recent conversations or their situation.{format_instructions}",
         }
         
-        prompt = prompts.get(email_type, f"Draft a {email_type} email for this client.")
+        prompt = prompts.get(email_type, f"Draft a {email_type} email for this client.{format_instructions}")
         
         return self.chat(user_message=prompt, context=context, temperature=0.7)
     
