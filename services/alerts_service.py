@@ -4,7 +4,7 @@ Detects important events and generates alerts for advisor action
 """
 
 from datetime import date, datetime, timedelta
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Any
 import uuid
 
 from data.schema import (
@@ -530,6 +530,188 @@ class AlertsService:
                 briefing += f"- **{alert.client_name}**: {alert.title}\n"
         
         return briefing
+
+
+    # ========== Proactive Nudge System ==========
+    
+    def get_proactive_nudge(
+        self, 
+        alerts: List[Alert], 
+        dismissed_alerts: set = None,
+        inactive_clients: set = None,
+        time_of_day: str = "morning"
+    ) -> Dict[str, Any]:
+        """
+        Generate tiered proactive nudges based on urgency level.
+        
+        Tiers:
+        - RED (≤5 days): Client-specific, immediate attention
+        - YELLOW (6-15 days): Client-specific, needs planning
+        - AGGREGATE (this month, >15 days): Grouped summary
+        
+        Args:
+            alerts: All generated alerts
+            dismissed_alerts: Set of dismissed alert IDs to exclude
+            inactive_clients: Set of client IDs marked as "not with us anymore"
+            time_of_day: "morning", "midday", or "evening"
+        
+        Returns:
+            Dict with red_alerts, yellow_alerts, aggregate_summary, and formatted_nudge
+        """
+        dismissed_alerts = dismissed_alerts or set()
+        inactive_clients = inactive_clients or set()
+        
+        # Filter out dismissed and inactive
+        active_alerts = [
+            a for a in alerts 
+            if a.id not in dismissed_alerts 
+            and a.client_id not in inactive_clients
+        ]
+        
+        # Categorize by urgency tier
+        red_alerts = []      # ≤5 days or overdue
+        yellow_alerts = []   # 6-15 days
+        aggregate_alerts = []  # >15 days but this month
+        
+        today = date.today()
+        end_of_month = date(today.year, today.month + 1, 1) if today.month < 12 else date(today.year + 1, 1, 1)
+        days_left_in_month = (end_of_month - today).days
+        
+        for alert in active_alerts:
+            if alert.days_until_due is None:
+                continue
+                
+            days = alert.days_until_due
+            
+            if days <= 5:  # RED: ≤5 days or overdue
+                red_alerts.append(alert)
+            elif days <= 15:  # YELLOW: 6-15 days
+                yellow_alerts.append(alert)
+            elif days <= days_left_in_month:  # This month, >15 days
+                aggregate_alerts.append(alert)
+        
+        # Sort by urgency within each tier
+        red_alerts.sort(key=lambda a: (a.days_until_due or -999, a.priority_order))
+        yellow_alerts.sort(key=lambda a: (a.days_until_due or 999, a.priority_order))
+        
+        # Build aggregate summary by type
+        aggregate_summary = self._build_aggregate_summary(aggregate_alerts)
+        
+        # Format the nudge based on time of day
+        formatted_nudge = self._format_proactive_nudge(
+            red_alerts, yellow_alerts, aggregate_summary, time_of_day
+        )
+        
+        return {
+            "red_alerts": red_alerts,
+            "yellow_alerts": yellow_alerts,
+            "aggregate_alerts": aggregate_alerts,
+            "aggregate_summary": aggregate_summary,
+            "formatted_nudge": formatted_nudge,
+            "total_urgent": len(red_alerts),
+            "total_warning": len(yellow_alerts),
+            "total_this_month": len(aggregate_alerts)
+        }
+    
+    def _build_aggregate_summary(self, alerts: List[Alert]) -> Dict[str, List[str]]:
+        """Build aggregated summary by alert type for this month"""
+        summary = {}
+        
+        for alert in alerts:
+            type_name = alert.alert_type.value.replace("_", " ").title()
+            if type_name not in summary:
+                summary[type_name] = []
+            summary[type_name].append(alert.client_name)
+        
+        return summary
+    
+    def _format_proactive_nudge(
+        self, 
+        red_alerts: List[Alert], 
+        yellow_alerts: List[Alert],
+        aggregate_summary: Dict[str, List[str]],
+        time_of_day: str
+    ) -> str:
+        """Format proactive nudge message based on time of day"""
+        
+        # Time-based greeting - comprehensive for all parts of day
+        greetings = {
+            "morning": "☀️ Good morning! Here's what needs your attention today:",
+            "afternoon_early": "👋 Good afternoon! Quick update on what's urgent:",
+            "afternoon": "☕ Afternoon check-in — here's what's pressing:",
+            "evening": "🌆 Good evening! Before you wrap up:",
+            "night": "🌙 Still working? Here's what's urgent:",
+            "late_night": "🦉 Working late? Just the critical items:"
+        }
+        greeting = greetings.get(time_of_day, greetings["morning"])
+        
+        parts = [greeting, ""]
+        
+        # Determine verbosity based on time
+        is_brief_mode = time_of_day in ["late_night", "night", "evening"]
+        is_full_mode = time_of_day in ["morning", "afternoon_early"]
+        
+        # RED alerts - always show (client-specific)
+        if red_alerts:
+            parts.append("🔴 **Urgent (≤5 days):**")
+            max_red = 3 if is_brief_mode else 5
+            for alert in red_alerts[:max_red]:
+                days_text = "⚠️ OVERDUE" if alert.days_until_due < 0 else f"in {alert.days_until_due} days" if alert.days_until_due > 0 else "🔥 TODAY"
+                parts.append(f"  • **{alert.client_name}**: {alert.title} — {days_text}")
+            if len(red_alerts) > max_red:
+                parts.append(f"  • *...and {len(red_alerts) - max_red} more urgent items*")
+            parts.append("")
+        
+        # YELLOW alerts - show details in full mode, count only otherwise
+        if yellow_alerts:
+            if is_full_mode:
+                parts.append("🟡 **Coming Up (6-15 days):**")
+                for alert in yellow_alerts[:3]:
+                    parts.append(f"  • **{alert.client_name}**: {alert.title} — in {alert.days_until_due} days")
+                if len(yellow_alerts) > 3:
+                    parts.append(f"  • *...and {len(yellow_alerts) - 3} more this fortnight*")
+                parts.append("")
+            elif not is_brief_mode:
+                parts.append(f"🟡 **{len(yellow_alerts)} items** due in the next 2 weeks")
+                parts.append("")
+        
+        # Aggregate - only in full mode (morning/early afternoon)
+        if aggregate_summary and is_full_mode:
+            parts.append("📋 **This Month:**")
+            for type_name, clients in list(aggregate_summary.items())[:4]:
+                parts.append(f"  • {len(clients)} {type_name}{'s' if len(clients) > 1 else ''}")
+            parts.append("")
+        
+        # Nothing urgent message
+        if not red_alerts and not yellow_alerts:
+            parts.append("✅ No urgent items right now. You're on top of things!")
+        
+        return "\n".join(parts)
+    
+    def get_client_nudges(
+        self, 
+        client_id: str, 
+        alerts: List[Alert],
+        dismissed_alerts: set = None
+    ) -> List[Alert]:
+        """
+        Get RED and YELLOW alerts for a specific client.
+        Used when discussing a client in chat to inject contextual nudges.
+        """
+        dismissed_alerts = dismissed_alerts or set()
+        
+        client_alerts = [
+            a for a in alerts 
+            if a.client_id == client_id 
+            and a.id not in dismissed_alerts
+            and a.days_until_due is not None
+            and a.days_until_due <= 15  # Only RED and YELLOW tier
+        ]
+        
+        # Sort by urgency
+        client_alerts.sort(key=lambda a: (a.days_until_due or -999, a.priority_order))
+        
+        return client_alerts
 
 
 # Singleton instance

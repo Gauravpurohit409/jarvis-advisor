@@ -18,7 +18,7 @@ from typing import List, Dict, Any, Optional, Tuple
 # ============== CONFIGURATION ==============
 
 NUM_CLIENTS = 100  # Number of clients to generate
-TODAY = date(2026, 2, 7)  # Current date for the simulation
+TODAY = date.today()  # Always use current date for realistic alerts
 
 # Distribution settings for realistic data
 DORMANT_PERCENTAGE = 0.15  # 15% dormant (no contact 90+ days)

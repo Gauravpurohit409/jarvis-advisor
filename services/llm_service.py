@@ -282,6 +282,7 @@ class LLMService:
     - Policy and portfolio information
     - Compliance status (review dates, suitability)
     - Upcoming life events and milestones
+    - Proactive alerts (urgent and upcoming deadlines)
 
     Guidelines:
     - Be concise and actionable
@@ -290,6 +291,9 @@ class LLMService:
     - Suggest proactive actions the advisor can take
     - Format responses clearly with bullets/sections
     - Use a professional but warm tone
+    - When PROACTIVE ALERTS are provided in context, weave them naturally into your response
+    - For urgent alerts (🔴), mention them prominently
+    - For upcoming alerts (🟡), mention as "by the way" or "also worth noting"
 
     UK Financial Advice Context:
     - FCA Consumer Duty requires demonstrating ongoing value

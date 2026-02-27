@@ -21,6 +21,7 @@ from services.llm_service import LLMService
 from services.vector_store import VectorStoreService, get_vector_store
 from services.alerts_service import AlertsService, alerts_service
 from services.compliance_service import ComplianceService, compliance_service, ComplianceStatus
+from services.dismissal_service import dismissal_service
 from data.schema import AlertPriority, AlertType
 
 
@@ -208,10 +209,58 @@ def render_sidebar(client_service: ClientService):
         
         # LLM Status
         st.caption(f"LLM: {st.session_state.get('llm_provider', 'Loading...')}")
+        
+        # Inactive Clients Recovery Section
+        inactive_clients = dismissal_service.get_inactive_clients_with_names()
+        if inactive_clients:
+            st.divider()
+            with st.expander(f"👻 Inactive Clients ({len(inactive_clients)})", expanded=False):
+                st.caption("Clients marked as 'not with us anymore'")
+                for client_id, client_name in inactive_clients.items():
+                    col_name, col_btn = st.columns([3, 1])
+                    with col_name:
+                        st.write(client_name)
+                    with col_btn:
+                        if st.button("↩️", key=f"reactivate_{client_id}", help="Reactivate client"):
+                            dismissal_service.reactivate_client(client_id)
+                            st.rerun()
+
+def get_time_of_day() -> str:
+    """Get time of day category for proactive messaging"""
+    hour = datetime.now().hour
+    if 5 <= hour < 12:
+        return "morning"
+    elif 12 <= hour < 14:
+        return "afternoon_early"
+    elif 14 <= hour < 17:
+        return "afternoon"
+    elif 17 <= hour < 20:
+        return "evening"
+    elif 20 <= hour < 22:
+        return "night"
+    else:  # 22:00 - 4:59
+        return "late_night"
+
+
+def get_greeting_date_key() -> str:
+    """Get today's date as a key for tracking daily greetings"""
+    return date.today().isoformat()
+
+
+def should_show_greeting() -> bool:
+    """Check if we should show the proactive greeting (once per day only)"""
+    today_key = get_greeting_date_key()
+    last_greeting_date = st.session_state.get("last_greeting_date")
+    return last_greeting_date != today_key
+
+
+def mark_greeting_shown():
+    """Mark that we've shown the greeting for today"""
+    st.session_state.last_greeting_date = get_greeting_date_key()
 
 
 def render_chat(client_service: ClientService, llm_service: LLMService, vector_store: VectorStoreService):
-    """Render chat interface with semantic search"""
+    """Render chat interface with proactive intelligence"""
     st.header("💬 Chat with Jarvis")
     
     # Store LLM provider name
@@ -220,6 +269,31 @@ def render_chat(client_service: ClientService, llm_service: LLMService, vector_s
     # Show vector store status
     if vector_store.is_available():
         st.caption(f"🧠 Semantic search active ({vector_store.collection.count()} documents indexed)")
+    
+    # Generate proactive greeting ONCE PER DAY only
+    if should_show_greeting() and not st.session_state.messages:
+        clients = client_service.get_all_clients()
+        all_alerts = alerts_service.generate_all_alerts(clients)
+        
+        # Get proactive nudge with dismissals applied
+        nudge_data = alerts_service.get_proactive_nudge(
+            alerts=all_alerts,
+            dismissed_alerts=dismissal_service.get_dismissed_alerts(),
+            inactive_clients=dismissal_service.get_inactive_clients(),
+            time_of_day=get_time_of_day()
+        )
+        
+        # Add proactive greeting as assistant message
+        if nudge_data["total_urgent"] > 0 or nudge_data["total_warning"] > 0:
+            greeting = nudge_data["formatted_nudge"]
+            st.session_state.messages.append({
+                "role": "assistant", 
+                "content": greeting,
+                "type": "greeting",
+                "nudge_data": nudge_data
+            })
+            mark_greeting_shown()
+            st.session_state.current_nudge_data = nudge_data
     
     # Quick action buttons - set pending message and rerun
     col1, col2, col3, col4 = st.columns(4)
@@ -249,9 +323,14 @@ def render_chat(client_service: ClientService, llm_service: LLMService, vector_s
     chat_container = st.container()
     
     with chat_container:
-        for message in st.session_state.messages:
+        for i, message in enumerate(st.session_state.messages):
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
+                
+                # Add action buttons for greeting messages
+                if message.get("type") == "greeting" and message.get("nudge_data"):
+                    nudge_data = message["nudge_data"]
+                    render_greeting_actions(nudge_data, client_service)
     
     # Get prompt from either chat input or pending message
     prompt = st.chat_input("Ask Jarvis anything about your clients...")
@@ -282,22 +361,42 @@ def render_chat(client_service: ClientService, llm_service: LLMService, vector_s
                     # Combine with keyword-based context
                     keyword_context = format_chat_context(briefing_data, client_service, prompt)
                     
+                    # Add proactive nudge context for specific client mentions
+                    proactive_context = get_client_proactive_context(prompt, client_service)
+                    
                     full_context = keyword_context
                     if semantic_context:
                         full_context += "\n\n" + semantic_context
+                    if proactive_context:
+                        full_context += "\n\n" + proactive_context
                     
-                    # Generate response
+                    # Handle "tell me more" expansion
+                    if any(phrase in prompt.lower() for phrase in ["tell me more", "more details", "expand", "what else"]):
+                        nudge_data = st.session_state.get("current_nudge_data")
+                        if nudge_data:
+                            full_context += "\n\n--- EXPANDED ALERT DETAILS ---\n"
+                            for alert in nudge_data.get("red_alerts", [])[:5]:
+                                full_context += f"\nURGENT - {alert.client_name}:\n{alert.description}\n"
+                            for alert in nudge_data.get("yellow_alerts", [])[:5]:
+                                full_context += f"\nUPCOMING - {alert.client_name}:\n{alert.description}\n"
+                    
+                    # Generate response - filter conversation history to only include serializable data
+                    clean_history = [
+                        {"role": msg["role"], "content": msg["content"]} 
+                        for msg in st.session_state.messages[:-1][-6:]
+                    ]
                     response = llm_service.chat(
                         user_message=prompt,
                         context=full_context,
-                        conversation_history=st.session_state.messages[:-1][-6:]  # Last 6 messages for context
+                        conversation_history=clean_history
                     )
                     
                     st.markdown(response)
                     st.session_state.messages.append({"role": "assistant", "content": response})
                 except Exception as e:
                     error_msg = str(e)
-                    if "connection" in error_msg.lower() or "api" in error_msg.lower():
+                    print(f"Chat error: {type(e).__name__}: {error_msg}")  # Log to terminal
+                    if "connection" in error_msg.lower() or "api" in error_msg.lower() or "APIConnectionError" in str(type(e)):
                         st.error("⚠️ Connection error. Please check your internet connection and try again.")
                     else:
                         st.error(f"⚠️ Error: {error_msg}")
@@ -305,11 +404,126 @@ def render_chat(client_service: ClientService, llm_service: LLMService, vector_s
                     if st.session_state.messages and st.session_state.messages[-1]["role"] == "user":
                         st.session_state.messages.pop()
     
-    # Clear chat button
+    # Clear chat button (resets for new session, but greeting won't show again today)
     if st.session_state.messages:
         if st.button("🗑️ Clear Chat"):
             st.session_state.messages = []
+            st.session_state.current_nudge_data = None
             st.rerun()
+
+
+def render_greeting_actions(nudge_data: dict, client_service: ClientService):
+    """Render action buttons for the proactive greeting message"""
+    # Only render if we're on the chat page
+    if st.session_state.get("current_view") != "chat":
+        return
+        
+    st.markdown("---")
+    
+    # Show counts
+    red_count = len(nudge_data.get("red_alerts", []))
+    yellow_count = len(nudge_data.get("yellow_alerts", []))
+    
+    # Use unique timestamp-based key prefix to avoid conflicts
+    key_prefix = f"greet_{date.today().isoformat()}"
+    
+    # Action buttons row
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        if st.button("📋 Tell me more", key=f"{key_prefix}_expand", use_container_width=True):
+            st.session_state.pending_chat_message = "Tell me more details about these urgent items"
+            st.rerun()
+    
+    with col2:
+        if red_count > 0:
+            if st.button(f"📧 Draft emails ({red_count})", key=f"{key_prefix}_draft", use_container_width=True):
+                # Go to first urgent client's email draft
+                first_alert = nudge_data["red_alerts"][0]
+                st.session_state.draft_for = first_alert.client_id
+                st.session_state.draft_type = _get_email_type_for_alert(first_alert.alert_type)
+                st.session_state.current_view = "emails"
+                st.rerun()
+    
+    with col3:
+        if st.button("🚨 View all alerts", key=f"{key_prefix}_alerts", use_container_width=True):
+            st.session_state.current_view = "alerts"
+            st.rerun()
+    
+    # Quick client links for urgent items
+    if red_count > 0:
+        st.caption("**Quick actions for urgent items:**")
+        for idx, alert in enumerate(nudge_data["red_alerts"][:3]):
+            col_name, col_email, col_view = st.columns([2, 1, 1])
+            with col_name:
+                st.write(f"🔴 {alert.client_name}")
+            with col_email:
+                if st.button("📧", key=f"{key_prefix}_email_{idx}", help="Draft email"):
+                    st.session_state.draft_for = alert.client_id
+                    st.session_state.draft_type = _get_email_type_for_alert(alert.alert_type)
+                    st.session_state.current_view = "emails"
+                    st.rerun()
+            with col_view:
+                if st.button("👤", key=f"{key_prefix}_view_{idx}", help="View client"):
+                    st.session_state.selected_client = alert.client_id
+                    st.session_state.current_view = "clients"
+                    st.rerun()
+    
+    # Expandable section for yellow alerts (upcoming items)
+    if yellow_count > 0:
+        with st.expander(f"🟡 Show {yellow_count} upcoming items (next 2 weeks)", expanded=False):
+            for idx, alert in enumerate(nudge_data["yellow_alerts"][:10]):
+                col_name, col_type, col_action = st.columns([2, 1, 1])
+                with col_name:
+                    st.write(f"🟡 {alert.client_name}")
+                with col_type:
+                    st.caption(alert.alert_type.value.replace("_", " ").title())
+                with col_action:
+                    if st.button("📧", key=f"{key_prefix}_yellow_email_{idx}", help="Draft email"):
+                        st.session_state.draft_for = alert.client_id
+                        st.session_state.draft_type = _get_email_type_for_alert(alert.alert_type)
+                        st.session_state.current_view = "emails"
+                        st.rerun()
+            if yellow_count > 10:
+                if st.button(f"...and {yellow_count - 10} more → View all in Alerts", key=f"{key_prefix}_view_more_alerts", use_container_width=True):
+                    # Pass the yellow alert IDs to filter on the alerts page
+                    st.session_state.alerts_filter_ids = [a.id for a in nudge_data["yellow_alerts"]]
+                    st.session_state.alerts_filter_label = "🟡 Upcoming items (next 2 weeks)"
+                    st.session_state.current_view = "alerts"
+                    st.rerun()
+
+
+def get_client_proactive_context(user_message: str, client_service: ClientService) -> str:
+    """
+    Get proactive nudges for any client mentioned in the user's message.
+    Injects RED/YELLOW alerts for that client into context.
+    """
+    message_lower = user_message.lower()
+    context_parts = []
+    
+    for client in client_service.get_all_clients():
+        if client.last_name.lower() in message_lower or client.first_name.lower() in message_lower:
+            # Skip inactive clients
+            if dismissal_service.is_client_inactive(client.id):
+                continue
+            
+            # Get this client's alerts
+            all_alerts = alerts_service.generate_all_alerts([client])
+            client_nudges = alerts_service.get_client_nudges(
+                client.id, 
+                all_alerts,
+                dismissed_alerts=dismissal_service.get_dismissed_alerts()
+            )
+            
+            if client_nudges:
+                context_parts.append(f"\n--- PROACTIVE ALERTS FOR {client.full_name.upper()} ---")
+                context_parts.append("(Mention these naturally in your response if relevant)")
+                for alert in client_nudges[:3]:  # Max 3 per client
+                    urgency = "🔴 URGENT" if alert.days_until_due <= 5 else "🟡 UPCOMING"
+                    context_parts.append(f"{urgency}: {alert.title} - {alert.description[:100]}")
+            break  # Only process first matched client
+    
+    return "\n".join(context_parts)
 
 
 def format_chat_context(briefing_data: dict, client_service: ClientService, user_message: str) -> str:
@@ -493,12 +707,40 @@ def render_dashboard(client_service: ClientService):
 def render_alerts(client_service: ClientService, llm_service: LLMService):
     """Render proactive alerts view - the heart of Jarvis"""
     st.header("🚨 Proactive Alerts")
-    st.caption("Jarvis has scanned all your clients and found these items needing attention")
+    
+    # Check if we have a specific filter from chat page
+    filter_ids = st.session_state.get("alerts_filter_ids")
+    filter_label = st.session_state.get("alerts_filter_label", "")
+    
+    if filter_ids:
+        st.info(f"Showing filtered view: {filter_label}")
+        if st.button("✖ Clear filter", key="clear_alerts_filter"):
+            del st.session_state["alerts_filter_ids"]
+            if "alerts_filter_label" in st.session_state:
+                del st.session_state["alerts_filter_label"]
+            st.rerun()
+        st.divider()
+    else:
+        st.caption("Jarvis has scanned all your clients and found these items needing attention")
     
     # Generate all alerts
     clients = client_service.get_all_clients()
     all_alerts = alerts_service.generate_all_alerts(clients)
-    summary = alerts_service.get_alert_summary(all_alerts)
+    
+    # Filter out inactive clients' alerts
+    inactive_clients = dismissal_service.get_inactive_clients()
+    dismissed_alerts = dismissal_service.get_dismissed_alerts()
+    
+    active_alerts = [
+        a for a in all_alerts 
+        if a.client_id not in inactive_clients
+    ]
+    
+    # Apply ID filter if coming from chat page
+    if filter_ids:
+        active_alerts = [a for a in active_alerts if a.id in filter_ids]
+    
+    summary = alerts_service.get_alert_summary(active_alerts)
     
     # Top summary metrics
     col1, col2, col3, col4, col5 = st.columns(5)
@@ -535,7 +777,7 @@ def render_alerts(client_service: ClientService, llm_service: LLMService):
         show_dismissed = st.checkbox("Show Dismissed", key="show_dismissed")
     
     # Apply filters
-    filtered_alerts = all_alerts
+    filtered_alerts = active_alerts
     
     if priority_filter != "All":
         priority_map = {"Urgent": AlertPriority.URGENT, "High": AlertPriority.HIGH, 
@@ -547,14 +789,18 @@ def render_alerts(client_service: ClientService, llm_service: LLMService):
         filtered_alerts = [a for a in filtered_alerts if a.alert_type.value == type_value]
     
     if not show_dismissed:
-        filtered_alerts = [a for a in filtered_alerts if not a.is_dismissed]
+        filtered_alerts = [a for a in filtered_alerts if a.id not in dismissed_alerts]
     
-    st.caption(f"Showing {len(filtered_alerts)} of {len(all_alerts)} alerts")
+    st.caption(f"Showing {len(filtered_alerts)} of {len(active_alerts)} alerts")
+    
+    # Show inactive clients count if any
+    if inactive_clients:
+        st.caption(f"👻 {len(inactive_clients)} inactive clients hidden (see sidebar to manage)")
     
     # Daily briefing button
     if st.button("📋 Generate Daily Briefing", use_container_width=True):
         with st.spinner("Generating AI briefing..."):
-            briefing_text = alerts_service.generate_daily_briefing(all_alerts)
+            briefing_text = alerts_service.generate_daily_briefing(filtered_alerts)
             
             # Enhance with LLM if available
             try:
@@ -593,10 +839,12 @@ def render_alerts(client_service: ClientService, llm_service: LLMService):
         st.subheader(f"{label} ({len(alerts_in_group)})")
         
         for alert in alerts_in_group:
-            # Get priority color
-            color = {"urgent": "🔴", "high": "🟠", "medium": "🟡", "low": "🟢"}.get(alert.priority.value, "⚪")
+            # Check if dismissed
+            is_dismissed = alert.id in dismissed_alerts
+            title_prefix = "~~" if is_dismissed else ""
+            title_suffix = "~~ (dismissed)" if is_dismissed else ""
             
-            with st.expander(f"{alert.title} | {alert.client_name}", expanded=(priority == AlertPriority.URGENT)):
+            with st.expander(f"{title_prefix}{alert.title} | {alert.client_name}{title_suffix}", expanded=(priority == AlertPriority.URGENT and not is_dismissed)):
                 col_info, col_actions = st.columns([3, 1])
                 
                 with col_info:
@@ -634,9 +882,22 @@ def render_alerts(client_service: ClientService, llm_service: LLMService):
                         st.session_state.current_view = "clients"
                         st.rerun()
                     
-                    if st.button("✓ Dismiss", key=f"alert_dismiss_{alert.id}", use_container_width=True):
-                        # In production, this would persist
-                        st.toast(f"Alert dismissed: {alert.title}")
+                    # Dismiss button (toggles)
+                    if is_dismissed:
+                        if st.button("↩️ Restore", key=f"alert_restore_{alert.id}", use_container_width=True):
+                            dismissal_service.undismiss_alert(alert.id)
+                            st.rerun()
+                    else:
+                        if st.button("✓ Dismiss", key=f"alert_dismiss_{alert.id}", use_container_width=True):
+                            dismissal_service.dismiss_alert(alert.id)
+                            st.toast(f"✓ Dismissed: {alert.title}")
+                            st.rerun()
+                    
+                    # Mark client as inactive (permanently stop all nudges for this client)
+                    if st.button("👻 Not with us", key=f"alert_inactive_{alert.id}", use_container_width=True, help="Mark client as 'not with us anymore' - stops ALL alerts"):
+                        dismissal_service.mark_client_inactive(alert.client_id, alert.client_name)
+                        st.toast(f"👻 {alert.client_name} marked inactive. Restore from sidebar.")
+                        st.rerun()
         
         st.divider()
 
