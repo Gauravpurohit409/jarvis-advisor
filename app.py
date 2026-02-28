@@ -4,7 +4,7 @@ Main Streamlit Application
 """
 
 import streamlit as st
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 import json
 
 # Page config must be first Streamlit command
@@ -22,7 +22,143 @@ from services.vector_store import VectorStoreService, get_vector_store
 from services.alerts_service import AlertsService, alerts_service
 from services.compliance_service import ComplianceService, compliance_service, ComplianceStatus
 from services.dismissal_service import dismissal_service
+from services.google_service import google_service
 from data.schema import AlertPriority, AlertType
+from config import REQUIRE_LOGIN
+
+
+# ============== LOGIN PAGE ==============
+
+def render_login_page():
+    """Render the Google login page for unauthenticated users"""
+    
+    # Check for OAuth callback (code in URL params)
+    params = st.query_params
+    auth_code = params.get("code")
+    
+    # If we got a code from Google redirect, process it
+    if auth_code:
+        # Prevent double-processing - check if we already processed this code
+        if st.session_state.get("_last_auth_code") == auth_code:
+            st.error("❌ This authorization code has already been used. Please try again.")
+            if st.button("🔄 Start Over"):
+                st.session_state.pop("_last_auth_code", None)
+                st.query_params.clear()
+                st.rerun()
+            return
+        
+        # Mark this code as being processed
+        st.session_state["_last_auth_code"] = auth_code
+        
+        # Clear URL params FIRST to prevent reprocessing on rerun
+        st.query_params.clear()
+        
+        with st.spinner("🔄 Completing sign-in..."):
+            try:
+                success, error_msg = google_service.complete_auth_with_code(auth_code)
+                if success:
+                    # Clear login flow state
+                    if "login_flow" in st.session_state:
+                        del st.session_state["login_flow"]
+                    if "login_auth_url" in st.session_state:
+                        del st.session_state["login_auth_url"]
+                    st.session_state.pop("_last_auth_code", None)
+                    st.success("🎉 Welcome to Jarvis!")
+                    st.balloons()
+                    st.rerun()
+                else:
+                    st.session_state.pop("_last_auth_code", None)
+                    st.error(f"❌ Authentication failed: {error_msg}")
+                    if st.button("🔄 Try Again"):
+                        st.rerun()
+            except Exception as e:
+                st.session_state.pop("_last_auth_code", None)
+                st.error(f"❌ Auth error: {e}")
+                if st.button("🔄 Try Again"):
+                    st.rerun()
+        return
+    
+    # Center the login content
+    col1, col2, col3 = st.columns([1, 2, 1])
+    
+    with col2:
+        st.markdown("""
+        <div style="text-align: center; padding: 50px 0;">
+            <h1>🤖 Jarvis</h1>
+            <p style="font-size: 1.2em; color: #666;">Your Proactive Financial Advisor Assistant</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown("---")
+        
+        # Check if Google integration is configured
+        if not google_service.is_enabled():
+            st.error("⚠️ Google Sign-In is not configured")
+            with st.expander("📋 Admin Setup Required"):
+                st.markdown("""
+                **For administrators:**
+                
+                1. Create a [Google Cloud Project](https://console.cloud.google.com/)
+                2. Enable **Gmail API** and **Google Calendar API**
+                3. Create OAuth 2.0 credentials (Web application)
+                4. Add `http://localhost:8501` as authorized redirect URI
+                5. Download `client_secret.json` to `credentials/` folder
+                """)
+            return
+        
+        # Check if we're in the middle of OAuth flow (waiting for redirect)
+        if "login_flow" in st.session_state and not auth_code:
+            st.info("🔄 Waiting for Google sign-in...")
+            st.markdown("If the sign-in window didn't open, click the button below:")
+            
+            auth_url = st.session_state.get("login_auth_url", "")
+            st.link_button("🔗 Open Google Sign-In", auth_url, use_container_width=True)
+            
+            if st.button("❌ Cancel Sign-In", use_container_width=True):
+                del st.session_state["login_flow"]
+                if "login_auth_url" in st.session_state:
+                    del st.session_state["login_auth_url"]
+                st.rerun()
+        else:
+            # Show login button
+            st.markdown("""
+            <div style="text-align: center; padding: 30px;">
+                <p>Sign in with your Google account to access Jarvis</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            if st.button("🔐 Sign in with Google", type="primary", use_container_width=True):
+                try:
+                    auth_url, flow = google_service.get_auth_url()
+                    st.session_state.login_flow = flow
+                    st.session_state.login_auth_url = auth_url
+                    # Redirect to Google
+                    st.markdown(f'<meta http-equiv="refresh" content="0;url={auth_url}">', unsafe_allow_html=True)
+                except Exception as e:
+                    st.error(f"Error starting login: {e}")
+            
+            st.markdown("""
+            <div style="text-align: center; padding: 20px; color: #888; font-size: 0.9em;">
+                <p>By signing in, you allow Jarvis to:</p>
+                <ul style="text-align: left; display: inline-block;">
+                    <li>Send emails on your behalf</li>
+                    <li>Access your calendar</li>
+                    <li>View your email address</li>
+                </ul>
+            </div>
+            """, unsafe_allow_html=True)
+
+
+def is_user_logged_in() -> bool:
+    """Check if user is logged in"""
+    if not REQUIRE_LOGIN:
+        return True
+    return google_service.is_authenticated()
+
+
+def get_current_user():
+    """Get the current logged-in user info"""
+    return google_service.get_logged_in_user()
 
 
 # ============== INITIALIZATION ==============
@@ -120,7 +256,25 @@ def render_sidebar(client_service: ClientService):
         st.title("🤖 Jarvis")
         st.caption("Proactive Advisor Assistant")
         
-        st.divider()
+        # Show logged-in user info at the top
+        if REQUIRE_LOGIN and is_user_logged_in():
+            user = get_current_user()
+            if user:
+                st.markdown(f"""
+                <div style="display: flex; align-items: center; padding: 10px; background: #f0f2f6; border-radius: 8px; margin-bottom: 10px;">
+                    <img src="{user.get('picture', '')}" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;" onerror="this.style.display='none'">
+                    <div>
+                        <strong>{user.get('name', user.get('email', 'User'))}</strong><br>
+                        <small style="color: #666;">{user.get('email', '')}</small>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                if st.button("🚪 Sign Out", key="logout_btn", use_container_width=True):
+                    google_service.logout()
+                    st.rerun()
+                
+                st.divider()
         
         # Navigation using buttons for better state control
         st.subheader("Navigation")
@@ -132,6 +286,7 @@ def render_sidebar(client_service: ClientService):
             ("🏛️ Compliance", "compliance"),
             ("👥 Clients", "clients"),
             ("📧 Email Drafts", "emails"),
+            ("⚙️ Settings", "settings"),
         ]
         
         current = st.session_state.get("current_view", "dashboard")
@@ -257,6 +412,269 @@ def should_show_greeting() -> bool:
 def mark_greeting_shown():
     """Mark that we've shown the greeting for today"""
     st.session_state.last_greeting_date = get_greeting_date_key()
+
+
+def parse_email_request(user_message: str) -> dict:
+    """
+    Parse if the user is requesting to send an email.
+    Returns email info if detected, None otherwise.
+    """
+    import re
+    
+    msg_lower = user_message.lower()
+    
+    # Check for email-related words
+    has_mail_word = any(w in msg_lower for w in ["email", "mail", "e-mail"])
+    has_send_word = any(w in msg_lower for w in ["send", "draft", "write", "compose"])
+    
+    # Intent: has both a send action AND mail word
+    has_email_intent = has_mail_word and has_send_word
+    
+    if not has_email_intent:
+        return None
+    
+    result = {
+        "detected": True,
+        "recipient_email": None,
+        "recipient_name": None,
+        "email_type": "general",
+    }
+    
+    # Extract email if present
+    email_match = re.search(r'[\w\.-]+@[\w\.-]+\.\w+', user_message)
+    if email_match:
+        result["recipient_email"] = email_match.group()
+    
+    # Detect email type
+    if any(w in user_message.lower() for w in ["birthday", "wish"]):
+        result["email_type"] = "birthday"
+    elif any(w in user_message.lower() for w in ["review", "annual"]):
+        result["email_type"] = "review_reminder"
+    elif any(w in user_message.lower() for w in ["follow up", "follow-up"]):
+        result["email_type"] = "follow_up"
+    elif any(w in user_message.lower() for w in ["check in", "check-in", "checking in"]):
+        result["email_type"] = "check_in"
+    
+    return result
+
+
+def extract_email_content(llm_response: str) -> dict:
+    """Extract subject and body from LLM-generated email response"""
+    import re
+    
+    subject = ""
+    body = ""
+    
+    # Try to extract subject line
+    subject_match = re.search(r'Subject:\s*(.+?)(?:\n|$)', llm_response, re.IGNORECASE)
+    if subject_match:
+        subject = subject_match.group(1).strip()
+    
+    # Get everything after the subject line as body
+    if subject_match:
+        body_start = subject_match.end()
+        body = llm_response[body_start:].strip()
+    else:
+        body = llm_response.strip()
+    
+    # Clean up body - remove markdown artifacts
+    body = body.replace("---", "").strip()
+    
+    # Replace [Advisor] placeholder with actual logged-in user's name
+    user_info = google_service.get_logged_in_user()
+    if user_info:
+        advisor_name = user_info.get("name") or user_info.get("given_name") or user_info.get("email", "").split("@")[0]
+        body = body.replace("[Advisor]", advisor_name)
+        body = body.replace("[Your Name]", advisor_name)
+        body = body.replace("[Advisor Name]", advisor_name)
+    
+    return {"subject": subject, "body": body}
+
+
+def render_email_send_form(email_info: dict, draft_content: dict):
+    """Render a form to confirm and send an email"""
+    st.markdown("---")
+    st.subheader("📧 Send Email")
+    
+    with st.form("send_email_form"):
+        recipient = st.text_input(
+            "To", 
+            value=email_info.get("recipient_email", ""),
+            placeholder="recipient@email.com"
+        )
+        
+        subject = st.text_input(
+            "Subject",
+            value=draft_content.get("subject", "")
+        )
+        
+        body = st.text_area(
+            "Message",
+            value=draft_content.get("body", ""),
+            height=200
+        )
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            send_btn = st.form_submit_button("📤 Send Email", type="primary", use_container_width=True)
+        with col2:
+            save_draft_btn = st.form_submit_button("💾 Save as Draft", use_container_width=True)
+        
+        if send_btn:
+            if not recipient:
+                st.error("Please enter a recipient email")
+            elif not subject:
+                st.error("Please enter a subject")
+            else:
+                success, result = google_service.send_email(
+                    to=recipient,
+                    subject=subject,
+                    body=body
+                )
+                if success:
+                    st.success(f"✅ Email sent to {recipient}!")
+                    st.session_state.pop("pending_email", None)
+                    st.balloons()
+                else:
+                    st.error(f"❌ Failed to send: {result}")
+        
+        if save_draft_btn:
+            if recipient and subject:
+                success, result = google_service.create_draft(
+                    to=recipient,
+                    subject=subject,
+                    body=body
+                )
+                if success:
+                    st.success("✅ Draft saved to Gmail!")
+                    st.session_state.pop("pending_email", None)
+                else:
+                    st.error(f"❌ Failed to save draft: {result}")
+
+
+def parse_scheduling_request(user_message: str, llm_response: str) -> dict:
+    """
+    Parse if the user is requesting to schedule a meeting.
+    Returns scheduling info if detected, None otherwise.
+    """
+    import re
+    
+    # Keywords indicating scheduling intent
+    schedule_keywords = ["schedule", "book", "meeting", "call", "appointment", "calendar", "set up a call"]
+    has_schedule_intent = any(kw in user_message.lower() for kw in schedule_keywords)
+    
+    if not has_schedule_intent:
+        return None
+    
+    # Try to extract details from the message
+    result = {
+        "detected": True,
+        "client_name": None,
+        "client_email": None,
+        "date": None,
+        "time": None,
+        "duration": 60,  # default 60 minutes
+        "title": None
+    }
+    
+    # Extract email if present
+    email_match = re.search(r'[\w\.-]+@[\w\.-]+\.\w+', user_message)
+    if email_match:
+        result["client_email"] = email_match.group()
+    
+    # Extract date patterns (e.g., "March 1st", "tomorrow", "next Monday")
+    date_patterns = [
+        r'(\d{1,2}(?:st|nd|rd|th)?\s+(?:of\s+)?(?:january|february|march|april|may|june|july|august|september|october|november|december))',
+        r'((?:january|february|march|april|may|june|july|august|september|october|november|december)\s+\d{1,2}(?:st|nd|rd|th)?)',
+        r'(\d{1,2}/\d{1,2}/\d{2,4})',
+        r'(\d{4}-\d{2}-\d{2})',
+    ]
+    for pattern in date_patterns:
+        match = re.search(pattern, user_message.lower())
+        if match:
+            result["date"] = match.group(1)
+            break
+    
+    # Extract time patterns (e.g., "10am", "2:30 PM", "14:00")
+    time_match = re.search(r'(\d{1,2}(?::\d{2})?\s*(?:am|pm)?)', user_message.lower())
+    if time_match:
+        result["time"] = time_match.group(1)
+    
+    return result
+
+
+def render_scheduling_form(scheduling_info: dict, client_service: ClientService):
+    """Render a form to complete scheduling a meeting"""
+    st.markdown("---")
+    st.subheader("📅 Schedule Meeting")
+    
+    with st.form("schedule_meeting_form"):
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            title = st.text_input("Meeting Title", value=scheduling_info.get("title", "Client Meeting"))
+            
+            # Date picker - default to extracted date or tomorrow
+            default_date = date.today() + timedelta(days=1)
+            if scheduling_info.get("date"):
+                # Try to parse the extracted date
+                try:
+                    from dateutil import parser
+                    parsed = parser.parse(scheduling_info["date"], fuzzy=True)
+                    default_date = parsed.date()
+                except:
+                    pass
+            
+            meeting_date = st.date_input("Date", value=default_date)
+        
+        with col2:
+            # Time picker
+            default_time = datetime.strptime("10:00", "%H:%M").time()
+            if scheduling_info.get("time"):
+                try:
+                    from dateutil import parser
+                    parsed = parser.parse(scheduling_info["time"], fuzzy=True)
+                    default_time = parsed.time()
+                except:
+                    pass
+            
+            meeting_time = st.time_input("Time", value=default_time)
+            duration = st.selectbox("Duration", [30, 45, 60, 90, 120], index=2)
+        
+        # Attendee email
+        attendee_email = st.text_input(
+            "Attendee Email", 
+            value=scheduling_info.get("client_email", ""),
+            placeholder="client@email.com"
+        )
+        
+        description = st.text_area("Description (optional)", placeholder="Meeting notes or agenda...")
+        
+        submitted = st.form_submit_button("📅 Create Calendar Event", type="primary", use_container_width=True)
+        
+        if submitted:
+            if not attendee_email:
+                st.error("Please enter an attendee email")
+            else:
+                # Create the event
+                start_datetime = datetime.combine(meeting_date, meeting_time)
+                end_datetime = start_datetime + timedelta(minutes=duration)
+                
+                success, result = google_service.create_event(
+                    summary=title,
+                    start_time=start_datetime,
+                    end_time=end_datetime,
+                    description=description,
+                    attendee_emails=[attendee_email] if attendee_email else [],
+                    send_notifications=True
+                )
+                
+                if success:
+                    st.success(f"✅ Meeting scheduled! Calendar invite sent to {attendee_email}")
+                    st.session_state.pop("pending_schedule", None)
+                    st.balloons()
+                else:
+                    st.error(f"❌ Failed to create event: {result}")
 
 
 def render_chat(client_service: ClientService, llm_service: LLMService, vector_store: VectorStoreService):
@@ -393,6 +811,28 @@ def render_chat(client_service: ClientService, llm_service: LLMService, vector_s
                     
                     st.markdown(response)
                     st.session_state.messages.append({"role": "assistant", "content": response})
+                    
+                    # Check if this was an email request and show email form
+                    email_info = parse_email_request(prompt)
+                    if email_info and email_info.get("detected"):
+                        if google_service.is_authenticated():
+                            # Extract email content from LLM response
+                            draft_content = extract_email_content(response)
+                            st.session_state.pending_email = {
+                                "email_info": email_info,
+                                "draft_content": draft_content
+                            }
+                        else:
+                            st.info("💡 To send emails directly, connect your Google account in Settings.")
+                    
+                    # Check if this was a scheduling request and show scheduling form
+                    scheduling_info = parse_scheduling_request(prompt, response)
+                    if scheduling_info and scheduling_info.get("detected"):
+                        if google_service.is_authenticated():
+                            st.session_state.pending_schedule = scheduling_info
+                        else:
+                            st.info("💡 To schedule meetings directly, connect your Google account in Settings.")
+                    
                 except Exception as e:
                     error_msg = str(e)
                     print(f"Chat error: {type(e).__name__}: {error_msg}")  # Log to terminal
@@ -409,7 +849,21 @@ def render_chat(client_service: ClientService, llm_service: LLMService, vector_s
         if st.button("🗑️ Clear Chat"):
             st.session_state.messages = []
             st.session_state.current_nudge_data = None
+            st.session_state.pop("pending_schedule", None)
+            st.session_state.pop("pending_email", None)
             st.rerun()
+    
+    # Show email form if pending
+    if st.session_state.get("pending_email"):
+        pending_email = st.session_state.pending_email
+        render_email_send_form(
+            pending_email.get("email_info", {}), 
+            pending_email.get("draft_content", {})
+        )
+    
+    # Show scheduling form if pending
+    if st.session_state.get("pending_schedule"):
+        render_scheduling_form(st.session_state.pending_schedule, client_service)
 
 
 def render_greeting_actions(nudge_data: dict, client_service: ClientService):
@@ -1691,8 +2145,16 @@ def render_clients(client_service: ClientService, vector_store: VectorStoreServi
 
 
 def render_emails(client_service: ClientService, llm_service: LLMService):
-    """Render email drafting view"""
+    """Render email drafting view with send capability"""
     st.header("📧 Email Drafts")
+    
+    # Check Google connection status
+    google_connected = google_service.is_authenticated()
+    
+    if google_connected:
+        st.success("✅ Google connected - you can send emails directly!")
+    else:
+        st.info("💡 Connect Google in Settings to send emails directly from Jarvis")
     
     # Check if we came from a button click (dashboard, alerts, etc.)
     draft_for = st.session_state.get("draft_for")
@@ -1723,6 +2185,7 @@ def render_emails(client_service: ClientService, llm_service: LLMService):
         
         selected = st.selectbox("Select Client", client_name_list, key="email_client_select")
         selected_client_id = client_names[selected]
+        selected_client = client_service.get_client_by_id(selected_client_id)
         
         # Email type - expanded for alert types
         email_types = {
@@ -1780,6 +2243,8 @@ def render_emails(client_service: ClientService, llm_service: LLMService):
                 )
                 
                 st.session_state.current_draft = email_draft
+                st.session_state.current_draft_client_id = selected_client_id
+                st.session_state.current_draft_type = email_type
                 # Store the parameters used for this draft
                 st.session_state.last_draft_params = {
                     "client_id": selected_client_id,
@@ -1787,23 +2252,282 @@ def render_emails(client_service: ClientService, llm_service: LLMService):
                     "context": additional_context
                 }
         
-        if "current_draft" in st.session_state:
-            st.markdown(st.session_state.current_draft)
+        if "current_draft" in st.session_state and selected_client:
+            # Extract subject and body from draft
+            draft_text = st.session_state.current_draft
             
-            col_a, col_b = st.columns(2)
+            # Try to parse subject line
+            lines = draft_text.strip().split('\n')
+            subject = ""
+            body_start = 0
+            for i, line in enumerate(lines):
+                if line.lower().startswith("subject:"):
+                    subject = line[8:].strip()
+                    body_start = i + 1
+                    break
+                elif line.lower().startswith("**subject:**"):
+                    subject = line[12:].strip()
+                    body_start = i + 1
+                    break
+            
+            if not subject:
+                # Generate default subject
+                type_subjects = {
+                    "birthday": f"Happy Birthday, {selected_client.first_name}!",
+                    "review_reminder": f"Annual Review - {selected_client.full_name}",
+                    "check_in": f"Checking In - {selected_client.first_name}",
+                    "follow_up": f"Following Up - {selected_client.first_name}",
+                    "policy_renewal": f"Policy Renewal Reminder",
+                    "policy_maturity": f"Policy Maturity Notice",
+                    "retirement_planning": f"Retirement Planning Discussion",
+                    "general_update": f"Update from Your Advisor"
+                }
+                subject = type_subjects.get(email_type, "Message from Your Financial Advisor")
+            
+            body = '\n'.join(lines[body_start:]).strip() if body_start > 0 else draft_text
+            
+            # Editable fields
+            edited_subject = st.text_input("Subject", value=subject, key="email_subject")
+            edited_body = st.text_area("Email Body", value=body, height=300, key="email_body")
+            
+            # Show recipient info
+            st.caption(f"**To:** {selected_client.contact_info.email}")
+            
+            # Action buttons
+            col_a, col_b, col_c = st.columns(3)
+            
             with col_a:
-                if st.button("📋 Copy to Clipboard"):
-                    st.info("Draft copied! (Use Ctrl+C on the text)")
-            with col_b:
-                if st.button("🔄 Regenerate"):
-                    # Set flag to regenerate on next run
+                if st.button("🔄 Regenerate", use_container_width=True):
                     st.session_state.regenerate_email = True
                     if "current_draft" in st.session_state:
                         del st.session_state.current_draft
                     st.rerun()
-        else:
+            
+            with col_b:
+                if google_connected:
+                    if st.button("📝 Save to Gmail Drafts", use_container_width=True):
+                        client_email = selected_client.contact_info.email
+                        success, result = google_service.create_draft(
+                            to=client_email,
+                            subject=edited_subject,
+                            body=edited_body
+                        )
+                        if success:
+                            st.success(f"✅ Draft saved to Gmail!")
+                        else:
+                            st.error(f"❌ Failed: {result}")
+                else:
+                    st.button("📝 Save to Gmail", use_container_width=True, disabled=True, 
+                             help="Connect Google in Settings")
+            
+            with col_c:
+                if google_connected:
+                    if st.button("📤 Send Email", type="primary", use_container_width=True):
+                        client_email = selected_client.contact_info.email
+                        # Confirm before sending
+                        st.session_state.confirm_send = {
+                            "to": client_email,
+                            "subject": edited_subject,
+                            "body": edited_body,
+                            "client_id": selected_client_id
+                        }
+                        st.rerun()
+                else:
+                    st.button("📤 Send Email", type="primary", use_container_width=True, disabled=True,
+                             help="Connect Google in Settings")
+            
+            # Send confirmation dialog
+            if "confirm_send" in st.session_state:
+                confirm = st.session_state.confirm_send
+                st.divider()
+                st.warning(f"⚠️ Send email to **{confirm['to']}**?")
+                
+                col_yes, col_no = st.columns(2)
+                with col_yes:
+                    if st.button("✅ Yes, Send", type="primary", use_container_width=True):
+                        success, result = google_service.send_email(
+                            to=confirm["to"],
+                            subject=confirm["subject"],
+                            body=confirm["body"]
+                        )
+                        if success:
+                            st.success(f"✅ Email sent to {confirm['to']}!")
+                            del st.session_state.confirm_send
+                            del st.session_state.current_draft
+                            st.balloons()
+                        else:
+                            st.error(f"❌ Failed to send: {result}")
+                            del st.session_state.confirm_send
+                
+                with col_no:
+                    if st.button("❌ Cancel", use_container_width=True):
+                        del st.session_state.confirm_send
+                        st.rerun()
+        
+        elif "current_draft" not in st.session_state:
             st.info("Select a client and email type, then click 'Generate Draft' to create an email.")
+    
+    # Quick Book Meeting section (if Google connected)
+    if google_connected and "current_draft" in st.session_state and selected_client:
+        st.divider()
+        with st.expander("📅 Book a Follow-up Meeting", expanded=False):
+            st.caption("Schedule a meeting with this client directly to your Google Calendar")
+            
+            col_date, col_time, col_dur = st.columns(3)
+            
+            with col_date:
+                meeting_date = st.date_input("Date", value=datetime.now().date() + timedelta(days=3), key="meeting_date")
+            
+            with col_time:
+                meeting_time = st.time_input("Time", value=datetime.strptime("10:00", "%H:%M").time(), key="meeting_time")
+            
+            with col_dur:
+                meeting_duration = st.selectbox("Duration (min)", [30, 45, 60, 90], index=2, key="meeting_duration")
+            
+            meeting_title = st.text_input("Meeting Title", 
+                value=f"Meeting with {selected_client.full_name}", 
+                key="meeting_title")
+            
+            meeting_notes = st.text_area("Meeting Notes/Agenda", 
+                placeholder="Topics to discuss...",
+                key="meeting_notes",
+                height=100)
+            
+            include_client = st.checkbox("Send calendar invite to client", value=True, key="invite_client")
+            
+            if st.button("📅 Create Calendar Event", type="primary", use_container_width=True):
+                start_datetime = datetime.combine(meeting_date, meeting_time)
+                end_datetime = start_datetime + timedelta(minutes=meeting_duration)
+                
+                attendees = [selected_client.contact_info.email] if include_client else []
+                
+                success, result = google_service.create_event(
+                    summary=meeting_title,
+                    start_time=start_datetime,
+                    end_time=end_datetime,
+                    description=meeting_notes,
+                    attendee_emails=attendees,
+                    send_notifications=include_client
+                )
+                
+                if success:
+                    invite_msg = f" (Invite sent to {selected_client.contact_info.email})" if include_client else ""
+                    st.success(f"✅ Meeting booked!{invite_msg}")
+                    st.balloons()
+                else:
+                    st.error(f"❌ Failed: {result}")
 
+
+def render_settings(client_service: ClientService):
+    """Render settings page with account info"""
+    st.header("⚙️ Settings")
+    
+    # User Account Section (if login is enabled)
+    if REQUIRE_LOGIN:
+        st.subheader("👤 Your Account")
+        user = get_current_user()
+        
+        if user:
+            col1, col2 = st.columns([1, 3])
+            with col1:
+                if user.get('picture'):
+                    st.image(user.get('picture'), width=100)
+                else:
+                    st.markdown("👤")
+            
+            with col2:
+                st.markdown(f"**Name:** {user.get('name', 'N/A')}")
+                st.markdown(f"**Email:** {user.get('email', 'N/A')}")
+                st.markdown("**Status:** ✅ Connected")
+                
+                if st.button("🚪 Sign Out", key="settings_logout"):
+                    google_service.logout()
+                    st.rerun()
+        
+        st.divider()
+    
+    # Google Integration Status
+    st.subheader("📧 Google Integration")
+    
+    if not google_service.is_enabled():
+        st.warning("⚠️ Google integration is not configured.")
+        with st.expander("📋 Admin Setup Required"):
+            st.markdown("""
+            **To enable Google integration:**
+            
+            1. Create a [Google Cloud Project](https://console.cloud.google.com/)
+            2. Enable "Gmail API" and "Google Calendar API"
+            3. Create OAuth credentials (Desktop app)
+            4. Download `client_secret.json` to `credentials/` folder
+            """)
+        return
+    
+    if google_service.is_authenticated():
+        st.success("✅ Google account connected")
+        st.markdown("""
+        **Available features:**
+        - ✉️ Send emails directly from Email Drafts page
+        - 📅 Book appointments on your Google Calendar
+        - 📝 Save drafts to Gmail
+        """)
+    else:
+        st.info("🔗 Not connected - sign in to enable Google features")
+    
+    # Calendar Settings (if authenticated)
+    if google_service.is_authenticated():
+        st.divider()
+        st.subheader("📅 Upcoming Calendar Events")
+        
+        # Show upcoming events
+        events = google_service.get_upcoming_events(days=7)
+        if events:
+            for event in events[:5]:
+                start = event.get('start', '')
+                if start:
+                    try:
+                        dt = datetime.fromisoformat(start.replace('Z', '+00:00'))
+                        start_str = dt.strftime("%a %d %b, %H:%M")
+                    except:
+                        start_str = start
+                else:
+                    start_str = "No time"
+                st.caption(f"• {event.get('summary', 'No title')} - {start_str}")
+        else:
+            st.caption("No upcoming events in the next 7 days")
+        
+        # Find free slots
+        st.divider()
+        st.subheader("🕐 Find Free Slots")
+        
+        col_dur, col_days = st.columns(2)
+        with col_dur:
+            duration = st.selectbox("Meeting duration (min)", [30, 45, 60, 90], index=2, key="slot_duration")
+        with col_days:
+            days = st.selectbox("Days ahead", [3, 5, 7, 14], index=2, key="slot_days")
+        
+        if st.button("🔍 Find Available Slots", use_container_width=True):
+            free_slots = google_service.find_free_slots(duration_minutes=duration, days_ahead=days)
+            if free_slots:
+                st.success(f"Found {len(free_slots)} available slots:")
+                for slot in free_slots:
+                    start_str = slot['start'].strftime("%A %d %b, %H:%M")
+                    st.caption(f"✅ {start_str}")
+            else:
+                st.info("No free slots found in the selected period")
+    
+    st.divider()
+    
+    # Other Settings
+    st.subheader("🎛️ Other Settings")
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.write("**LLM Provider:**", st.session_state.get("llm_provider", "Unknown"))
+    with col2:
+        if st.button("🗑️ Clear All Dismissals", use_container_width=True):
+            dismissal_service.clear_all()
+            st.success("All dismissals cleared")
+            st.rerun()
 
 
 def render_compliance(client_service: ClientService):
@@ -2006,12 +2730,22 @@ def main():
     """Main application entry point"""
     init_session_state()
     
+    # Try to authenticate Google silently (if credentials exist)
+    if google_service.is_enabled() and not google_service.is_authenticated():
+        google_service.authenticate()
+    
+    # Check if login is required and user is not logged in
+    if REQUIRE_LOGIN and not is_user_logged_in():
+        render_login_page()
+        return
+    
     try:
         # Show loading message during initialization (only visible when actually loading)
         with st.spinner("🚀 Initializing Jarvis... Loading client data and setting up semantic search. This may take a moment on first load."):
             client_service, llm_service, vector_store = init_services()
         # Store vector_store in session state for sidebar access
         st.session_state.vector_store = vector_store
+        
     except Exception as e:
         st.error(f"Error initializing services: {e}")
         st.info("Make sure to run `python data/mock_generator.py` first to generate client data.")
@@ -2035,6 +2769,8 @@ def main():
         render_clients(client_service, vector_store)
     elif st.session_state.current_view == "emails":
         render_emails(client_service, llm_service)
+    elif st.session_state.current_view == "settings":
+        render_settings(client_service)
 
 
 if __name__ == "__main__":

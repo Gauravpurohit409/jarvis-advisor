@@ -50,3 +50,26 @@ MILESTONE_BIRTHDAYS = [55, 60, 65, 70, 75]
 # Tax Year Deadlines (UK)
 TAX_YEAR_END = "04-05"  # 5th April
 ISA_DEADLINE = "04-05"
+
+# ============================================
+# Google API Configuration
+# ============================================
+CREDENTIALS_DIR = BASE_DIR / "credentials"
+GOOGLE_ENABLED = os.getenv("GOOGLE_ENABLED", "true").lower() == "true"
+GOOGLE_CREDENTIALS_PATH = os.getenv("GOOGLE_CREDENTIALS_PATH", str(CREDENTIALS_DIR / "client_secret.json"))
+GOOGLE_TOKEN_PATH = os.getenv("GOOGLE_TOKEN_PATH", str(CREDENTIALS_DIR / "google_token.json"))
+
+# Gmail & Calendar API scopes (includes userinfo for login)
+GOOGLE_SCOPES = [
+    'openid',
+    'https://www.googleapis.com/auth/userinfo.email',
+    'https://www.googleapis.com/auth/userinfo.profile',
+    'https://www.googleapis.com/auth/gmail.send',
+    'https://www.googleapis.com/auth/gmail.compose',
+    'https://www.googleapis.com/auth/gmail.readonly',
+    'https://www.googleapis.com/auth/calendar',
+    'https://www.googleapis.com/auth/calendar.events',
+]
+
+# Login Settings
+REQUIRE_LOGIN = os.getenv("REQUIRE_LOGIN", "true").lower() == "true"
