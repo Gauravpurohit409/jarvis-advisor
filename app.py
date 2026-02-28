@@ -156,9 +156,18 @@ def render_login_page():
                 except Exception as e:
                     st.error(f"Error starting login: {e}")
             
+            st.markdown("---")
+            
+            # Skip login option
+            if st.button("👤 Continue as Guest", use_container_width=True):
+                st.session_state.guest_mode = True
+                st.rerun()
+            
+            st.caption("Guest mode: Email & Calendar features will be disabled")
+            
             st.markdown("""
             <div style="text-align: center; padding: 20px; color: #888; font-size: 0.9em;">
-                <p>By signing in, you allow Jarvis to:</p>
+                <p>By signing in with Google, you allow Jarvis to:</p>
                 <ul style="text-align: left; display: inline-block;">
                     <li>Send emails on your behalf</li>
                     <li>Access your calendar</li>
@@ -171,6 +180,9 @@ def render_login_page():
 def is_user_logged_in() -> bool:
     """Check if user is logged in"""
     if not REQUIRE_LOGIN:
+        return True
+    # Allow guest mode
+    if st.session_state.get("guest_mode"):
         return True
     return google_service.is_authenticated()
 
