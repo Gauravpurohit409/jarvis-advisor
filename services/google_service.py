@@ -22,28 +22,18 @@ from config import (
     GOOGLE_SCOPES,
     GOOGLE_ENABLED,
     GOOGLE_CLIENT_ID,
-    GOOGLE_CLIENT_SECRET
+    GOOGLE_CLIENT_SECRET,
+    GOOGLE_REDIRECT_URI
 )
 
 
 def get_redirect_uri():
     """Get the appropriate redirect URI based on environment"""
-    try:
-        import streamlit as st
-        # Check if running on Streamlit Cloud
-        if hasattr(st, 'runtime') and st.runtime.exists():
-            # Try to get the app URL from query params or headers
-            try:
-                from streamlit.web.server.websocket_headers import _get_websocket_headers
-                headers = _get_websocket_headers()
-                if headers and 'Host' in headers:
-                    host = headers['Host']
-                    if 'streamlit.app' in host:
-                        return f"https://{host}/"
-            except:
-                pass
-    except:
-        pass
+    # First check if explicitly configured
+    if GOOGLE_REDIRECT_URI:
+        return GOOGLE_REDIRECT_URI
+    
+    # Default to localhost for local development
     return "http://localhost:8501"
 
 
