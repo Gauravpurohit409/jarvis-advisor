@@ -59,6 +59,17 @@ GOOGLE_ENABLED = os.getenv("GOOGLE_ENABLED", "true").lower() == "true"
 GOOGLE_CREDENTIALS_PATH = os.getenv("GOOGLE_CREDENTIALS_PATH", str(CREDENTIALS_DIR / "client_secret.json"))
 GOOGLE_TOKEN_PATH = os.getenv("GOOGLE_TOKEN_PATH", str(CREDENTIALS_DIR / "google_token.json"))
 
+# Try to load Google credentials from Streamlit secrets (for cloud deployment)
+GOOGLE_CLIENT_ID = None
+GOOGLE_CLIENT_SECRET = None
+try:
+    import streamlit as st
+    GOOGLE_CLIENT_ID = st.secrets.get("GOOGLE_CLIENT_ID", os.getenv("GOOGLE_CLIENT_ID"))
+    GOOGLE_CLIENT_SECRET = st.secrets.get("GOOGLE_CLIENT_SECRET", os.getenv("GOOGLE_CLIENT_SECRET"))
+except:
+    GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
+    GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
+
 # Gmail & Calendar API scopes (includes userinfo for login)
 GOOGLE_SCOPES = [
     'openid',

@@ -20,8 +20,31 @@ from config import (
     GOOGLE_CREDENTIALS_PATH, 
     GOOGLE_TOKEN_PATH, 
     GOOGLE_SCOPES,
-    GOOGLE_ENABLED
+    GOOGLE_ENABLED,
+    GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET
 )
+
+
+def get_redirect_uri():
+    """Get the appropriate redirect URI based on environment"""
+    try:
+        import streamlit as st
+        # Check if running on Streamlit Cloud
+        if hasattr(st, 'runtime') and st.runtime.exists():
+            # Try to get the app URL from query params or headers
+            try:
+                from streamlit.web.server.websocket_headers import _get_websocket_headers
+                headers = _get_websocket_headers()
+                if headers and 'Host' in headers:
+                    host = headers['Host']
+                    if 'streamlit.app' in host:
+                        return f"https://{host}/"
+            except:
+                pass
+    except:
+        pass
+    return "http://localhost:8501"
 
 
 class GoogleService:
@@ -47,10 +70,14 @@ class GoogleService:
     
     def is_enabled(self) -> bool:
         """Check if Google integration is enabled and credentials exist"""
+        # Check for credentials file OR Streamlit secrets
+        has_file_creds = Path(GOOGLE_CREDENTIALS_PATH).exists()
+        has_secret_creds = bool(GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET)
+        
         return (
             GOOGLE_ENABLED and 
             self._google_available and 
-            Path(GOOGLE_CREDENTIALS_PATH).exists()
+            (has_file_creds or has_secret_creds)
         )
     
     def is_authenticated(self) -> bool:
@@ -67,25 +94,36 @@ class GoogleService:
         
         import json
         
-        # Load client config
-        with open(GOOGLE_CREDENTIALS_PATH) as f:
-            client_config = json.load(f)
+        # Get client ID - from secrets or file
+        client_id = GOOGLE_CLIENT_ID
         
-        # Get client info (handle both "web" and "installed" formats)
-        if "web" in client_config:
-            client_info = client_config["web"]
-        else:
-            client_info = client_config["installed"]
+        if not client_id and Path(GOOGLE_CREDENTIALS_PATH).exists():
+            # Load from file
+            with open(GOOGLE_CREDENTIALS_PATH) as f:
+                client_config = json.load(f)
+            
+            # Get client info (handle both "web" and "installed" formats)
+            if "web" in client_config:
+                client_info = client_config["web"]
+            else:
+                client_info = client_config["installed"]
+            
+            client_id = client_info["client_id"]
         
-        client_id = client_info["client_id"]
+        # Get redirect URI
+        redirect_uri = get_redirect_uri()
         
         # Build auth URL manually
         scopes_str = "%20".join([s.replace(":", "%3A").replace("/", "%2F") for s in GOOGLE_SCOPES])
         
+        # URL encode the redirect URI
+        import urllib.parse
+        encoded_redirect = urllib.parse.quote(redirect_uri, safe='')
+        
         auth_url = (
             f"https://accounts.google.com/o/oauth2/v2/auth?"
             f"client_id={client_id}&"
-            f"redirect_uri=http://localhost:8501&"
+            f"redirect_uri={encoded_redirect}&"
             f"response_type=code&"
             f"scope={scopes_str}&"
             f"access_type=offline&"
@@ -107,18 +145,26 @@ class GoogleService:
             import requests
             from google.oauth2.credentials import Credentials
             
-            # Load client config
-            with open(GOOGLE_CREDENTIALS_PATH) as f:
-                client_config = json.load(f)
+            # Get client credentials - from secrets or file
+            client_id = GOOGLE_CLIENT_ID
+            client_secret = GOOGLE_CLIENT_SECRET
             
-            # Get client info (handle both "web" and "installed" formats)
-            if "web" in client_config:
-                client_info = client_config["web"]
-            else:
-                client_info = client_config["installed"]
+            if not client_id and Path(GOOGLE_CREDENTIALS_PATH).exists():
+                # Load from file
+                with open(GOOGLE_CREDENTIALS_PATH) as f:
+                    client_config = json.load(f)
+                
+                # Get client info (handle both "web" and "installed" formats)
+                if "web" in client_config:
+                    client_info = client_config["web"]
+                else:
+                    client_info = client_config["installed"]
+                
+                client_id = client_info["client_id"]
+                client_secret = client_info["client_secret"]
             
-            client_id = client_info["client_id"]
-            client_secret = client_info["client_secret"]
+            # Get redirect URI
+            redirect_uri = get_redirect_uri()
             
             # Exchange code for tokens using direct HTTP POST
             token_url = "https://oauth2.googleapis.com/token"
@@ -127,7 +173,7 @@ class GoogleService:
                 "code": auth_code,
                 "client_id": client_id,
                 "client_secret": client_secret,
-                "redirect_uri": "http://localhost:8501",
+                "redirect_uri": redirect_uri,
                 "grant_type": "authorization_code"
             }
             
