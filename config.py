@@ -65,10 +65,15 @@ GOOGLE_CLIENT_SECRET = None
 GOOGLE_REDIRECT_URI = None
 try:
     import streamlit as st
-    GOOGLE_CLIENT_ID = st.secrets.get("GOOGLE_CLIENT_ID", os.getenv("GOOGLE_CLIENT_ID"))
-    GOOGLE_CLIENT_SECRET = st.secrets.get("GOOGLE_CLIENT_SECRET", os.getenv("GOOGLE_CLIENT_SECRET"))
-    GOOGLE_REDIRECT_URI = st.secrets.get("GOOGLE_REDIRECT_URI", os.getenv("GOOGLE_REDIRECT_URI"))
-except:
+    if hasattr(st, 'secrets'):
+        GOOGLE_CLIENT_ID = st.secrets.get("GOOGLE_CLIENT_ID", None) or os.getenv("GOOGLE_CLIENT_ID")
+        GOOGLE_CLIENT_SECRET = st.secrets.get("GOOGLE_CLIENT_SECRET", None) or os.getenv("GOOGLE_CLIENT_SECRET")
+        GOOGLE_REDIRECT_URI = st.secrets.get("GOOGLE_REDIRECT_URI", None) or os.getenv("GOOGLE_REDIRECT_URI")
+    else:
+        GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
+        GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
+        GOOGLE_REDIRECT_URI = os.getenv("GOOGLE_REDIRECT_URI")
+except Exception:
     GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
     GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
     GOOGLE_REDIRECT_URI = os.getenv("GOOGLE_REDIRECT_URI")

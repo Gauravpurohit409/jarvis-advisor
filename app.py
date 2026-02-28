@@ -94,6 +94,17 @@ def render_login_page():
         # Check if Google integration is configured
         if not google_service.is_enabled():
             st.error("⚠️ Google Sign-In is not configured")
+            
+            # Debug info
+            from config import GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REDIRECT_URI, GOOGLE_CREDENTIALS_PATH
+            from pathlib import Path
+            with st.expander("🔍 Debug Info"):
+                st.write(f"CLIENT_ID set: {bool(GOOGLE_CLIENT_ID)}")
+                st.write(f"CLIENT_SECRET set: {bool(GOOGLE_CLIENT_SECRET)}")
+                st.write(f"REDIRECT_URI: {GOOGLE_REDIRECT_URI}")
+                st.write(f"Credentials file exists: {Path(GOOGLE_CREDENTIALS_PATH).exists()}")
+                st.write(f"Google libs available: {google_service._google_available}")
+            
             with st.expander("📋 Admin Setup Required"):
                 st.markdown("""
                 **For administrators:**
@@ -103,6 +114,14 @@ def render_login_page():
                 3. Create OAuth 2.0 credentials (Web application)
                 4. Add `http://localhost:8501` as authorized redirect URI
                 5. Download `client_secret.json` to `credentials/` folder
+                
+                **For Streamlit Cloud:**
+                Add these to your app's Secrets:
+                ```
+                GOOGLE_CLIENT_ID = "your_client_id"
+                GOOGLE_CLIENT_SECRET = "your_client_secret"
+                GOOGLE_REDIRECT_URI = "https://your-app.streamlit.app/"
+                ```
                 """)
             return
         
