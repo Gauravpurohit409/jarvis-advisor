@@ -590,9 +590,18 @@ def parse_scheduling_request(user_message: str, llm_response: str) -> dict:
     """
     import re
     
-    # Keywords indicating scheduling intent
-    schedule_keywords = ["schedule", "book", "meeting", "call", "appointment", "calendar", "set up a call"]
-    has_schedule_intent = any(kw in user_message.lower() for kw in schedule_keywords)
+    user_lower = user_message.lower()
+    
+    # If this is an email request, don't treat it as scheduling
+    email_keywords = ["send email", "send an email", "email to", "send a mail", "send mail", 
+                      "write email", "draft and send", "birthday wish", "wish mail"]
+    if any(kw in user_lower for kw in email_keywords):
+        return None
+    
+    # Keywords indicating scheduling intent (only in user message, not response)
+    schedule_keywords = ["schedule", "book a meeting", "book meeting", "set up a call", 
+                         "schedule a call", "calendar event", "book a call", "meeting with"]
+    has_schedule_intent = any(kw in user_lower for kw in schedule_keywords)
     
     if not has_schedule_intent:
         return None
@@ -845,7 +854,9 @@ def render_chat(client_service: ClientService, llm_service: LLMService, vector_s
                     
                     # Check if this was an email request and show email form
                     email_info = parse_email_request(prompt)
-                    if email_info and email_info.get("detected"):
+                    is_email_request = email_info and email_info.get("detected")
+                    
+                    if is_email_request:
                         if google_service.is_authenticated():
                             # Extract email content from LLM response
                             draft_content = extract_email_content(response)
@@ -854,15 +865,16 @@ def render_chat(client_service: ClientService, llm_service: LLMService, vector_s
                                 "draft_content": draft_content
                             }
                         else:
-                            st.info("💡 To send emails directly, connect your Google account in Settings.")
+                            st.warning("🔐 To send emails, please sign in with Google. Go to sidebar and click 'Sign in with Google'.")
                     
-                    # Check if this was a scheduling request and show scheduling form
-                    scheduling_info = parse_scheduling_request(prompt, response)
-                    if scheduling_info and scheduling_info.get("detected"):
-                        if google_service.is_authenticated():
-                            st.session_state.pending_schedule = scheduling_info
-                        else:
-                            st.info("💡 To schedule meetings directly, connect your Google account in Settings.")
+                    # Check if this was a scheduling request (but NOT if it's an email request)
+                    if not is_email_request:
+                        scheduling_info = parse_scheduling_request(prompt, response)
+                        if scheduling_info and scheduling_info.get("detected"):
+                            if google_service.is_authenticated():
+                                st.session_state.pending_schedule = scheduling_info
+                            else:
+                                st.warning("🔐 To schedule meetings, please sign in with Google. Go to sidebar and click 'Sign in with Google'.")
                     
                 except Exception as e:
                     error_msg = str(e)
